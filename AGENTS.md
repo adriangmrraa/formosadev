@@ -71,8 +71,21 @@ desde GitHub sin configurar servidor.
 
 **Comando de scaffold documentado:** `npx create-next-app@latest --typescript --tailwind --app`
 
-> Nota: los docs dicen "Next.js 14+". La versión actual del registry es Next.js 16.x.
-> Al scaffoldeá, fijá explícitamente la versión mayor que decidas y dejá registro acá.
+### Versiones efectivamente instaladas
+
+| Paquete | Versión |
+|---|---|
+| Next.js | `16.3.5` |
+| React / React DOM | `19.2.8` |
+| Tailwind CSS | v4 (`@tailwindcss/postcss`) |
+| TypeScript | v5 |
+| ESLint | v9 |
+
+> Los docs dicen "Next.js 14+". Se instaló **Next.js 16.3.5**, que cumple el "14+".
+>
+> **Ojo con Tailwind v4:** ya no existe `tailwind.config.js`. La configuración es
+> CSS-first — `@import "tailwindcss"` y directivas `@theme` dentro de
+> `src/app/globals.css`. No busques un archivo de config que no está.
 
 ---
 
@@ -134,8 +147,8 @@ No hay escala de espaciado, radios ni archivo de tokens definido todavía.
 
 - [x] Repositorio inicializado y conectado a `origin`
 - [x] `estructura-sitio.md` y `copy-sitio.md` versionados en la raíz
-- [ ] Scaffold del framework — **pendiente**
-- [ ] Layout global (navbar + footer)
+- [x] Scaffold de Next.js 16 + TypeScript + Tailwind v4 en `src/app/`
+- [ ] Layout global (navbar + footer) — hoy `layout.tsx` y `page.tsx` son el boilerplate
 - [ ] Secciones
 - [ ] Deploy a Vercel + dominio formosa.dev
 
@@ -166,3 +179,16 @@ preguntá antes de construir.
 
 4. **Placeholders sin verificar.** `https://chat.whatsapp.com/...` y los endpoints de
    Formspree son placeholders. Los links a GitHub, YouTube y LinkedIn no están confirmados.
+
+---
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
+
