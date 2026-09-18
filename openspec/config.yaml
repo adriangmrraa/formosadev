@@ -1,0 +1,47 @@
+schema: spec-driven
+artifact_store: engram
+
+context: |
+  Tech stack: Next.js 16.3.5 (App Router, Turbopack), React 19.2.8, TypeScript 5, Tailwind CSS v4 (CSS-first @theme in src/app/globals.css; no tailwind.config.js).
+  Architecture: single landing-page app. Server Components by default, client components only for real interaction. Route handlers under src/app/. Copy centralized in src/lib/content.ts, types in src/lib/types.ts.
+  Testing: no test runner installed. Verification = npm run build + npm run lint + visual/functional QA.
+  Style: UI copy es-AR (voseo); code, identifiers, filenames and comments in English; conventional commits, no AI attribution; no emojis in formal docs.
+
+strict_tdd: false
+
+projects:
+  - path: "."
+    stack: "Next.js 16.3.5 / React 19.2.8 / TypeScript 5 / Tailwind CSS v4"
+    test_command: ""
+    test_framework: ""
+    coverage_command: ""
+    linter_command: "npm run lint"
+    typecheck_command: "npx tsc --noEmit"
+    formatter_command: ""
+
+rules:
+  proposal:
+    - Include a rollback plan for risky changes
+    - Reference the authoritative product source when one exists
+  specs:
+    - Use Given/When/Then for scenarios
+    - Use RFC 2119 keywords (MUST, SHALL, SHOULD, MAY)
+  design:
+    - Document architecture decisions with rationale
+    - Keep server/client boundaries explicit
+  tasks:
+    - Group by phase, use hierarchical numbering
+    - Keep tasks completable in one session
+  apply:
+    guidelines:
+      - Follow existing code patterns
+      - Centralize copy in src/lib/content.ts and do not invent new copy
+    tdd: false
+    test_command: ""
+  verify:
+    test_command: ""
+    build_command: "npm run build"
+    lint_command: "npm run lint"
+    coverage_threshold: 0
+  archive:
+    - Warn before merging destructive deltas
