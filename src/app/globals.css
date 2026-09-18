@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-ink: #0f172a;
+  --color-ink-soft: #1e293b;
+  --color-crema: #fff8f5;
+  --color-crema-soft: #fffdfb;
+  --color-lapacho: #ff2b8a;
+  --color-lapacho-deep: #d61f74;
+  --color-sol: #ffc31a;
+  --color-lavanda: #d9a7f5;
+  --color-durazno: #ffd6c1;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-manrope), "Inter", system-ui, -apple-system, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #fff8f5;
+  --foreground: #0f172a;
+  --motion-fast: 350ms;
+  --motion-normal: 550ms;
+  --motion-slow: 900ms;
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion system — progressive enhancement.
+   All reveal states are gated behind a `.js` class added before hydration, so
+   without JavaScript the content is always visible. `prefers-reduced-motion`
+   disables everything.
+--------------------------------------------------------------------------- */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--motion-normal) var(--ease-editorial),
+    transform var(--motion-normal) var(--ease-editorial);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js .reveal.reveal-scale {
+  transform: translateY(24px) scale(0.97);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.js .reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(10px);
+  transition:
+    opacity var(--motion-fast) var(--ease-editorial),
+    transform var(--motion-fast) var(--ease-editorial),
+    filter var(--motion-normal) var(--ease-editorial);
+}
+
+.js .is-visible .reveal-word {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Organic marker/highlight over a chosen word — draws in after the reveal. */
+.highlight {
+  background-image: linear-gradient(104deg, var(--color-sol) 0%, var(--color-sol) 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 40%;
+  background-position: 0 88%;
+}
+
+.js .highlight {
+  background-size: 0% 40%;
+  transition: background-size var(--motion-slow) var(--ease-editorial);
+  transition-delay: 500ms;
+}
+
+.js .is-visible .highlight {
+  background-size: 100% 40%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal,
+  .js .reveal-word {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+
+  .js .highlight {
+    background-size: 100% 40% !important;
+    transition: none !important;
+  }
 }
