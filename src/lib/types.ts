@@ -31,6 +31,8 @@ export interface Collaborator {
   logoAlt: string;
   /** Optional external URL (the organization's website). */
   url?: string;
+  /** Render the logo 50% larger (for compact artwork next to wide wordmarks). */
+  large?: boolean;
 }
 
 export interface ConductRuleSet {

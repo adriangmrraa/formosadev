@@ -88,11 +88,11 @@ export default function Home() {
               impulsan a la comunidad.
             </p>
             {collaborators.length > 0 ? (
-              <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+              <ul className="mt-10 flex snap-x snap-proximity gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {collaborators.map((collaborator) => (
                   <li
                     key={collaborator.id}
-                    className="flex h-28 items-center justify-center rounded-2xl border border-ink/10 bg-white p-6 transition-colors hover:border-ink/25"
+                    className="flex h-36 w-44 shrink-0 snap-start items-center justify-center rounded-2xl border border-ink/10 bg-white p-6 transition-colors hover:border-ink/25 sm:w-52"
                   >
                     {collaborator.url ? (
                       <a
@@ -106,7 +106,11 @@ export default function Home() {
                           alt={collaborator.logoAlt}
                           width={240}
                           height={96}
-                          className="h-12 w-auto max-w-full object-contain"
+                          className={
+                            collaborator.large
+                              ? "h-18 w-auto max-w-full object-contain"
+                              : "h-12 w-auto max-w-full object-contain"
+                          }
                         />
                       </a>
                     ) : (
@@ -115,7 +119,11 @@ export default function Home() {
                         alt={collaborator.logoAlt}
                         width={240}
                         height={96}
-                        className="h-12 w-auto max-w-full object-contain"
+                        className={
+                          collaborator.large
+                            ? "h-18 w-auto max-w-full object-contain"
+                            : "h-12 w-auto max-w-full object-contain"
+                        }
                       />
                     )}
                   </li>

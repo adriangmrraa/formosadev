@@ -221,6 +221,7 @@ export const collaborators: Collaborator[] = [
     logoSrc: "/assets/colaboradores/fusalabs.svg",
     logoAlt: "Logo de FusaLabs",
     url: "https://www.fusalabs.com/",
+    large: true,
   },
   {
     id: "jujuy-dev",
@@ -228,6 +229,7 @@ export const collaborators: Collaborator[] = [
     logoSrc: "/assets/colaboradores/jujuy-dev.png",
     logoAlt: "Logo de Jujuy Dev",
     url: "https://jujuy.dev.ar/",
+    large: true,
   },
   {
     id: "mar-del-plata-dev",
@@ -235,6 +237,7 @@ export const collaborators: Collaborator[] = [
     logoSrc: "/assets/colaboradores/mar-del-plata-dev.png",
     logoAlt: "Logo de Mar del Plata Dev",
     url: "https://mardelplata.dev.ar/",
+    large: true,
   },
   {
     id: "salta-dev",
@@ -242,6 +245,7 @@ export const collaborators: Collaborator[] = [
     logoSrc: "/assets/colaboradores/salta-dev.png",
     logoAlt: "Logo de SaltaDev",
     url: "https://salta.dev/",
+    large: true,
   },
 ];
 
