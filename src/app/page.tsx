@@ -77,7 +77,71 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 03 — Prueba de vida */}
+        {/* 03 — Colaboradores */}
+        <section id="colaboradores" className="border-t border-ink/10 bg-white">
+          <Reveal className="mx-auto max-w-6xl px-5 py-20">
+            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
+              Colaboradores
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
+              Empresas, instituciones y organizaciones que colaboran, apoyan e
+              impulsan a la comunidad.
+            </p>
+            {collaborators.length > 0 ? (
+              <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+                {collaborators.map((collaborator) => (
+                  <li
+                    key={collaborator.id}
+                    className="flex h-28 items-center justify-center rounded-2xl border border-ink/10 bg-white p-6 transition-colors hover:border-ink/25"
+                  >
+                    {collaborator.url ? (
+                      <a
+                        href={collaborator.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={collaborator.name}
+                      >
+                        <Image
+                          src={collaborator.logoSrc}
+                          alt={collaborator.logoAlt}
+                          width={240}
+                          height={96}
+                          className="h-12 w-auto max-w-full object-contain"
+                        />
+                      </a>
+                    ) : (
+                      <Image
+                        src={collaborator.logoSrc}
+                        alt={collaborator.logoAlt}
+                        width={240}
+                        height={96}
+                        className="h-12 w-auto max-w-full object-contain"
+                      />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="mt-10 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
+                <p className="font-semibold text-ink">
+                  Todavía no hay colaboradores publicados.
+                </p>
+                <p className="mt-2 leading-relaxed">
+                  Estamos sumando a las organizaciones que acompañan e impulsan
+                  a Formosa.dev.
+                </p>
+              </div>
+            )}
+            <a
+              href="/contacto"
+              className="mt-8 inline-block rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
+            >
+              Quiero colaborar
+            </a>
+          </Reveal>
+        </section>
+
+        {/* 04 — Prueba de vida */}
         <section
           aria-label="Síntesis"
           className="border-y border-ink/10 bg-crema-soft"
@@ -94,7 +158,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 04 — Qué es Formosa.dev */}
+        {/* 05 — Qué es Formosa.dev */}
         <section id="que-es" className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -123,7 +187,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 05 — Próximo evento */}
+        {/* 06 — Próximo evento */}
         <section id="evento" className="border-t border-ink/10 bg-crema-soft">
           <Reveal className="mx-auto max-w-6xl px-5 py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -159,7 +223,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 06 — Eventos anteriores / Prueba social */}
+        {/* 07 — Eventos anteriores / Prueba social */}
         <section id="eventos-anteriores" className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -178,7 +242,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 07 — Misión territorial / Mapa de Formosa */}
+        {/* 08 — Misión territorial / Mapa de Formosa */}
         <section id="territorio" className="border-t border-ink/10 bg-ink text-crema">
           <div className="mx-auto max-w-6xl px-5 py-20">
             <Reveal>
@@ -266,7 +330,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 08 — Café Meetup / Sedes */}
+        {/* 09 — Café Meetup / Sedes */}
         <section id="cafe" className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -287,71 +351,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 09 — Colaboradores */}
-        <section id="colaboradores" className="border-t border-ink/10 bg-white">
-          <Reveal className="mx-auto max-w-6xl px-5 py-20">
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Colaboradores
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Empresas, instituciones y organizaciones que colaboran, apoyan e
-              impulsan a la comunidad.
-            </p>
-            {collaborators.length > 0 ? (
-              <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-                {collaborators.map((collaborator) => (
-                  <li
-                    key={collaborator.id}
-                    className="flex h-28 items-center justify-center rounded-2xl border border-ink/10 bg-white p-6 transition-colors hover:border-ink/25"
-                  >
-                    {collaborator.url ? (
-                      <a
-                        href={collaborator.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={collaborator.name}
-                      >
-                        <Image
-                          src={collaborator.logoSrc}
-                          alt={collaborator.logoAlt}
-                          width={240}
-                          height={96}
-                          className="h-12 w-auto max-w-full object-contain"
-                        />
-                      </a>
-                    ) : (
-                      <Image
-                        src={collaborator.logoSrc}
-                        alt={collaborator.logoAlt}
-                        width={240}
-                        height={96}
-                        className="h-12 w-auto max-w-full object-contain"
-                      />
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="mt-10 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
-                <p className="font-semibold text-ink">
-                  Todavía no hay colaboradores publicados.
-                </p>
-                <p className="mt-2 leading-relaxed">
-                  Estamos sumando a las organizaciones que acompañan e impulsan
-                  a Formosa.dev.
-                </p>
-              </div>
-            )}
-            <a
-              href="/contacto"
-              className="mt-8 inline-block rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
-            >
-              Quiero colaborar
-            </a>
-          </Reveal>
-        </section>
-
-        {/* 10 — Equipo / Quiénes impulsan */}
+        {/* 11 — Equipo / Quiénes impulsan */}
         <section id="equipo" className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -371,7 +371,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 11 — FAQ */}
+        {/* 12 — FAQ */}
         <section id="faq" className="border-t border-ink/10 bg-crema-soft">
           <Reveal className="mx-auto max-w-3xl px-5 py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -407,7 +407,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 12 — CTA final */}
+        {/* 13 — CTA final */}
         <section id="sumate" className="mx-auto max-w-4xl px-5 py-20 text-center">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-5xl">
