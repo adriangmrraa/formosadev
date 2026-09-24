@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { channels, institutional } from "../lib/content";
 
@@ -9,9 +10,22 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-14">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
-            <p className="text-lg font-extrabold tracking-tight">
-              formosa<span className="text-lapacho">.dev</span>
-            </p>
+            <Link
+              href="/"
+              className="flex items-center gap-2 text-lg font-extrabold tracking-tight"
+              aria-label="Formosa.dev, inicio"
+            >
+              <Image
+                src="/assets/logo-formosadev.png"
+                alt="Logo de Formosa.dev"
+                width={32}
+                height={32}
+                className="h-8 w-8 rounded-full object-cover"
+              />
+              <span>
+                formosa<span className="text-lapacho">.dev</span>
+              </span>
+            </Link>
             <p className="mt-3 max-w-xs text-sm text-crema/70">
               {institutional.descriptor}
             </p>
@@ -33,18 +47,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#proyectos" className="text-crema/80 transition-colors hover:text-lapacho">
-                  Proyectos
-                </Link>
-              </li>
-              <li>
-                <Link href="/#recursos" className="text-crema/80 transition-colors hover:text-lapacho">
-                  Recursos
-                </Link>
-              </li>
-              <li>
-                <Link href="/#aliados" className="text-crema/80 transition-colors hover:text-lapacho">
-                  Aliados
+                <Link href="/#colaboradores" className="text-crema/80 transition-colors hover:text-lapacho">
+                  Colaboradores
                 </Link>
               </li>
             </ul>

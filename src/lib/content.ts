@@ -1,5 +1,6 @@
 import type {
   Channel,
+  Collaborator,
   ConductRuleSet,
   FaqItem,
   InstitutionalCopy,
@@ -199,6 +200,48 @@ export const channels: Channel[] = [
     name: "YouTube",
     state: "forthcoming",
     note: "Próximamente, en preparación.",
+  },
+];
+
+// Collaborators: companies, institutions and organizations that support the
+// community. To add one, drop its logo in public/assets/colaboradores/ and
+// append an entry here (alphabetical order by name). The section renders on a
+// clean white background, so prefer dark artwork variants for the logos.
+export const collaborators: Collaborator[] = [
+  {
+    id: "crecimiento",
+    name: "Crecimiento",
+    logoSrc: "/assets/colaboradores/crecimiento.png",
+    logoAlt: "Logo de Crecimiento",
+    url: "https://crecimiento.build/",
+  },
+  {
+    id: "fusalabs",
+    name: "FusaLabs",
+    logoSrc: "/assets/colaboradores/fusalabs.svg",
+    logoAlt: "Logo de FusaLabs",
+    url: "https://www.fusalabs.com/",
+  },
+  {
+    id: "jujuy-dev",
+    name: "Jujuy Dev",
+    logoSrc: "/assets/colaboradores/jujuy-dev.png",
+    logoAlt: "Logo de Jujuy Dev",
+    url: "https://jujuy.dev.ar/",
+  },
+  {
+    id: "mar-del-plata-dev",
+    name: "Mar del Plata Dev",
+    logoSrc: "/assets/colaboradores/mar-del-plata-dev.png",
+    logoAlt: "Logo de Mar del Plata Dev",
+    url: "https://mardelplata.dev.ar/",
+  },
+  {
+    id: "salta-dev",
+    name: "SaltaDev",
+    logoSrc: "/assets/colaboradores/salta-dev.png",
+    logoAlt: "Logo de SaltaDev",
+    url: "https://salta.dev/",
   },
 ];
 

@@ -1,11 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { MobileNav } from "./MobileNav";
 
 const navItems = [
   { label: "Comunidad", href: "/#sumate" },
   { label: "Eventos", href: "/#evento" },
-  { label: "Proyectos", href: "/#proyectos" },
-  { label: "Recursos", href: "/#recursos" },
+  { label: "Colaboradores", href: "/#colaboradores" },
   { label: "Código de conducta", href: "/codigo-de-conducta" },
 ];
 
@@ -18,10 +18,20 @@ export function Header() {
       >
         <Link
           href="/"
-          className="text-lg font-extrabold tracking-tight"
+          className="flex items-center gap-2 text-lg font-extrabold tracking-tight"
           aria-label="Formosa.dev, inicio"
         >
-          formosa<span className="text-lapacho">.dev</span>
+          <Image
+            src="/assets/logo-formosadev.png"
+            alt="Logo de Formosa.dev"
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-full object-cover"
+            priority
+          />
+          <span>
+            formosa<span className="text-lapacho">.dev</span>
+          </span>
         </Link>
 
         <div className="hidden items-center gap-7 md:flex">

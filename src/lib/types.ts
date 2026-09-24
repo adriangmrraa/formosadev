@@ -22,6 +22,17 @@ export interface Pillar {
   description: string;
 }
 
+export interface Collaborator {
+  id: string;
+  name: string;
+  /** Public path to the logo file, e.g. "/assets/colaboradores/org.png". */
+  logoSrc: string;
+  /** Accessible name for the logo image. */
+  logoAlt: string;
+  /** Optional external URL (the organization's website). */
+  url?: string;
+}
+
 export interface ConductRuleSet {
   purpose: string;
   allowed: string[];

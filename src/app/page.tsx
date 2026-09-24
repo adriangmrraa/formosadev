@@ -4,23 +4,13 @@ import { Header } from "../components/Header";
 import { Reveal } from "../components/motion/Reveal";
 import { RevealText } from "../components/motion/RevealText";
 import {
+  collaborators,
   faq,
   institutional,
   joinNote,
   pillars,
   territorialImages,
 } from "../lib/content";
-
-const resourceCategories = [
-  "Primeros pasos",
-  "Desarrollo",
-  "IA y automatización",
-  "Diseño y producto",
-  "Negocios y ventas",
-  "Open source",
-  "Herramientas",
-  "Lectura",
-];
 
 const localityStates = [
   "Buscando referente",
@@ -169,56 +159,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 06 — Personas / Comunidad */}
-        <section id="personas" className="mx-auto max-w-6xl px-5 py-20">
-          <Reveal>
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              La gente hace a la comunidad
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Una comunidad no es una organización abstracta: son personas que se
-              encuentran, comparten y construyen. La nuestra está arrancando.
-            </p>
-            <div className="mt-8 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
-              <p className="font-semibold text-ink">
-                Todavía no hay perfiles publicados.
-              </p>
-              <p className="mt-2 leading-relaxed">
-                Sé de las primeras personas en sumarte y darle cara a la comunidad.
-              </p>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* 07 — Hecho en Formosa / Proyectos */}
-        <section id="proyectos" className="border-t border-ink/10 bg-crema-soft">
-          <Reveal className="mx-auto max-w-6xl px-5 py-20">
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Hecho en Formosa
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Los proyectos que se construyen en la provincia: qué resuelven,
-              quién los hace y con qué stack. Un espacio permanente para mostrar
-              obra real y encontrar colaboradores.
-            </p>
-            <div className="mt-8 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
-              <p className="font-semibold text-ink">
-                Todavía no hay proyectos publicados.
-              </p>
-              <p className="mt-2 leading-relaxed">
-                Subí lo que estás construyendo y sé de los primeros.
-              </p>
-            </div>
-            <a
-              href="#sumate"
-              className="mt-8 inline-block rounded-full bg-ink px-6 py-3 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho"
-            >
-              Ver qué están construyendo
-            </a>
-          </Reveal>
-        </section>
-
-        {/* 08 — Eventos anteriores / Prueba social */}
+        {/* 06 — Eventos anteriores / Prueba social */}
         <section id="eventos-anteriores" className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -237,7 +178,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 09 — Misión territorial / Mapa de Formosa */}
+        {/* 07 — Misión territorial / Mapa de Formosa */}
         <section id="territorio" className="border-t border-ink/10 bg-ink text-crema">
           <div className="mx-auto max-w-6xl px-5 py-20">
             <Reveal>
@@ -325,7 +266,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 10 — Café Meetup / Sedes */}
+        {/* 08 — Café Meetup / Sedes */}
         <section id="cafe" className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -346,72 +287,71 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 11 — Recursos / Aprender */}
-        <section id="recursos" className="border-t border-ink/10 bg-crema-soft">
+        {/* 09 — Colaboradores */}
+        <section id="colaboradores" className="border-t border-ink/10 bg-white">
           <Reveal className="mx-auto max-w-6xl px-5 py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Recursos para aprender
+              Colaboradores
             </h2>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Una biblioteca curada y útil, no una academia. Estamos armando las
-              primeras colecciones, elegidas entre la comunidad.
+              Empresas, instituciones y organizaciones que colaboran, apoyan e
+              impulsan a la comunidad.
             </p>
-            <ul className="mt-8 flex max-w-3xl flex-wrap gap-2">
-              {resourceCategories.map((category) => (
-                <li
-                  key={category}
-                  className="rounded-full border border-ink/15 px-4 py-1.5 text-sm text-ink-soft"
-                >
-                  {category}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </section>
-
-        {/* 12 — Oportunidades */}
-        <section id="oportunidades" className="mx-auto max-w-6xl px-5 py-20">
-          <Reveal>
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Oportunidades
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Trabajo, colaboración, desafíos, becas y convocatorias. Un espacio
-              para conectar el talento local con lo que se está buscando.
-            </p>
-            <div className="mt-8 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
-              <p className="font-semibold text-ink">
-                Todavía no hay oportunidades publicadas.
-              </p>
-              <p className="mt-2 leading-relaxed">
-                Pronto vamos a compartir las primeras.
-              </p>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* 13 — Aliados */}
-        <section id="aliados" className="border-t border-ink/10 bg-crema-soft">
-          <Reveal className="mx-auto max-w-6xl px-5 py-20">
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Colaborar con Formosa.dev
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Distinguimos con claridad cada tipo de relación: una sede, un
-              sponsor, una organización que colabora, un socio o co-organizador, y
-              la tecnología que se usa. Cada vínculo se comunica por lo que es,
-              sin mezclar todo bajo la etiqueta de &ldquo;partners&rdquo;.
-            </p>
+            {collaborators.length > 0 ? (
+              <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+                {collaborators.map((collaborator) => (
+                  <li
+                    key={collaborator.id}
+                    className="flex h-28 items-center justify-center rounded-2xl border border-ink/10 bg-white p-6 transition-colors hover:border-ink/25"
+                  >
+                    {collaborator.url ? (
+                      <a
+                        href={collaborator.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={collaborator.name}
+                      >
+                        <Image
+                          src={collaborator.logoSrc}
+                          alt={collaborator.logoAlt}
+                          width={240}
+                          height={96}
+                          className="h-12 w-auto max-w-full object-contain"
+                        />
+                      </a>
+                    ) : (
+                      <Image
+                        src={collaborator.logoSrc}
+                        alt={collaborator.logoAlt}
+                        width={240}
+                        height={96}
+                        className="h-12 w-auto max-w-full object-contain"
+                      />
+                    )}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <div className="mt-10 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
+                <p className="font-semibold text-ink">
+                  Todavía no hay colaboradores publicados.
+                </p>
+                <p className="mt-2 leading-relaxed">
+                  Estamos sumando a las organizaciones que acompañan e impulsan
+                  a Formosa.dev.
+                </p>
+              </div>
+            )}
             <a
               href="/contacto"
-              className="mt-8 inline-block rounded-full bg-ink px-6 py-3 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho"
+              className="mt-8 inline-block rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
             >
               Quiero colaborar
             </a>
           </Reveal>
         </section>
 
-        {/* 14 — Equipo / Quiénes impulsan */}
+        {/* 10 — Equipo / Quiénes impulsan */}
         <section id="equipo" className="mx-auto max-w-6xl px-5 py-20">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -431,7 +371,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 15 — FAQ */}
+        {/* 11 — FAQ */}
         <section id="faq" className="border-t border-ink/10 bg-crema-soft">
           <Reveal className="mx-auto max-w-3xl px-5 py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -467,7 +407,7 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 16 — CTA final */}
+        {/* 12 — CTA final */}
         <section id="sumate" className="mx-auto max-w-4xl px-5 py-20 text-center">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-5xl">
