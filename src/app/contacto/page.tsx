@@ -31,7 +31,7 @@ export default function ContactoPage() {
                 href={channel.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between rounded-xl border border-ink/10 bg-crema px-5 py-4 transition-colors hover:border-lapacho"
+                className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 bg-crema px-5 py-4 transition-colors hover:border-lapacho"
               >
                 <span className="font-semibold">{channel.name}</span>
                 <span className="text-sm text-ink-soft">{channel.note}</span>
@@ -39,7 +39,7 @@ export default function ContactoPage() {
             ) : (
               <div
                 key={channel.id}
-                className="flex items-center justify-between rounded-xl border border-ink/10 bg-crema-soft px-5 py-4"
+                className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 bg-crema-soft px-5 py-4"
               >
                 <span className="font-semibold text-ink-soft">
                   {channel.name}

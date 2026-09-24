@@ -14,11 +14,11 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-crema/90 backdrop-blur">
       <nav
         aria-label="Principal"
-        className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-4"
+        className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-5"
       >
         <Link
           href="/"
-          className="flex items-center gap-2 text-lg font-extrabold tracking-tight"
+          className="flex items-center gap-2 text-base font-extrabold tracking-tight md:text-lg"
           aria-label="Formosa.dev, inicio"
         >
           <Image

@@ -79,7 +79,7 @@ export default function Home() {
 
         {/* 03 — Colaboradores */}
         <section id="colaboradores" className="border-t border-ink/10 bg-white">
-          <Reveal className="mx-auto max-w-6xl px-5 py-20">
+          <Reveal className="mx-auto max-w-6xl px-5 py-14 md:py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
               Colaboradores
             </h2>
@@ -159,7 +159,7 @@ export default function Home() {
         </section>
 
         {/* 05 — Qué es Formosa.dev */}
-        <section id="que-es" className="mx-auto max-w-6xl px-5 py-20">
+        <section id="que-es" className="mx-auto max-w-6xl px-5 py-14 md:py-20">
           <Reveal>
             <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
               Una comunidad para construir desde acá.
@@ -189,7 +189,7 @@ export default function Home() {
 
         {/* 06 — Próximo evento */}
         <section id="evento" className="border-t border-ink/10 bg-crema-soft">
-          <Reveal className="mx-auto max-w-6xl px-5 py-20">
+          <Reveal className="mx-auto max-w-6xl px-5 py-14 md:py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
               Próximo evento
             </h2>
@@ -224,7 +224,7 @@ export default function Home() {
         </section>
 
         {/* 07 — Eventos anteriores / Prueba social */}
-        <section id="eventos-anteriores" className="mx-auto max-w-6xl px-5 py-20">
+        <section id="eventos-anteriores" className="mx-auto max-w-6xl px-5 py-14 md:py-20">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
               Eventos anteriores
@@ -244,7 +244,7 @@ export default function Home() {
 
         {/* 08 — Misión territorial / Mapa de Formosa */}
         <section id="territorio" className="border-t border-ink/10 bg-ink text-crema">
-          <div className="mx-auto max-w-6xl px-5 py-20">
+          <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
             <Reveal>
               <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
                 Queremos que Formosa.dev se encienda en cada localidad
@@ -331,7 +331,7 @@ export default function Home() {
         </section>
 
         {/* 09 — Café Meetup / Sedes */}
-        <section id="cafe" className="mx-auto max-w-6xl px-5 py-20">
+        <section id="cafe" className="mx-auto max-w-6xl px-5 py-14 md:py-20">
           <Reveal>
             <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
               Tu espacio puede ser sede de encuentros
@@ -351,11 +351,11 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 11 — Equipo / Quiénes impulsan */}
-        <section id="equipo" className="mx-auto max-w-6xl px-5 py-20">
+        {/* 11 — Equipo / Organización */}
+        <section id="equipo" className="mx-auto max-w-6xl px-5 py-14 md:py-20">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Quiénes impulsan la comunidad
+              Quiénes son parte de la organización de Formosa.dev
             </h2>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
               La comunidad la sostienen voluntarios en community management,
@@ -373,7 +373,7 @@ export default function Home() {
 
         {/* 12 — FAQ */}
         <section id="faq" className="border-t border-ink/10 bg-crema-soft">
-          <Reveal className="mx-auto max-w-3xl px-5 py-20">
+          <Reveal className="mx-auto max-w-3xl px-5 py-14 md:py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
               Preguntas frecuentes
             </h2>
@@ -408,7 +408,7 @@ export default function Home() {
         </section>
 
         {/* 13 — CTA final */}
-        <section id="sumate" className="mx-auto max-w-4xl px-5 py-20 text-center">
+        <section id="sumate" className="mx-auto max-w-4xl px-5 py-14 md:py-20 text-center">
           <Reveal>
             <h2 className="text-3xl font-extrabold tracking-tight md:text-5xl">
               Hay gente de acá construyendo. Falta que te sumes vos.
