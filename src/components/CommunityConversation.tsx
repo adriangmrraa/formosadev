@@ -90,17 +90,38 @@ export function CommunityJoinTrigger({ children, className }: CommunityJoinTrigg
         {children}
       </button>
       {isOpen ? (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/65 p-5" role="presentation" onMouseDown={() => setIsOpen(false)}>
-          <section role="dialog" aria-modal="true" aria-labelledby="community-dialog-title" className="w-full max-w-md rounded-3xl bg-crema p-6 shadow-2xl" onMouseDown={(event) => event.stopPropagation()}>
-            <div className="flex items-start justify-between gap-5">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-widest text-lapacho">Formosa.dev</p>
-                <h2 id="community-dialog-title" className="mt-2 text-2xl font-extrabold tracking-tight">Sumate a la conversación</h2>
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/35 p-5 backdrop-blur-xl"
+          role="presentation"
+          onMouseDown={() => setIsOpen(false)}
+        >
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="community-dialog-title"
+            className="relative max-h-[calc(100dvh-2.5rem)] w-full max-w-md overflow-y-auto rounded-[2rem] border border-white/70 bg-crema/95 p-6 shadow-[0_24px_80px_rgba(13,17,23,0.35)] backdrop-blur-2xl sm:p-8"
+            onMouseDown={(event) => event.stopPropagation()}
+          >
+            <div aria-hidden="true" className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-lapacho/15 blur-3xl" />
+            <div aria-hidden="true" className="absolute -bottom-24 -left-20 h-48 w-48 rounded-full bg-celeste/20 blur-3xl" />
+            <div className="relative">
+              <div className="flex items-start justify-between gap-5">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-lapacho">Formosa.dev</p>
+                  <h2 id="community-dialog-title" className="mt-3 text-3xl font-extrabold leading-tight tracking-tight">Sumate a la conversación</h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  aria-label="Cerrar"
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white/70 text-xl leading-none text-ink-soft transition hover:border-lapacho/40 hover:bg-white hover:text-ink"
+                >
+                  ×
+                </button>
               </div>
-              <button type="button" onClick={() => setIsOpen(false)} aria-label="Cerrar" className="rounded-full p-2 text-ink-soft transition hover:bg-crema-soft hover:text-ink">×</button>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">Elegí el canal que prefieras para ser parte de la comunidad.</p>
+              <div className="mt-7"><ConversationOptions /></div>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-ink-soft">Elegí el canal que prefieras para ser parte de la comunidad.</p>
-            <div className="mt-6"><ConversationOptions /></div>
           </section>
         </div>
       ) : null}
