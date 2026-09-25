@@ -209,6 +209,14 @@ export const channels: Channel[] = [
 // clean white background, so prefer dark artwork variants for the logos.
 export const collaborators: Collaborator[] = [
   {
+    id: "ah-sports",
+    name: "AH Sports",
+    logoSrc: "/assets/colaboradores/ah-sports.png",
+    logoAlt: "Logo de AH Sports",
+    url: "https://www.instagram.com/ahsportsindumentaria/",
+    large: true,
+  },
+  {
     id: "crecimiento",
     name: "Crecimiento",
     logoSrc: "/assets/colaboradores/crecimiento.png",
@@ -237,6 +245,14 @@ export const collaborators: Collaborator[] = [
     logoSrc: "/assets/colaboradores/mar-del-plata-dev.png",
     logoAlt: "Logo de Mar del Plata Dev",
     url: "https://mardelplata.dev.ar/",
+    large: true,
+  },
+  {
+    id: "pepe-guapo",
+    name: "Pepe Guapo",
+    logoSrc: "/assets/colaboradores/pepe-guapo.png",
+    logoAlt: "Logo de Pepe Guapo",
+    url: "https://pepe-club.com/",
     large: true,
   },
   {
