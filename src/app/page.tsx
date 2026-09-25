@@ -16,7 +16,6 @@ import {
   pillars,
   territorialImages,
   xLatestPostUrl,
-  xProfileUrl,
 } from "../lib/content";
 import type { Collaborator } from "../lib/types";
 
@@ -195,15 +194,14 @@ export default function Home() {
                 Ver publicación en X
               </a>
               <div className="mt-8 max-w-xl overflow-hidden rounded-2xl border border-ink/10 bg-white p-3">
-                <a
-                  className="twitter-timeline"
-                  href={xProfileUrl}
-                  data-tweet-limit="1"
-                  data-chrome="noheader nofooter noborders transparent"
+                <blockquote
+                  className="twitter-tweet"
                   data-lang="es"
+                  data-theme="light"
+                  data-dnt="true"
                 >
-                  Posts de @formosadev
-                </a>
+                  <a href={xLatestPostUrl}>Ver última publicación de @formosadev en X</a>
+                </blockquote>
               </div>
             </div>
 
