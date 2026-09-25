@@ -24,9 +24,9 @@ export function Header() {
           <Image
             src="/assets/logo-formosadev.png"
             alt="Logo de Formosa.dev"
-            width={32}
-            height={32}
-            className="h-8 w-8 rounded-full object-cover"
+            width={48}
+            height={48}
+            className="h-12 w-12 rounded-full object-cover"
             priority
           />
           <span>
