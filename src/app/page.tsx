@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { AutoMarquee } from "../components/motion/AutoMarquee";
 import { Reveal } from "../components/motion/Reveal";
 import { RevealText } from "../components/motion/RevealText";
 import {
@@ -11,6 +12,7 @@ import {
   pillars,
   territorialImages,
 } from "../lib/content";
+import type { Collaborator } from "../lib/types";
 
 const localityStates = [
   "Buscando referente",
@@ -19,6 +21,48 @@ const localityStates = [
   "Comunidad activa",
   "Camino al hackathon",
 ];
+
+function CollaboratorCard({
+  collaborator,
+  hidden = false,
+}: {
+  collaborator: Collaborator;
+  hidden?: boolean;
+}) {
+  const image = (
+    <Image
+      src={collaborator.logoSrc}
+      alt={hidden ? "" : collaborator.logoAlt}
+      width={240}
+      height={96}
+      className={
+        collaborator.large
+          ? "h-18 w-auto max-w-full object-contain"
+          : "h-12 w-auto max-w-full object-contain"
+      }
+    />
+  );
+
+  return (
+    <li
+      aria-hidden={hidden || undefined}
+      className="mr-4 flex h-36 w-44 shrink-0 items-center justify-center rounded-2xl border border-ink/10 bg-white p-6 transition-colors hover:border-ink/25 sm:w-52"
+    >
+      {collaborator.url && !hidden ? (
+        <a
+          href={collaborator.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={collaborator.name}
+        >
+          {image}
+        </a>
+      ) : (
+        image
+      )}
+    </li>
+  );
+}
 
 export default function Home() {
   return (
@@ -88,47 +132,23 @@ export default function Home() {
               impulsan a la comunidad.
             </p>
             {collaborators.length > 0 ? (
-              <ul className="mt-10 flex snap-x snap-proximity gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {collaborators.map((collaborator) => (
-                  <li
-                    key={collaborator.id}
-                    className="flex h-36 w-44 shrink-0 snap-start items-center justify-center rounded-2xl border border-ink/10 bg-white p-6 transition-colors hover:border-ink/25 sm:w-52"
-                  >
-                    {collaborator.url ? (
-                      <a
-                        href={collaborator.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={collaborator.name}
-                      >
-                        <Image
-                          src={collaborator.logoSrc}
-                          alt={collaborator.logoAlt}
-                          width={240}
-                          height={96}
-                          className={
-                            collaborator.large
-                              ? "h-18 w-auto max-w-full object-contain"
-                              : "h-12 w-auto max-w-full object-contain"
-                          }
-                        />
-                      </a>
-                    ) : (
-                      <Image
-                        src={collaborator.logoSrc}
-                        alt={collaborator.logoAlt}
-                        width={240}
-                        height={96}
-                        className={
-                          collaborator.large
-                            ? "h-18 w-auto max-w-full object-contain"
-                            : "h-12 w-auto max-w-full object-contain"
-                        }
-                      />
-                    )}
-                  </li>
-                ))}
-              </ul>
+              <AutoMarquee duration={36}>
+                <ul className="colaboradores-track mt-10">
+                  {collaborators.map((collaborator) => (
+                    <CollaboratorCard
+                      key={collaborator.id}
+                      collaborator={collaborator}
+                    />
+                  ))}
+                  {collaborators.map((collaborator) => (
+                    <CollaboratorCard
+                      key={`${collaborator.id}-copy`}
+                      collaborator={collaborator}
+                      hidden
+                    />
+                  ))}
+                </ul>
+              </AutoMarquee>
             ) : (
               <div className="mt-10 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
                 <p className="font-semibold text-ink">

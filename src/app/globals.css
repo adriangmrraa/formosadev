@@ -95,6 +95,45 @@ body {
   background-size: 100% 40%;
 }
 
+/* ---------------------------------------------------------------------------
+   Collaborators auto-marquee — gentle infinite scroll to the left.
+   The track holds two identical halves (see page.tsx); translating -50%
+   loops seamlessly. Runs only while the viewport is on screen
+   (AutoMarquee toggles data-running), pauses on hover/focus so the linked
+   logos stay usable.
+--------------------------------------------------------------------------- */
+
+.colaboradores-viewport {
+  overflow: hidden;
+}
+
+.colaboradores-track {
+  display: flex;
+  width: max-content;
+  animation-name: colaboradores-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.colaboradores-viewport[data-running="true"] .colaboradores-track {
+  animation-play-state: running;
+}
+
+.colaboradores-viewport:hover .colaboradores-track,
+.colaboradores-viewport:focus-within .colaboradores-track {
+  animation-play-state: paused;
+}
+
+@keyframes colaboradores-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -111,5 +150,24 @@ body {
   .js .highlight {
     background-size: 100% 40% !important;
     transition: none !important;
+  }
+
+  .colaboradores-track {
+    animation: none !important;
+  }
+
+  .colaboradores-viewport {
+    overflow-x: auto;
+  }
+}
+
+/* Without JS the observer never runs, so fall back to manual scroll. */
+@media (scripting: none) {
+  .colaboradores-track {
+    animation: none;
+  }
+
+  .colaboradores-viewport {
+    overflow-x: auto;
   }
 }
