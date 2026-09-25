@@ -110,7 +110,7 @@ export default function Home() {
                   className="h-auto w-full rounded-2xl object-cover"
                 />
                 <figcaption className="mt-2 text-xs text-ink/50">
-                  Estación de tren de Formosa Capital.
+                  Paisajes y encuentros de Formosa.
                 </figcaption>
               </figure>
             </Reveal>

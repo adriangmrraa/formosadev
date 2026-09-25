@@ -30,7 +30,7 @@ export const institutional: InstitutionalCopy = {
 };
 
 export const communityWhatsAppUrl = institutional.joinUrl;
-export const communityTelegramUrl: string | null = null;
+export const communityTelegramUrl = "https://t.me/+SVRF2loStn_ovjiS";
 export const contactWhatsAppUrl = "https://wa.me/5491162793009";
 
 export const joinNote =
@@ -269,10 +269,10 @@ export const collaborators: Collaborator[] = [
 // Territorial imagery, sourced from the approved raw territorial set.
 export const territorialImages = {
   hero: {
-    src: "/assets/hero-estacion.jpg",
-    alt: "Estación de tren de Formosa, de día, con la vegetación y el entorno urbano de la ciudad",
-    width: 1280,
-    height: 852,
+    src: "/assets/hero-formosa-collage.png",
+    alt: "Collage de paisajes, espacios urbanos y encuentros de Formosa",
+    width: 1600,
+    height: 900,
   },
   banado: {
     src: "/assets/banado.jpg",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { communityTelegramUrl, communityWhatsAppUrl } from "../lib/content";
 
 type CommunityJoinTriggerProps = {
@@ -68,7 +69,7 @@ function ConversationOptions() {
   return (
     <div className="space-y-3">
       <ChannelOption name="WhatsApp" description="Unite al grupo de la comunidad." href={communityWhatsAppUrl} icon={<WhatsAppIcon />} />
-      <ChannelOption name="Telegram" description="Disponible próximamente." href={communityTelegramUrl} icon={<TelegramIcon />} />
+      <ChannelOption name="Telegram" description="Unite al grupo de la comunidad." href={communityTelegramUrl} icon={<TelegramIcon />} />
     </div>
   );
 }
@@ -77,21 +78,31 @@ export function CommunityJoinTrigger({ children, className }: CommunityJoinTrigg
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setIsOpen(false);
     };
+
+    document.body.style.overflow = "hidden";
     window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, []);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [isOpen]);
 
   return (
     <>
       <button type="button" onClick={() => setIsOpen(true)} className={className}>
         {children}
       </button>
-      {isOpen ? (
+      {isOpen && typeof document !== "undefined"
+        ? createPortal(
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/35 p-5 backdrop-blur-xl"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/25 p-5 [backdrop-filter:blur(24px)] [-webkit-backdrop-filter:blur(24px)]"
           role="presentation"
           onMouseDown={() => setIsOpen(false)}
         >
@@ -99,7 +110,7 @@ export function CommunityJoinTrigger({ children, className }: CommunityJoinTrigg
             role="dialog"
             aria-modal="true"
             aria-labelledby="community-dialog-title"
-            className="relative max-h-[calc(100dvh-2.5rem)] w-full max-w-md overflow-y-auto rounded-[2rem] border border-white/70 bg-crema/95 p-6 shadow-[0_24px_80px_rgba(13,17,23,0.35)] backdrop-blur-2xl sm:p-8"
+            className="relative w-full max-w-md rounded-[2rem] border border-white/70 bg-crema/95 p-6 shadow-[0_24px_80px_rgba(13,17,23,0.35)] backdrop-blur-2xl sm:p-8"
             onMouseDown={(event) => event.stopPropagation()}
           >
             <div aria-hidden="true" className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-lapacho/15 blur-3xl" />
@@ -123,8 +134,10 @@ export function CommunityJoinTrigger({ children, className }: CommunityJoinTrigg
               <div className="mt-7"><ConversationOptions /></div>
             </div>
           </section>
-        </div>
-      ) : null}
+        </div>,
+        document.body,
+      )
+        : null}
     </>
   );
 }
@@ -138,7 +151,7 @@ export function ConversationSection() {
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">Elegí dónde querés participar. Podés encontrarnos en los canales oficiales de Formosa.dev.</p>
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           <ChannelOption name="WhatsApp" description="Comunidad oficial" href={communityWhatsAppUrl} icon={<WhatsAppIcon />} />
-          <ChannelOption name="Telegram" description="Próximamente" href={communityTelegramUrl} icon={<TelegramIcon />} />
+          <ChannelOption name="Telegram" description="Comunidad oficial" href={communityTelegramUrl} icon={<TelegramIcon />} />
           <ChannelOption name="Discord" description="Canal en preparación" href={null} icon={<DiscordIcon />} />
         </div>
       </div>
