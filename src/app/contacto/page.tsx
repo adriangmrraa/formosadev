@@ -6,6 +6,7 @@ import { channels, institutional } from "../../lib/content";
 
 export const metadata: Metadata = {
   title: "Contacto",
+  alternates: { canonical: "/contacto/" },
   description:
     "Canales de contacto de Formosa.dev, la comunidad tecnológica de Formosa.",
 };

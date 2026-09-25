@@ -23,7 +23,7 @@ export function Header() {
           aria-label="Formosa.dev, inicio"
         >
           <Image
-            src="/assets/logo-formosadev.png"
+            src="/assets/logo-formosadev.webp"
             alt="Logo de Formosa.dev"
             width={48}
             height={48}

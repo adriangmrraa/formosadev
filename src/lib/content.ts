@@ -212,7 +212,7 @@ export const collaborators: Collaborator[] = [
   {
     id: "ah-sports",
     name: "AH Sports",
-    logoSrc: "/assets/colaboradores/ah-sports.png",
+    logoSrc: "/assets/colaboradores/ah-sports.webp",
     logoAlt: "Logo de AH Sports",
     url: "https://www.instagram.com/ahsportsindumentaria/",
     large: true,
@@ -220,7 +220,7 @@ export const collaborators: Collaborator[] = [
   {
     id: "crecimiento",
     name: "Crecimiento",
-    logoSrc: "/assets/colaboradores/crecimiento.png",
+    logoSrc: "/assets/colaboradores/crecimiento.webp",
     logoAlt: "Logo de Crecimiento",
     url: "https://crecimiento.build/",
   },
@@ -235,7 +235,7 @@ export const collaborators: Collaborator[] = [
   {
     id: "jujuy-dev",
     name: "Jujuy Dev",
-    logoSrc: "/assets/colaboradores/jujuy-dev.png",
+    logoSrc: "/assets/colaboradores/jujuy-dev.webp",
     logoAlt: "Logo de Jujuy Dev",
     url: "https://jujuy.dev.ar/",
     large: true,
@@ -243,7 +243,7 @@ export const collaborators: Collaborator[] = [
   {
     id: "mar-del-plata-dev",
     name: "Mar del Plata Dev",
-    logoSrc: "/assets/colaboradores/mar-del-plata-dev.png",
+    logoSrc: "/assets/colaboradores/mar-del-plata-dev.webp",
     logoAlt: "Logo de Mar del Plata Dev",
     url: "https://mardelplata.dev.ar/",
     large: true,
@@ -251,7 +251,7 @@ export const collaborators: Collaborator[] = [
   {
     id: "pepe-guapo",
     name: "Pepe Guapo",
-    logoSrc: "/assets/colaboradores/pepe-guapo.png",
+    logoSrc: "/assets/colaboradores/pepe-guapo.webp",
     logoAlt: "Logo de Pepe Guapo",
     url: "https://pepe-club.com/",
     large: true,
@@ -259,7 +259,7 @@ export const collaborators: Collaborator[] = [
   {
     id: "salta-dev",
     name: "SaltaDev",
-    logoSrc: "/assets/colaboradores/salta-dev.png",
+    logoSrc: "/assets/colaboradores/salta-dev.webp",
     logoAlt: "Logo de SaltaDev",
     url: "https://salta.dev/",
     large: true,
@@ -269,19 +269,19 @@ export const collaborators: Collaborator[] = [
 // Territorial imagery, sourced from the approved raw territorial set.
 export const territorialImages = {
   hero: {
-    src: "/assets/hero-formosa-collage.png",
+    src: "/assets/hero-formosa-collage.webp",
     alt: "Collage de paisajes, espacios urbanos y encuentros de Formosa",
     width: 1600,
     height: 900,
   },
   banado: {
-    src: "/assets/banado.jpg",
+    src: "/assets/banado.webp",
     alt: "Bañado La Estrella, humedal formoseño con aves y vegetación",
     width: 805,
     height: 601,
   },
   cruzDelNorte: {
-    src: "/assets/cruz-del-norte.jpg",
+    src: "/assets/cruz-del-norte.webp",
     alt: "Cielo nocturno de Formosa con la constelación de la Cruz del Norte",
     width: 1280,
     height: 853,

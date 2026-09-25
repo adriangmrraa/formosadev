@@ -5,6 +5,7 @@ import { conduct } from "../../lib/content";
 
 export const metadata: Metadata = {
   title: "Código de conducta",
+  alternates: { canonical: "/codigo-de-conducta/" },
   description:
     "Normas de convivencia de la comunidad de Formosa.dev: qué se puede compartir, qué no, y cómo se modera.",
 };
