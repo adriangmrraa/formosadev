@@ -25,15 +25,15 @@ export const institutional: InstitutionalCopy = {
     "Formosa.dev es la comunidad tecnológica de Formosa. Un punto de encuentro para aprender, conocer gente, construir proyectos reales y abrir oportunidades desde acá.",
   statusFormula:
     "Formosa.dev es una comunidad tecnológica e iniciativa sin fines de lucro de Formosa, en proceso de institucionalización hacia una futura Fundación Formosa.dev.",
-  joinUrl: "https://instagram.com/formosa.dev",
-  joinUrlLabel: "Seguinos en Instagram para sumarte",
+  joinUrl: "https://chat.whatsapp.com/L3PqNeGLdut7QBGPVifdnC",
+  joinUrlLabel: "Unite a la comunidad de WhatsApp",
 };
 
-// The WhatsApp invitation is not published anywhere yet (the only known value is
-// a placeholder). The documented join path is: the invitation is shared on
-// Instagram. We never ship a placeholder link.
+export const communityWhatsAppUrl = institutional.joinUrl;
+export const contactWhatsAppUrl = "https://wa.me/5491162793009";
+
 export const joinNote =
-  "La invitación al grupo de WhatsApp se comparte por Instagram. Ahí vas a encontrar el link para sumarte a la comunidad.";
+  "Unite al grupo de WhatsApp para ser parte de la comunidad.";
 
 export const pillars: Pillar[] = [
   {

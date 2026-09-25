@@ -6,6 +6,8 @@ import { Reveal } from "../components/motion/Reveal";
 import { RevealText } from "../components/motion/RevealText";
 import {
   collaborators,
+  communityWhatsAppUrl,
+  contactWhatsAppUrl,
   faq,
   institutional,
   joinNote,
@@ -88,13 +90,17 @@ export default function Home() {
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a
-                    href="#sumate"
+                    href={communityWhatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho"
                   >
                     Sumate a la comunidad
                   </a>
                   <a
-                    href="#evento"
+                    href={communityWhatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:border-lapacho hover:text-lapacho"
                   >
                     Ver próximo encuentro
@@ -161,7 +167,9 @@ export default function Home() {
               </div>
             )}
             <a
-              href="/contacto"
+              href={contactWhatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-8 inline-block rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
             >
               Quiero colaborar
@@ -235,13 +243,17 @@ export default function Home() {
               </ul>
               <div className="mt-6 flex flex-wrap gap-3">
                 <a
-                  href="#sumate"
+                  href={communityWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho"
                 >
                   Sumate a la comunidad
                 </a>
                 <a
-                  href="/contacto"
+                  href={contactWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-full border border-ink/15 px-5 py-2.5 text-sm font-semibold transition hover:-translate-y-0.5 hover:border-lapacho hover:text-lapacho"
                 >
                   Proponé un evento u ofrecé una sede
@@ -342,13 +354,17 @@ export default function Home() {
 
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
-                  href="/contacto"
+                  href={communityWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
                 >
                   Quiero activar mi localidad
                 </a>
                 <a
-                  href="/contacto"
+                  href={contactWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-full border border-crema/30 px-6 py-3 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:border-lapacho hover:text-lapacho"
                 >
                   Ofrecer una sede
@@ -371,7 +387,9 @@ export default function Home() {
               comunidad aporta convocatoria y contenido.
             </p>
             <a
-              href="/contacto"
+              href={contactWhatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-8 inline-block rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
             >
               Quiero recibir un meetup

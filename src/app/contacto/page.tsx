@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { channels, institutional } from "../../lib/content";
+import { channels, communityWhatsAppUrl, institutional } from "../../lib/content";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -18,10 +18,16 @@ export default function ContactoPage() {
           Contacto
         </h1>
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
-          Por ahora, el canal principal para contactarnos y sumarte es Instagram.
-          Estamos confirmando el resto de los canales antes de publicarlos, para
-          no darte datos que después cambien.
+          Para sumarte a la comunidad, unite directamente al grupo de WhatsApp.
         </p>
+        <a
+          href={communityWhatsAppUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-6 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition-colors hover:bg-lapacho"
+        >
+          Unirme a la comunidad
+        </a>
 
         <div className="mt-10 space-y-3">
           {channels.map((channel) =>
