@@ -225,6 +225,13 @@ export const collaborators: Collaborator[] = [
     url: "https://crecimiento.build/",
   },
   {
+    id: "debatech",
+    name: "Debatech",
+    logoSrc: "/assets/colaboradores/debatech.jpg",
+    logoAlt: "Logo de Debatech",
+    large: true,
+  },
+  {
     id: "fusalabs",
     name: "FusaLabs",
     logoSrc: "/assets/colaboradores/fusalabs.svg",
