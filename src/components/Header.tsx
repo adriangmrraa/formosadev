@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { communityWhatsAppUrl } from "../lib/content";
+import { CommunityJoinTrigger } from "./CommunityConversation";
 import { MobileNav } from "./MobileNav";
 
 const navItems = [
-  { label: "Comunidad", href: communityWhatsAppUrl },
+  { label: "Comunidad", href: "/#conversacion" },
   { label: "Eventos", href: "/#evento" },
   { label: "Colaboradores", href: "/#colaboradores" },
   { label: "Código de conducta", href: "/codigo-de-conducta" },
@@ -48,14 +48,9 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Link
-            href={communityWhatsAppUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-crema transition-colors hover:bg-lapacho"
-          >
+          <CommunityJoinTrigger className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-crema transition-colors hover:bg-lapacho">
             Sumate
-          </Link>
+          </CommunityJoinTrigger>
           <MobileNav items={navItems} />
         </div>
       </nav>

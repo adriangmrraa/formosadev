@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CommunityJoinTrigger, ConversationSection } from "../components/CommunityConversation";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { AutoMarquee } from "../components/motion/AutoMarquee";
@@ -6,7 +7,6 @@ import { Reveal } from "../components/motion/Reveal";
 import { RevealText } from "../components/motion/RevealText";
 import {
   collaborators,
-  communityWhatsAppUrl,
   contactWhatsAppUrl,
   faq,
   institutional,
@@ -89,22 +89,12 @@ export default function Home() {
                   {institutional.heroSubcopy}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a
-                    href={communityWhatsAppUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho"
-                  >
-                    Sumate a la comunidad
-                  </a>
-                  <a
-                    href={communityWhatsAppUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:border-lapacho hover:text-lapacho"
-                  >
-                    Ver próximo encuentro
-                  </a>
+                  <CommunityJoinTrigger className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho">
+                  Sumate a la comunidad
+                </CommunityJoinTrigger>
+                  <CommunityJoinTrigger className="rounded-full border border-ink/15 px-6 py-3 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:border-lapacho hover:text-lapacho">
+                  Ver próximo encuentro
+                </CommunityJoinTrigger>
                 </div>
               </Reveal>
             </div>
@@ -126,6 +116,8 @@ export default function Home() {
             </Reveal>
           </div>
         </section>
+
+        <ConversationSection />
 
         {/* 03 — Colaboradores */}
         <section id="colaboradores" className="border-t border-ink/10 bg-white">
@@ -242,14 +234,9 @@ export default function Home() {
                 <li>· Sumate a la comunidad para enterarte apenas se confirme.</li>
               </ul>
               <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href={communityWhatsAppUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho"
-                >
+                <CommunityJoinTrigger className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho">
                   Sumate a la comunidad
-                </a>
+                </CommunityJoinTrigger>
                 <a
                   href={contactWhatsAppUrl}
                   target="_blank"
@@ -353,14 +340,9 @@ export default function Home() {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={communityWhatsAppUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
-                >
+                <CommunityJoinTrigger className="rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep">
                   Quiero activar mi localidad
-                </a>
+                </CommunityJoinTrigger>
                 <a
                   href={contactWhatsAppUrl}
                   target="_blank"
@@ -464,14 +446,9 @@ export default function Home() {
               desde Formosa.
             </p>
             <div className="mt-8 flex flex-col items-center gap-4">
-              <a
-                href={institutional.joinUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-lapacho px-8 py-4 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
-              >
-                Entrar a la comunidad
-              </a>
+              <CommunityJoinTrigger className="rounded-full bg-lapacho px-8 py-4 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep">
+                  Entrar a la comunidad
+                </CommunityJoinTrigger>
               <p className="max-w-sm text-sm text-ink-soft">{joinNote}</p>
             </div>
           </Reveal>

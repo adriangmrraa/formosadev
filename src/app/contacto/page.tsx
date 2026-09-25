@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { CommunityJoinTrigger } from "../../components/CommunityConversation";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import { channels, communityWhatsAppUrl, institutional } from "../../lib/content";
+import { channels, institutional } from "../../lib/content";
 
 export const metadata: Metadata = {
   title: "Contacto",
@@ -20,14 +21,9 @@ export default function ContactoPage() {
         <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
           Para sumarte a la comunidad, unite directamente al grupo de WhatsApp.
         </p>
-        <a
-          href={communityWhatsAppUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-6 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition-colors hover:bg-lapacho"
-        >
+        <CommunityJoinTrigger className="mt-6 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition-colors hover:bg-lapacho">
           Unirme a la comunidad
-        </a>
+        </CommunityJoinTrigger>
 
         <div className="mt-10 space-y-3">
           {channels.map((channel) =>

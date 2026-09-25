@@ -30,6 +30,7 @@ export const institutional: InstitutionalCopy = {
 };
 
 export const communityWhatsAppUrl = institutional.joinUrl;
+export const communityTelegramUrl: string | null = null;
 export const contactWhatsAppUrl = "https://wa.me/5491162793009";
 
 export const joinNote =
