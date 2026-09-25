@@ -51,6 +51,11 @@ export function Footer() {
                   Colaboradores
                 </Link>
               </li>
+              <li>
+                <Link href="/#redes" className="text-crema/80 transition-colors hover:text-lapacho">
+                  Redes
+                </Link>
+              </li>
             </ul>
           </div>
 

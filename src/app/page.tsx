@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Script from "next/script";
 import { CommunityJoinTrigger, ConversationSection } from "../components/CommunityConversation";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
@@ -7,12 +8,15 @@ import { Reveal } from "../components/motion/Reveal";
 import { RevealText } from "../components/motion/RevealText";
 import {
   collaborators,
+  channels,
   contactWhatsAppUrl,
   faq,
   institutional,
   joinNote,
   pillars,
   territorialImages,
+  xLatestPostUrl,
+  xProfileUrl,
 } from "../lib/content";
 import type { Collaborator } from "../lib/types";
 
@@ -169,7 +173,66 @@ export default function Home() {
           </Reveal>
         </section>
 
-        {/* 04 — Prueba de vida */}
+        {/* 04 — Redes */}
+        <section id="redes" className="border-t border-ink/10 bg-crema-soft">
+          <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[minmax(0,1fr)_18rem] md:py-20">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-lapacho">
+                Redes
+              </p>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+                Lo último de Formosa.dev en X
+              </h2>
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">
+                Noticias, encuentros y lo que estamos construyendo desde la comunidad.
+              </p>
+              <a
+                href={xLatestPostUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition hover:bg-lapacho"
+              >
+                Ver publicación en X
+              </a>
+              <div className="mt-8 max-w-xl overflow-hidden rounded-2xl border border-ink/10 bg-white p-3">
+                <a
+                  className="twitter-timeline"
+                  href={xProfileUrl}
+                  data-tweet-limit="1"
+                  data-chrome="noheader nofooter noborders transparent"
+                  data-lang="es"
+                >
+                  Posts de @formosadev
+                </a>
+              </div>
+            </div>
+
+            <aside className="self-start rounded-2xl border border-ink/10 bg-white p-6">
+              <h3 className="text-lg font-bold">Seguinos</h3>
+              <ul className="mt-5 space-y-3">
+                {channels.filter((channel) => channel.url).map((channel) => (
+                  <li key={channel.id}>
+                    <a
+                      href={channel.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold transition hover:border-lapacho hover:text-lapacho"
+                    >
+                      <span>{channel.name}</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          </div>
+          <Script
+            src="https://platform.x.com/widgets.js"
+            strategy="lazyOnload"
+          />
+        </section>
+
+        {/* 05 — Prueba de vida */}
         <section
           aria-label="Síntesis"
           className="border-y border-ink/10 bg-crema-soft"

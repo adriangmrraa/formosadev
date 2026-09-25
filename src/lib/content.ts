@@ -31,6 +31,9 @@ export const institutional: InstitutionalCopy = {
 
 export const communityWhatsAppUrl = institutional.joinUrl;
 export const communityTelegramUrl = "https://t.me/+SVRF2loStn_ovjiS";
+export const xProfileUrl = "https://x.com/formosadev";
+export const xLatestPostUrl =
+  "https://x.com/formosadev/status/2103603327741112743?s=46";
 export const contactWhatsAppUrl = "https://wa.me/5491162793009";
 
 export const joinNote =
@@ -183,6 +186,20 @@ export const channels: Channel[] = [
     url: "https://instagram.com/formosa.dev",
     state: "confirmed",
     note: "@formosa.dev",
+  },
+  {
+    id: "telegram",
+    name: "Telegram",
+    url: communityTelegramUrl,
+    state: "confirmed",
+    note: "Comunidad oficial",
+  },
+  {
+    id: "x",
+    name: "X",
+    url: xProfileUrl,
+    state: "confirmed",
+    note: "@formosadev",
   },
   {
     id: "linkedin",
