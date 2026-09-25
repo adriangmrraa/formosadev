@@ -456,7 +456,7 @@ formosa.dev/
 2. Configurar layout global con navbar y footer
 3. Crear secciones como componentes
 4. Deploy a Vercel desde GitHub
-5. Conectar dominio formosa.dev
+5. Conectar dominio formosa.dev.ar
 
 ---
 

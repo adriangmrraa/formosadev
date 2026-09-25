@@ -11,7 +11,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://formosa.dev"),
+  metadataBase: new URL("https://formosa.dev.ar"),
   title: {
     default: "Formosa.dev — Comunidad tecnológica de Formosa",
     template: "%s — Formosa.dev",

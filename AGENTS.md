@@ -5,7 +5,7 @@ Todo lo demás de la comunidad —estrategia, prensa, mailing, redes, documentac
 **fuera de este repositorio**, en el directorio padre.
 
 **Repo:** https://github.com/adriangmrraa/formosadev
-**Dominio de producción:** formosa.dev
+**Dominio de producción:** formosa.dev.ar (GitHub Pages)
 
 ---
 
@@ -150,7 +150,7 @@ No hay escala de espaciado, radios ni archivo de tokens definido todavía.
 - [x] Scaffold de Next.js 16 + TypeScript + Tailwind v4 en `src/app/`
 - [ ] Layout global (navbar + footer) — hoy `layout.tsx` y `page.tsx` son el boilerplate
 - [ ] Secciones
-- [ ] Deploy a Vercel + dominio formosa.dev
+- [ ] Deploy a GitHub Pages + dominio formosa.dev.ar
 
 ---
 
