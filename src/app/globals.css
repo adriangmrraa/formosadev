@@ -104,7 +104,22 @@ body {
 --------------------------------------------------------------------------- */
 
 .colaboradores-viewport {
-  overflow: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  cursor: grab;
+}
+
+.colaboradores-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.colaboradores-viewport:active {
+  cursor: grabbing;
+}
+
+.colaboradores-track > li {
+  scroll-snap-align: start;
 }
 
 .colaboradores-track {
@@ -121,7 +136,8 @@ body {
 }
 
 .colaboradores-viewport:hover .colaboradores-track,
-.colaboradores-viewport:focus-within .colaboradores-track {
+.colaboradores-viewport:focus-within .colaboradores-track,
+.colaboradores-viewport:active .colaboradores-track {
   animation-play-state: paused;
 }
 
