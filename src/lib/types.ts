@@ -12,6 +12,28 @@ export interface Channel {
   note?: string;
 }
 
+/**
+ * A confirmed upcoming event. Every field must be verifiable on the public
+ * registration page it links to — never invent dates, speakers or capacity.
+ */
+export interface UpcomingEvent {
+  id: string;
+  /** Short eyebrow: program or organizing body. */
+  descriptor: string;
+  /** Real event title as published on the registration page. */
+  title: string;
+  /** Short factual description, sourced from the registration page. */
+  description: string;
+  /** Venue and city, as published. */
+  location: string;
+  /** Small print shown next to the registration action. */
+  note: string;
+  /** Canonical public registration page. */
+  url: string;
+  /** Embeddable registration URL, used as the iframe source. */
+  embedUrl: string;
+}
+
 export interface FaqItem {
   question: string;
   answer: string;

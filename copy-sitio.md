@@ -232,19 +232,32 @@
 
 ```html
 <div class="event-card">
-  <div class="event-date">
-    <span class="event-day">Jueves 5</span>
-    <span class="event-month">Octubre 2026</span>
-  </div>
   <div class="event-info">
-    <h3>Meetup de Lanzamiento: Formosa.dev</h3>
-    <p class="event-location">📍 Lugar a confirmar — Formosa Capital</p>
-    <p class="event-speaker">🎤 Jesus Fleitas — Fundador de Formosa.dev</p>
-    <p class="event-description">Evento de lanzamiento oficial de la comunidad. Charla inaugural, networking, sorpresas.</p>
-    <a href="#" class="btn-event">Reservar lugar</a>
+    <p class="event-kicker">Road to Colosseum · Superteam Argentina</p>
+    <h3>Superteam Argentina Hackathon | Road to Colosseum X Formosa</h3>
+    <p class="event-location">📍 Pepe Club — 9 de Julio 629, Formosa Capital</p>
+    <p class="event-description">
+      Formosa.dev co-organiza el encuentro presencial en Formosa Capital.
+      Registrate en Luma para recibir la agenda, los enlaces a las sesiones y
+      las novedades de la hackathon: workshop week online, mentorías para los
+      equipos seleccionados y el track de Superteam Argentina en Colosseum.
+    </p>
+    <a href="https://luma.com/usz4536h" class="btn-event">Reservar lugar</a>
+    <p class="event-note">Entrada gratuita con registro previo en Luma, sujeta a la capacidad del espacio.</p>
   </div>
+  <iframe
+    src="https://luma.com/embed/event/evt-umoVbiRegG4qFLO/simple"
+    title="Registro al evento: Superteam Argentina Hackathon | Road to Colosseum X Formosa"
+    loading="lazy"
+    allow="fullscreen; payment"
+  ></iframe>
 </div>
 ```
+
+> El copy se toma de la página pública del evento (`https://luma.com/usz4536h`).
+> No publicar fechas, speakers ni capacidad que no estén verificados ahí.
+> El embed va a ancho completo (sin `width`/`height` fijos) para no desbordar en mobile.
+
 
 ### Sin eventos (estado vacio)
 

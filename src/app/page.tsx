@@ -15,6 +15,7 @@ import {
   joinNote,
   pillars,
   territorialImages,
+  upcomingEvent,
   xLatestPostUrl,
 } from "../lib/content";
 import type { Collaborator } from "../lib/types";
@@ -282,32 +283,75 @@ export default function Home() {
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
               Próximo evento
             </h2>
-            <div className="mt-8 max-w-2xl rounded-2xl border border-ink/10 bg-crema p-8">
-              <h3 className="text-xl font-bold">Estamos armando el próximo encuentro</h3>
-              <p className="mt-3 leading-relaxed text-ink-soft">
-                Todavía no hay una fecha confirmada, pero ya estamos organizando
-                los primeros meetups en Formosa Capital. Podés ayudar de tres
-                maneras:
-              </p>
-              <ul className="mt-5 space-y-2 text-sm leading-relaxed text-ink-soft">
-                <li>· Proponé un evento o una charla.</li>
-                <li>· Ofrecé una sede.</li>
-                <li>· Sumate a la comunidad para enterarte apenas se confirme.</li>
-              </ul>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <CommunityJoinTrigger className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho">
-                  Sumate a la comunidad
-                </CommunityJoinTrigger>
-                <a
-                  href={contactWhatsAppUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="rounded-full border border-ink/15 px-5 py-2.5 text-sm font-semibold transition hover:-translate-y-0.5 hover:border-lapacho hover:text-lapacho"
-                >
-                  Proponé un evento u ofrecé una sede
-                </a>
+            {upcomingEvent ? (
+              <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,34rem)] lg:items-start">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-widest text-lapacho">
+                    {upcomingEvent.descriptor}
+                  </p>
+                  <h3 className="mt-3 text-2xl font-bold leading-snug md:text-3xl">
+                    {upcomingEvent.title}
+                  </h3>
+                  <p className="mt-4 leading-relaxed text-ink-soft">
+                    {upcomingEvent.description}
+                  </p>
+                  <p className="mt-5 text-sm">
+                    <span className="font-semibold text-ink-soft">Lugar: </span>
+                    <span className="text-ink">{upcomingEvent.location}</span>
+                  </p>
+                  <div className="mt-6">
+                    <a
+                      href={upcomingEvent.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
+                    >
+                      Reservar lugar
+                    </a>
+                    <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-soft">
+                      {upcomingEvent.note}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="w-full overflow-hidden rounded-2xl border border-ink/10 bg-white">
+                  <iframe
+                    src={upcomingEvent.embedUrl}
+                    title={`Registro al evento: ${upcomingEvent.title}`}
+                    loading="lazy"
+                    allow="fullscreen; payment"
+                    className="block h-[450px] w-full border-0"
+                  />
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="mt-8 max-w-2xl rounded-2xl border border-ink/10 bg-crema p-8">
+                <h3 className="text-xl font-bold">Estamos armando el próximo encuentro</h3>
+                <p className="mt-3 leading-relaxed text-ink-soft">
+                  Todavía no hay una fecha confirmada, pero ya estamos organizando
+                  los primeros meetups en Formosa Capital. Podés ayudar de tres
+                  maneras:
+                </p>
+                <ul className="mt-5 space-y-2 text-sm leading-relaxed text-ink-soft">
+                  <li>· Proponé un evento o una charla.</li>
+                  <li>· Ofrecé una sede.</li>
+                  <li>· Sumate a la comunidad para enterarte apenas se confirme.</li>
+                </ul>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <CommunityJoinTrigger className="rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition hover:-translate-y-0.5 hover:bg-lapacho">
+                    Sumate a la comunidad
+                  </CommunityJoinTrigger>
+                  <a
+                    href={contactWhatsAppUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-full border border-ink/15 px-5 py-2.5 text-sm font-semibold transition hover:-translate-y-0.5 hover:border-lapacho hover:text-lapacho"
+                  >
+                    Proponé un evento u ofrecé una sede
+                  </a>
+                </div>
+              </div>
+            )}
           </Reveal>
         </section>
 

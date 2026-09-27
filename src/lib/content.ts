@@ -5,6 +5,7 @@ import type {
   FaqItem,
   InstitutionalCopy,
   Pillar,
+  UpcomingEvent,
 } from "./types";
 
 // Single source of truth for institutional copy. Head metadata, footer, FAQ and
@@ -38,6 +39,22 @@ export const contactWhatsAppUrl = "https://wa.me/5491162793009";
 
 export const joinNote =
   "Unite al grupo de WhatsApp para ser parte de la comunidad.";
+
+// Confirmed upcoming event. Every detail here is verified on its public Luma
+// registration page (title, venue, note). Leave `upcomingEvent` undefined when
+// there is no confirmed event so the section falls back to an honest empty
+// state instead of showing stale data.
+export const upcomingEvent: UpcomingEvent | undefined = {
+  id: "road-to-colosseum-formosa",
+  descriptor: "Road to Colosseum · Superteam Argentina",
+  title: "Superteam Argentina Hackathon | Road to Colosseum X Formosa",
+  description:
+    "Formosa.dev co-organiza el encuentro presencial en Formosa Capital. Registrate en Luma para recibir la agenda, los enlaces a las sesiones y las novedades de la hackathon: workshop week online, mentorías para los equipos seleccionados y el track de Superteam Argentina en Colosseum.",
+  location: "Pepe Club — 9 de Julio 629, Formosa Capital",
+  note: "Entrada gratuita con registro previo en Luma, sujeta a la capacidad del espacio.",
+  url: "https://luma.com/usz4536h",
+  embedUrl: "https://luma.com/embed/event/evt-umoVbiRegG4qFLO/simple",
+};
 
 export const pillars: Pillar[] = [
   {
