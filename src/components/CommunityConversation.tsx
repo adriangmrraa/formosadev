@@ -25,14 +25,6 @@ function TelegramIcon() {
   );
 }
 
-function DiscordIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7">
-      <path d="M19.54 4.3A16.8 16.8 0 0 0 15.4 3l-.5 1.02a15.6 15.6 0 0 0-5.8 0L8.6 3A16.6 16.6 0 0 0 4.45 4.3C1.83 8.2 1.12 12 1.48 15.74A16.7 16.7 0 0 0 6.55 18.3l1.22-1.66a9.8 9.8 0 0 1-1.92-.92l.46-.36c3.7 1.7 7.7 1.7 11.35 0l.46.36c-.62.37-1.26.68-1.92.92l1.22 1.66a16.6 16.6 0 0 0 5.08-2.56c.43-4.34-.74-8.1-2.96-11.44ZM8.85 13.42c-1.12 0-2.03-1.02-2.03-2.27s.9-2.27 2.03-2.27c1.13 0 2.05 1.03 2.03 2.27 0 1.25-.9 2.27-2.03 2.27Zm6.3 0c-1.12 0-2.03-1.02-2.03-2.27s.9-2.27 2.03-2.27c1.13 0 2.05 1.03 2.03 2.27 0 1.25-.9 2.27-2.03 2.27Z" />
-    </svg>
-  );
-}
-
 function ChannelOption({
   name,
   description,
@@ -139,22 +131,5 @@ export function CommunityJoinTrigger({ children, className }: CommunityJoinTrigg
       )
         : null}
     </>
-  );
-}
-
-export function ConversationSection() {
-  return (
-    <section id="conversacion" className="border-t border-ink/10 bg-white">
-      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-        <p className="text-sm font-semibold uppercase tracking-widest text-lapacho">Comunidad</p>
-        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">Sumate a la conversación</h2>
-        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">Elegí dónde querés participar. Podés encontrarnos en los canales oficiales de Formosa.dev.</p>
-        <div className="mt-10 grid gap-4 sm:grid-cols-3">
-          <ChannelOption name="WhatsApp" description="Comunidad oficial" href={communityWhatsAppUrl} icon={<WhatsAppIcon />} />
-          <ChannelOption name="Telegram" description="Comunidad oficial" href={communityTelegramUrl} icon={<TelegramIcon />} />
-          <ChannelOption name="Discord" description="Canal en preparación" href={null} icon={<DiscordIcon />} />
-        </div>
-      </div>
-    </section>
   );
 }

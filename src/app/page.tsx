@@ -1,6 +1,5 @@
 import Image from "next/image";
-import Script from "next/script";
-import { CommunityJoinTrigger, ConversationSection } from "../components/CommunityConversation";
+import { CommunityJoinTrigger } from "../components/CommunityConversation";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { AutoMarquee } from "../components/motion/AutoMarquee";
@@ -9,6 +8,7 @@ import { RevealText } from "../components/motion/RevealText";
 import {
   collaborators,
   channels,
+  communityWhatsAppUrl,
   contactWhatsAppUrl,
   faq,
   institutional,
@@ -16,7 +16,6 @@ import {
   pillars,
   territorialImages,
   upcomingEvent,
-  xLatestPostUrl,
 } from "../lib/content";
 import type { Collaborator } from "../lib/types";
 
@@ -27,6 +26,12 @@ const localityStates = [
   "Comunidad activa",
   "Camino al hackathon",
 ];
+
+// Shared card treatment for the channel blocks in the Redes section, so every
+// outbound channel reads as one grid. These are direct links; the community
+// modal is only for the "Sumate" CTAs, where the visitor still has to choose.
+const channelCardClass =
+  "flex h-full w-full items-center justify-between gap-3 rounded-2xl border border-ink/10 bg-white p-5 text-left transition hover:-translate-y-0.5 hover:border-lapacho";
 
 function CollaboratorCard({
   collaborator,
@@ -76,7 +81,7 @@ export default function Home() {
       <Header />
 
       <main>
-        {/* 02 — Hero */}
+        {/* 01 — Hero */}
         <section className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <div className="grid items-center gap-12 md:grid-cols-2">
             <div>
@@ -121,163 +126,7 @@ export default function Home() {
           </div>
         </section>
 
-        <ConversationSection />
-
-        {/* 03 — Colaboradores */}
-        <section id="colaboradores" className="border-t border-ink/10 bg-white">
-          <Reveal className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Colaboradores
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Empresas, instituciones y organizaciones que colaboran, apoyan e
-              impulsan a la comunidad.
-            </p>
-            {collaborators.length > 0 ? (
-              <AutoMarquee duration={36}>
-                <ul className="colaboradores-track mt-10">
-                  {collaborators.map((collaborator) => (
-                    <CollaboratorCard
-                      key={collaborator.id}
-                      collaborator={collaborator}
-                    />
-                  ))}
-                  {collaborators.map((collaborator) => (
-                    <CollaboratorCard
-                      key={`${collaborator.id}-copy`}
-                      collaborator={collaborator}
-                      hidden
-                    />
-                  ))}
-                </ul>
-              </AutoMarquee>
-            ) : (
-              <div className="mt-10 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
-                <p className="font-semibold text-ink">
-                  Todavía no hay colaboradores publicados.
-                </p>
-                <p className="mt-2 leading-relaxed">
-                  Estamos sumando a las organizaciones que acompañan e impulsan
-                  a Formosa.dev.
-                </p>
-              </div>
-            )}
-            <a
-              href={contactWhatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
-            >
-              Quiero colaborar
-            </a>
-          </Reveal>
-        </section>
-
-        {/* 04 — Redes */}
-        <section id="redes" className="border-t border-ink/10 bg-crema-soft">
-          <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 md:grid-cols-[minmax(0,1fr)_18rem] md:py-20">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-lapacho">
-                Redes
-              </p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
-                Lo último de Formosa.dev en X
-              </h2>
-              <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-soft">
-                Noticias, encuentros y lo que estamos construyendo desde la comunidad.
-              </p>
-              <a
-                href={xLatestPostUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition hover:bg-lapacho"
-              >
-                Ver publicación en X
-              </a>
-              <div className="mt-8 max-w-xl overflow-hidden rounded-2xl border border-ink/10 bg-white p-3">
-                <blockquote
-                  className="twitter-tweet"
-                  data-lang="es"
-                  data-theme="light"
-                  data-dnt="true"
-                >
-                  <a href={xLatestPostUrl}>Ver última publicación de @formosadev en X</a>
-                </blockquote>
-              </div>
-            </div>
-
-            <aside className="self-start rounded-2xl border border-ink/10 bg-white p-6">
-              <h3 className="text-lg font-bold">Seguinos</h3>
-              <ul className="mt-5 space-y-3">
-                {channels.filter((channel) => channel.url).map((channel) => (
-                  <li key={channel.id}>
-                    <a
-                      href={channel.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 px-4 py-3 text-sm font-semibold transition hover:border-lapacho hover:text-lapacho"
-                    >
-                      <span>{channel.name}</span>
-                      <span aria-hidden="true">↗</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-          </div>
-          <Script
-            src="https://platform.x.com/widgets.js"
-            strategy="lazyOnload"
-          />
-        </section>
-
-        {/* 05 — Prueba de vida */}
-        <section
-          aria-label="Síntesis"
-          className="border-y border-ink/10 bg-crema-soft"
-        >
-          <Reveal>
-            <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-8 text-center">
-              <span className="text-xl font-extrabold md:text-2xl">Aprender.</span>
-              <span className="text-xl font-extrabold md:text-2xl">Conectar.</span>
-              <span className="text-xl font-extrabold md:text-2xl">Construir.</span>
-              <span className="w-full text-sm text-ink-soft md:w-auto md:text-base">
-                {institutional.inclusion}
-              </span>
-            </div>
-          </Reveal>
-        </section>
-
-        {/* 05 — Qué es Formosa.dev */}
-        <section id="que-es" className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-          <Reveal>
-            <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
-              Una comunidad para construir desde acá.
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              La distancia no debería impedir acceder a personas, conocimiento,
-              proyectos y oportunidades. Formosa.dev conecta y multiplica lo que ya
-              existe en la provincia: talento, ganas de construir y territorio.
-            </p>
-            <dl className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {pillars.map((pillar, index) => (
-                <div key={pillar.title}>
-                  <dt className="flex items-baseline gap-3">
-                    <span className="font-mono text-sm font-bold text-lapacho">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-semibold">{pillar.title}</span>
-                  </dt>
-                  <dd className="mt-2 pl-9 text-sm leading-relaxed text-ink-soft">
-                    {pillar.description}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </section>
-
-        {/* 06 — Próximo evento */}
+        {/* 02 — Próximo evento */}
         <section id="evento" className="border-t border-ink/10 bg-crema-soft">
           <Reveal className="mx-auto max-w-6xl px-5 py-14 md:py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -352,6 +201,157 @@ export default function Home() {
                 </div>
               </div>
             )}
+          </Reveal>
+        </section>
+
+        {/* 03 — Colaboradores */}
+        <section id="colaboradores" className="border-t border-ink/10 bg-white">
+          <Reveal className="mx-auto max-w-6xl px-5 py-14 md:py-20">
+            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
+              Colaboradores
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
+              Empresas, instituciones y organizaciones que colaboran, apoyan e
+              impulsan a la comunidad.
+            </p>
+            {collaborators.length > 0 ? (
+              <AutoMarquee duration={36}>
+                <ul className="colaboradores-track mt-10">
+                  {collaborators.map((collaborator) => (
+                    <CollaboratorCard
+                      key={collaborator.id}
+                      collaborator={collaborator}
+                    />
+                  ))}
+                  {collaborators.map((collaborator) => (
+                    <CollaboratorCard
+                      key={`${collaborator.id}-copy`}
+                      collaborator={collaborator}
+                      hidden
+                    />
+                  ))}
+                </ul>
+              </AutoMarquee>
+            ) : (
+              <div className="mt-10 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
+                <p className="font-semibold text-ink">
+                  Todavía no hay colaboradores publicados.
+                </p>
+                <p className="mt-2 leading-relaxed">
+                  Estamos sumando a las organizaciones que acompañan e impulsan
+                  a Formosa.dev.
+                </p>
+              </div>
+            )}
+            <a
+              href={contactWhatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block rounded-full bg-lapacho px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-lapacho-deep"
+            >
+              Quiero colaborar
+            </a>
+          </Reveal>
+        </section>
+
+        {/* 04 — Redes */}
+        <section id="redes" className="border-t border-ink/10 bg-crema-soft">
+          <Reveal className="mx-auto max-w-6xl px-5 py-14 md:py-20">
+            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
+              Redes
+            </h2>
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {channels
+                .filter((channel) => channel.url)
+                .map((channel) => (
+                  <li key={channel.id}>
+                    <a
+                      href={channel.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={channelCardClass}
+                    >
+                      <span>
+                        <span className="block font-semibold text-ink">
+                          {channel.name}
+                        </span>
+                        {channel.note ? (
+                          <span className="mt-1 block text-sm text-ink-soft">
+                            {channel.note}
+                          </span>
+                        ) : null}
+                      </span>
+                      <span aria-hidden="true" className="text-ink-soft">
+                        ↗
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              <li>
+                <a
+                  href={communityWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={channelCardClass}
+                >
+                  <span>
+                    <span className="block font-semibold text-ink">WhatsApp</span>
+                    <span className="mt-1 block text-sm text-ink-soft">
+                      Comunidad oficial
+                    </span>
+                  </span>
+                  <span aria-hidden="true" className="text-ink-soft">
+                    ↗
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </Reveal>
+        </section>
+
+        {/* 05 — Prueba de vida */}
+        <section
+          aria-label="Síntesis"
+          className="border-y border-ink/10 bg-crema-soft"
+        >
+          <Reveal>
+            <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-2 px-5 py-8 text-center">
+              <span className="text-xl font-extrabold md:text-2xl">Aprender.</span>
+              <span className="text-xl font-extrabold md:text-2xl">Conectar.</span>
+              <span className="text-xl font-extrabold md:text-2xl">Construir.</span>
+              <span className="w-full text-sm text-ink-soft md:w-auto md:text-base">
+                {institutional.inclusion}
+              </span>
+            </div>
+          </Reveal>
+        </section>
+
+        {/* 05 — Qué es Formosa.dev */}
+        <section id="que-es" className="mx-auto max-w-6xl px-5 py-14 md:py-20">
+          <Reveal>
+            <h2 className="max-w-2xl text-3xl font-extrabold tracking-tight md:text-4xl">
+              Una comunidad para construir desde acá.
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
+              La distancia no debería impedir acceder a personas, conocimiento,
+              proyectos y oportunidades. Formosa.dev conecta y multiplica lo que ya
+              existe en la provincia: talento, ganas de construir y territorio.
+            </p>
+            <dl className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {pillars.map((pillar, index) => (
+                <div key={pillar.title}>
+                  <dt className="flex items-baseline gap-3">
+                    <span className="font-mono text-sm font-bold text-lapacho">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="font-semibold">{pillar.title}</span>
+                  </dt>
+                  <dd className="mt-2 pl-9 text-sm leading-relaxed text-ink-soft">
+                    {pillar.description}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </section>
 

@@ -4,8 +4,8 @@ import { CommunityJoinTrigger } from "./CommunityConversation";
 import { MobileNav } from "./MobileNav";
 
 const navItems = [
-  { label: "Comunidad", href: "/#conversacion" },
   { label: "Eventos", href: "/#evento" },
+  { label: "Redes", href: "/#redes" },
   { label: "Colaboradores", href: "/#colaboradores" },
   { label: "Código de conducta", href: "/codigo-de-conducta" },
 ];
