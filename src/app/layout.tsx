@@ -80,7 +80,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     "@type": "AdministrativeArea",
                     name: "Formosa, Argentina",
                   },
-                  sameAs: ["https://instagram.com/formosa.dev"],
+                  sameAs: ["https://www.instagram.com/formosa.dev.ar?stkn=MXZmMmM1OW1oOTd4Mg=="],
                 },
                 {
                   "@type": "WebSite",

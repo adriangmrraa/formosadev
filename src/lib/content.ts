@@ -114,7 +114,7 @@ export const faq: FaqItem[] = [
   {
     question: "¿Cómo me entero del próximo evento?",
     answer:
-      "Siguiendo a @formosa.dev en Instagram y a la comunidad en LinkedIn. Ahí se anuncian los eventos con la debida anticipación.",
+      "Siguiendo a @formosa.dev.ar en Instagram y a la comunidad en LinkedIn. Ahí se anuncian los eventos con la debida anticipación.",
   },
   {
     question: "¿Puedo proponer una charla, un proyecto o un evento?",
@@ -198,9 +198,9 @@ export const channels: Channel[] = [
   {
     id: "instagram",
     name: "Instagram",
-    url: "https://instagram.com/formosa.dev",
+    url: "https://www.instagram.com/formosa.dev.ar?stkn=MXZmMmM1OW1oOTd4Mg==",
     state: "confirmed",
-    note: "@formosa.dev",
+    note: "@formosa.dev.ar",
   },
   {
     id: "telegram",
