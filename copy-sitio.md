@@ -220,12 +220,34 @@
 
 ---
 
-## SECTION 4: PROXIMOS EVENTOS
+## SECTION 4: EVENTOS
 
 ### Titulo
 
 ```html
-<h2>Proximos eventos</h2>
+<h2>Eventos</h2>
+<p>Los encuentros de la comunidad: lo que ya pasó y lo que viene.</p>
+```
+
+### Evento pasado (con recap)
+
+El Road to Colosseum X Formosa (3/10/2026, Pepe Club) ya se realizó: quedó como
+primer evento pasado con galería de fotos y video recap en
+`public/assets/eventos/road-to-colosseum/` (webp + h264 mp4 optimizados).
+
+```html
+<article class="past-event">
+  <p class="event-kicker">Road to Colosseum · Superteam Argentina</p>
+  <h3>Superteam Argentina Hackathon | Road to Colosseum X Formosa</h3>
+  <p class="event-meta">Sábado 3 de octubre de 2026 · Pepe Club — 9 de Julio 629, Formosa Capital</p>
+  <p class="event-description">
+    La primera jornada presencial co-organizada por Formosa.dev: equipos
+    trabajando en sus proyectos para el track argentino de Colosseum, la
+    hackathon global de Solana.
+  </p>
+  <a href="https://luma.com/usz4536h">Ver la publicación del evento</a>
+  <!-- galería masonry + lightbox + video recap -->
+</article>
 ```
 
 ### Con evento activo

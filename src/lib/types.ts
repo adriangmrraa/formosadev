@@ -34,6 +34,44 @@ export interface UpcomingEvent {
   embedUrl: string;
 }
 
+/** A photo from a past event, served from public/assets. */
+export interface EventImage {
+  kind: "image";
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+/** A video recap from a past event. Sources are declared once and selected by the browser via media queries (mobile gets the smaller file). */
+export interface EventVideo {
+  kind: "video";
+  /** Frame shown in the gallery and before playback starts. */
+  poster: string;
+  /** Accessible description of the video content. */
+  title: string;
+  sources: { src: string; media?: string }[];
+  width: number;
+  height: number;
+}
+
+export type EventMedia = EventImage | EventVideo;
+
+/** A finished event with verified data and its media recap. */
+export interface PastEvent {
+  id: string;
+  /** Short eyebrow: program or co-organizing body. */
+  descriptor: string;
+  title: string;
+  /** Human-readable date, e.g. "Sábado 3 de octubre de 2026". */
+  date: string;
+  location: string;
+  description: string;
+  /** Canonical public page of the event, when it exists. */
+  url?: string;
+  media: EventMedia[];
+}
+
 export interface FaqItem {
   question: string;
   answer: string;

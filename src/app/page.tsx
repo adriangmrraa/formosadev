@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CommunityJoinTrigger } from "../components/CommunityConversation";
+import { EventGallery } from "../components/EventGallery";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { AutoMarquee } from "../components/motion/AutoMarquee";
@@ -13,6 +14,7 @@ import {
   faq,
   institutional,
   joinNote,
+  pastEvents,
   pillars,
   territorialImages,
   upcomingEvent,
@@ -126,12 +128,15 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 02 — Próximo evento */}
+        {/* 02 — Eventos (próximo + anteriores) */}
         <section id="evento" className="border-t border-ink/10 bg-crema-soft">
           <Reveal className="mx-auto max-w-6xl px-5 py-14 md:py-20">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Próximo evento
+              Eventos
             </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
+              Los encuentros de la comunidad: lo que ya pasó y lo que viene.
+            </p>
             {upcomingEvent ? (
               <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,34rem)] lg:items-start">
                 <div>
@@ -173,8 +178,43 @@ export default function Home() {
                   />
                 </div>
               </div>
-            ) : (
-              <div className="mt-8 max-w-2xl rounded-2xl border border-ink/10 bg-crema p-8">
+            ) : null}
+
+            {pastEvents.map((event) => (
+              <article
+                key={event.id}
+                className="mt-14 border-t border-ink/10 pt-10"
+              >
+                <p className="text-sm font-semibold uppercase tracking-widest text-lapacho">
+                  {event.descriptor}
+                </p>
+                <h3 className="mt-3 text-2xl font-bold leading-snug md:text-3xl">
+                  {event.title}
+                </h3>
+                <p className="mt-3 text-sm font-medium text-ink-soft">
+                  {event.date} · {event.location}
+                </p>
+                <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+                  {event.description}
+                </p>
+                {event.url ? (
+                  <a
+                    href={event.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 inline-block text-sm font-semibold text-lapacho underline-offset-4 hover:underline"
+                  >
+                    Ver la publicación del evento ↗
+                  </a>
+                ) : null}
+                <div className="mt-8">
+                  <EventGallery media={event.media} eventTitle={event.title} />
+                </div>
+              </article>
+            ))}
+
+            {!upcomingEvent ? (
+              <div className="mt-12 max-w-2xl rounded-2xl border border-ink/10 bg-crema p-8">
                 <h3 className="text-xl font-bold">Estamos armando el próximo encuentro</h3>
                 <p className="mt-3 leading-relaxed text-ink-soft">
                   Todavía no hay una fecha confirmada, pero ya estamos organizando
@@ -200,7 +240,7 @@ export default function Home() {
                   </a>
                 </div>
               </div>
-            )}
+            ) : null}
           </Reveal>
         </section>
 
@@ -352,25 +392,6 @@ export default function Home() {
                 </div>
               ))}
             </dl>
-          </Reveal>
-        </section>
-
-        {/* 07 — Eventos anteriores / Prueba social */}
-        <section id="eventos-anteriores" className="mx-auto max-w-6xl px-5 py-14 md:py-20">
-          <Reveal>
-            <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-              Eventos anteriores
-            </h2>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-soft">
-              Acá van a quedar las fotos y los recaps de cada encuentro, para que se
-              vea que esto ya está pasando.
-            </p>
-            <div className="mt-8 max-w-2xl rounded-2xl border border-dashed border-ink/20 p-8 text-ink-soft">
-              <p className="font-semibold text-ink">Todavía no hay eventos pasados.</p>
-              <p className="mt-2 leading-relaxed">
-                El primero va a ser el comienzo de la historia.
-              </p>
-            </div>
           </Reveal>
         </section>
 

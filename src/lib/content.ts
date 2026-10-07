@@ -4,6 +4,7 @@ import type {
   ConductRuleSet,
   FaqItem,
   InstitutionalCopy,
+  PastEvent,
   Pillar,
   UpcomingEvent,
 } from "./types";
@@ -42,17 +43,94 @@ export const joinNote =
 // registration page (title, venue, note). Leave `upcomingEvent` undefined when
 // there is no confirmed event so the section falls back to an honest empty
 // state instead of showing stale data.
-export const upcomingEvent: UpcomingEvent | undefined = {
-  id: "road-to-colosseum-formosa",
-  descriptor: "Road to Colosseum · Superteam Argentina",
-  title: "Superteam Argentina Hackathon | Road to Colosseum X Formosa",
-  description:
-    "Formosa.dev co-organiza el encuentro presencial en Formosa Capital. Registrate en Luma para recibir la agenda, los enlaces a las sesiones y las novedades de la hackathon: workshop week online, mentorías para los equipos seleccionados y el track de Superteam Argentina en Colosseum.",
-  location: "Pepe Club — 9 de Julio 629, Formosa Capital",
-  note: "Entrada gratuita con registro previo en Luma, sujeta a la capacidad del espacio.",
-  url: "https://luma.com/usz4536h",
-  embedUrl: "https://luma.com/embed/event/evt-umoVbiRegG4qFLO/simple",
-};
+export const upcomingEvent: UpcomingEvent | undefined = undefined;
+
+// Past events with their media recap. Photos/videos live in
+// public/assets/eventos/<slug>/ as web-optimized files (webp, h264 mp4).
+export const pastEvents: PastEvent[] = [
+  {
+    id: "road-to-colosseum-formosa-2026",
+    descriptor: "Road to Colosseum · Superteam Argentina",
+    title: "Superteam Argentina Hackathon | Road to Colosseum X Formosa",
+    date: "Sábado 3 de octubre de 2026",
+    location: "Pepe Club — 9 de Julio 629, Formosa Capital",
+    description:
+      "La primera jornada presencial co-organizada por Formosa.dev: equipos trabajando en sus proyectos para el track argentino de Colosseum, la hackathon global de Solana.",
+    url: "https://luma.com/usz4536h",
+    media: [
+      {
+        kind: "video",
+        poster: "/assets/eventos/road-to-colosseum/colosseum-recap-poster.webp",
+        title: "Video recap de la jornada",
+        sources: [
+          {
+            src: "/assets/eventos/road-to-colosseum/colosseum-recap-720.mp4",
+            media: "(max-width: 640px)",
+          },
+          { src: "/assets/eventos/road-to-colosseum/colosseum-recap-1080.mp4" },
+        ],
+        width: 1080,
+        height: 1920,
+      },
+      {
+        kind: "image",
+        src: "/assets/eventos/road-to-colosseum/colosseum-05.webp",
+        alt: "Organizadores junto al banner de Superteam Argentina en Pepe Club",
+        width: 960,
+        height: 1280,
+      },
+      {
+        kind: "image",
+        src: "/assets/eventos/road-to-colosseum/colosseum-02.webp",
+        alt: "Participantes trabajando en sus laptops durante la jornada",
+        width: 828,
+        height: 796,
+      },
+      {
+        kind: "image",
+        src: "/assets/eventos/road-to-colosseum/colosseum-01.webp",
+        alt: "Pantalla de la hackathon global de Superteam Argentina y Colosseum junto a stickers de Formosa.dev",
+        width: 1280,
+        height: 732,
+      },
+      {
+        kind: "image",
+        src: "/assets/eventos/road-to-colosseum/colosseum-07.webp",
+        alt: "Equipos desarrollando sus proyectos durante la hackathon",
+        width: 960,
+        height: 1280,
+      },
+      {
+        kind: "image",
+        src: "/assets/eventos/road-to-colosseum/colosseum-08.webp",
+        alt: "Participante trabajando junto al banner de Superteam Argentina",
+        width: 960,
+        height: 1280,
+      },
+      {
+        kind: "image",
+        src: "/assets/eventos/road-to-colosseum/colosseum-06.webp",
+        alt: "Estación de trabajo con la pantalla del evento mostrando 'A construir'",
+        width: 960,
+        height: 1280,
+      },
+      {
+        kind: "image",
+        src: "/assets/eventos/road-to-colosseum/colosseum-03.webp",
+        alt: "Momento de la comida durante la jornada",
+        width: 828,
+        height: 1145,
+      },
+      {
+        kind: "image",
+        src: "/assets/eventos/road-to-colosseum/colosseum-04.webp",
+        alt: "Pizzas y empanadas para los equipos participantes",
+        width: 828,
+        height: 660,
+      },
+    ],
+  },
+];
 
 export const pillars: Pillar[] = [
   {
