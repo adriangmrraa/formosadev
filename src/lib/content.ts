@@ -45,8 +45,10 @@ export const joinNote =
 // state instead of showing stale data.
 export const upcomingEvent: UpcomingEvent | undefined = undefined;
 
-// Past events with their media recap. Photos/videos live in
-// public/assets/eventos/<slug>/ as web-optimized files (webp, h264 mp4).
+// Past events with their media recap, newest first — the section renders a
+// switcher strip when there is more than one. Photos/videos live in
+// public/assets/eventos/<slug>/ as web-optimized files (webp, h264 mp4); to
+// add an event, drop its assets there and prepend an entry to this array.
 export const pastEvents: PastEvent[] = [
   {
     id: "road-to-colosseum-formosa-2026",

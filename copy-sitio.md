@@ -234,6 +234,9 @@
 El Road to Colosseum X Formosa (3/10/2026, Pepe Club) ya se realizó: quedó como
 primer evento pasado con galería de fotos y video recap en
 `public/assets/eventos/road-to-colosseum/` (webp + h264 mp4 optimizados).
+Cuando haya más de un evento pasado, la sección muestra un selector horizontal
+de eventos (más reciente primero en `pastEvents`); cada uno con su propia ficha
+y galería.
 
 ```html
 <article class="past-event">

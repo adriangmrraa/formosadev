@@ -95,6 +95,22 @@ body {
   background-size: 100% 40%;
 }
 
+/* Fade+rise for the past-event panel when the switcher changes event. */
+.js .event-panel {
+  animation: event-panel-in var(--motion-normal) var(--ease-editorial);
+}
+
+@keyframes event-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Collaborators auto-marquee — gentle infinite scroll to the left.
    The track holds two identical halves (see page.tsx); translating -50%
@@ -169,6 +185,10 @@ body {
   }
 
   .colaboradores-track {
+    animation: none !important;
+  }
+
+  .js .event-panel {
     animation: none !important;
   }
 

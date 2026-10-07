@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { CommunityJoinTrigger } from "../components/CommunityConversation";
-import { EventGallery } from "../components/EventGallery";
+import { PastEvents } from "../components/PastEvents";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { AutoMarquee } from "../components/motion/AutoMarquee";
@@ -180,38 +180,11 @@ export default function Home() {
               </div>
             ) : null}
 
-            {pastEvents.map((event) => (
-              <article
-                key={event.id}
-                className="mt-14 border-t border-ink/10 pt-10"
-              >
-                <p className="text-sm font-semibold uppercase tracking-widest text-lapacho">
-                  {event.descriptor}
-                </p>
-                <h3 className="mt-3 text-2xl font-bold leading-snug md:text-3xl">
-                  {event.title}
-                </h3>
-                <p className="mt-3 text-sm font-medium text-ink-soft">
-                  {event.date} · {event.location}
-                </p>
-                <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
-                  {event.description}
-                </p>
-                {event.url ? (
-                  <a
-                    href={event.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-4 inline-block text-sm font-semibold text-lapacho underline-offset-4 hover:underline"
-                  >
-                    Ver la publicación del evento ↗
-                  </a>
-                ) : null}
-                <div className="mt-8">
-                  <EventGallery media={event.media} eventTitle={event.title} />
-                </div>
-              </article>
-            ))}
+            {pastEvents.length > 0 ? (
+              <div className="mt-10 border-t border-ink/10 pt-10">
+                <PastEvents events={pastEvents} />
+              </div>
+            ) : null}
 
             {!upcomingEvent ? (
               <div className="mt-12 max-w-2xl rounded-2xl border border-ink/10 bg-crema p-8">
