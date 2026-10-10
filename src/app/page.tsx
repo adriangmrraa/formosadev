@@ -122,12 +122,25 @@ export default function Home() {
       <Header />
 
       <main>
-        {/* 01 — Hero */}
-        <Section spacing="hero">
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <div>
+        {/* 01 — Hero: the opening 10 seconds of the verified event recap. */}
+        <section className="relative min-h-[82svh] overflow-hidden bg-ink text-crema">
+          {recapVideo ? (
+            <Parallax className="absolute inset-0">
+              <div className="depth-zoom absolute inset-0" style={{ "--dz": "0.1" } as CSSProperties}>
+                <AmbientVideo
+                  sources={recapVideo.sources}
+                  poster={recapVideo.poster}
+                  loopDuration={10}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </Parallax>
+          ) : null}
+          <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/58 to-ink/20" />
+          <div className="relative mx-auto flex min-h-[82svh] max-w-6xl items-end px-5 py-16 md:py-24">
+            <div className="max-w-2xl">
               <Reveal>
-                <Eyebrow>{institutional.descriptor}</Eyebrow>
+                <Eyebrow tone="onDark">{institutional.descriptor}</Eyebrow>
               </Reveal>
               <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
                 <RevealText
@@ -137,7 +150,7 @@ export default function Home() {
                 />
               </h1>
               <Reveal delay={150}>
-                <p className="mt-6 max-w-md text-lg font-light leading-relaxed text-text-muted">
+                <p className="mt-6 max-w-md text-lg font-light leading-relaxed text-crema/85">
                   {institutional.heroSubcopy}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
@@ -152,27 +165,11 @@ export default function Home() {
                 </div>
               </Reveal>
             </div>
-            <Reveal scale delay={120}>
-              <figure>
-                <Image
-                  src="/assets/campaigns/el-comercial-cowork/background-ferroviario.png"
-                  alt="Estación ferroviaria de Formosa"
-                  width={941}
-                  height={1672}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                  className="media-glow h-auto w-full rounded-card object-cover"
-                />
-                <figcaption className="mt-3 text-xs font-light text-text-faint">
-                  Paisajes y encuentros de Formosa.
-                </figcaption>
-              </figure>
-            </Reveal>
           </div>
-        </Section>
+        </section>
 
         {/* 02 — Eventos (próximo + anteriores) */}
-        <Section id="evento" tone="soft">
+        <Section id="evento">
           <Reveal>
             <SectionHeading>Eventos</SectionHeading>
             <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
@@ -220,7 +217,11 @@ export default function Home() {
               </div>
             ) : null}
 
-            {!upcomingEvent ? <ProposedCowork /> : null}
+            {!upcomingEvent ? (
+              <Parallax>
+                <ProposedCowork />
+              </Parallax>
+            ) : null}
 
             {pastEvents.length > 0 ? (
               <div className="mt-10 border-t border-hairline pt-10">
@@ -228,114 +229,8 @@ export default function Home() {
               </div>
             ) : null}
 
-            {!upcomingEvent ? (
-              <div className="surface-glow mt-12 max-w-2xl rounded-panel border border-hairline-soft p-6 sm:p-8">
-                <div className="flex items-start gap-4">
-                  <span className="icon-orb flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl">
-                    <CalendarDays aria-hidden="true" className="size-5" />
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="text-xl font-bold">Estamos armando el próximo encuentro</h3>
-                    <p className="mt-3 font-light leading-relaxed text-text-muted">
-                      Todavía no hay una fecha confirmada, pero ya estamos organizando
-                      los primeros meetups en Formosa Capital. Podés ayudar de tres
-                      maneras:
-                    </p>
-                    <ul className="mt-5 space-y-2 text-sm leading-relaxed text-text-muted">
-                      <li>· Proponé un evento o una charla.</li>
-                      <li>· Ofrecé una sede.</li>
-                      <li>· Sumate a la comunidad para enterarte apenas se confirme.</li>
-                    </ul>
-                    <div className="mt-6 flex flex-wrap gap-3">
-                      <CommunityJoinTrigger className={buttonClass({ variant: "accent" })}>
-                        <WhatsAppIcon className="size-4" />
-                        Sumate a la comunidad
-                      </CommunityJoinTrigger>
-                      <Button
-                        href={contactWhatsAppUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        variant="secondary"
-                        icon={<MessageCircle />}
-                      >
-                        Proponé un evento u ofrecé una sede
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : null}
           </Reveal>
         </Section>
-
-        {/* Recap video — full-bleed ambient band between sections 02 and 03.
-            The video covers the whole band (object-cover, no letterboxing)
-            and zooms gently while it crosses the viewport; real playback
-            stays in the gallery lightbox above. */}
-        {recapEvent && recapVideo ? (
-          <section
-            aria-label={`Recap en video: ${recapEvent.title}`}
-            className="relative"
-          >
-            <Parallax className="relative h-[52svh] max-h-[560px] min-h-80 overflow-hidden">
-              <div
-                className="depth-zoom absolute inset-0"
-                style={{ "--dz": "0.12" } as CSSProperties}
-              >
-                <AmbientVideo
-                  sources={recapVideo.sources}
-                  poster={recapVideo.poster}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-ink/35"
-              />
-              <div className="absolute inset-x-0 bottom-0 pb-6">
-                <div className="mx-auto flex max-w-6xl items-center gap-4 px-5">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-crema/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur">
-                    <span className="live-dot" aria-hidden="true" />
-                    Recap
-                  </span>
-                  <p className="min-w-0 truncate text-sm font-semibold text-crema/90">
-                    {recapEvent.descriptor}
-                  </p>
-                </div>
-              </div>
-            </Parallax>
-          </section>
-        ) : null}
-
-        {/* The second and last full-bleed depth band: an unchanged local
-            Formosa environment. All remaining sections stay predominantly
-            flat/textural so the page keeps its rhythm and the motion remains
-            purposeful. */}
-        <section aria-label="Paisaje de Formosa" className="relative">
-          <Parallax className="relative h-[46svh] max-h-[520px] min-h-72 overflow-hidden">
-            <div
-              className="depth-zoom absolute inset-0"
-              style={{ "--dz": "0.08" } as CSSProperties}
-            >
-              <Image
-                src="/assets/campaigns/el-comercial-cowork/background-plaza-san-martin.png"
-                alt="Plaza San Martín de Formosa"
-                fill
-                sizes="100vw"
-                className="object-cover"
-              />
-            </div>
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-ink/30"
-            />
-            <div className="absolute inset-x-0 bottom-0 pb-6">
-              <p className="mx-auto max-w-6xl px-5 text-sm font-semibold text-crema/90">
-                Formosa es el punto de partida.
-              </p>
-            </div>
-          </Parallax>
-        </section>
 
         {/* 03 — Colaboradores */}
         <Section id="colaboradores" tone="surface">

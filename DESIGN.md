@@ -265,7 +265,15 @@ Principio: **el movimiento sirve a la comprensión, nunca decora** (manual §35)
   Colaboradores/Redes/Síntesis y los thumbs de la galería.
 - **Video ambiental** (`AmbientVideo`): muted, loop, `playsInline`, `object-cover`
   sin letterbox; reproduce solo en viewport y solo con motion permitido; el
-  poster queda como fallback estático. La reproducción real vive en el lightbox.
+  poster queda como fallback estático. El hero usa únicamente los primeros 10 s
+  del recap antes de reiniciar. La reproducción real vive en el lightbox.
+- **Bandas con profundidad:** máximo dos por landing: el hero de video y la
+  propuesta visual de cowork. El cowork cruza fondos reales de Formosa según
+  `--p` y desemboca en una superficie blanca; el resto alterna fondos lisos,
+  texturas e imágenes estáticas, sin sumar parallax decorativo.
+- **Información:** evitar carditis. Los datos que se pueden leer como una sola
+  frase (frecuencia y horario, por ejemplo) se muestran en línea; una card solo
+  se justifica cuando es una unidad interactiva o agrupa contenido independiente.
 - **Micro-interacciones de UI:** ≤ `--motion-ui` (200ms), `ease-out`. Hover:
   cambio de color y `-translate-y-0.5` en cards; `active:scale-[0.97–0.98]` en
   todo lo presionable; chevron `group-hover:translate-x-0.5`.

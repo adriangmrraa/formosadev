@@ -14,10 +14,13 @@ export function AmbientVideo({
   sources,
   poster,
   className = "",
+  loopDuration,
 }: {
   sources: EventVideo["sources"];
   poster: string;
   className?: string;
+  /** Restarts a short opening segment before the source video reaches its end. */
+  loopDuration?: number;
 }) {
   const ref = useRef<HTMLVideoElement | null>(null);
 
@@ -42,14 +45,23 @@ export function AmbientVideo({
     });
     io.observe(video);
 
+    const onTimeUpdate = () => {
+      if (loopDuration && video.currentTime >= loopDuration) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+    };
+    video.addEventListener("timeupdate", onTimeUpdate);
+
     const onMotionChange = () => sync();
     mq.addEventListener("change", onMotionChange);
 
     return () => {
       io.disconnect();
+      video.removeEventListener("timeupdate", onTimeUpdate);
       mq.removeEventListener("change", onMotionChange);
     };
-  }, []);
+  }, [loopDuration]);
 
   return (
     <video

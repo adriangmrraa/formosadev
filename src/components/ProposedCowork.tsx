@@ -1,29 +1,57 @@
 import { CalendarDays, Clock3, Coffee, ExternalLink, Sparkles } from "lucide-react";
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import { CommunityJoinTrigger } from "./CommunityConversation";
 import { buttonClass } from "./ui/Button";
 
 /** A clearly-labelled venue proposal, not a published or confirmed event. */
 export function ProposedCowork() {
   return (
-    <article className="surface-glow mt-10 overflow-hidden rounded-panel border border-hairline-soft">
-      <div className="grid lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,0.95fr)]">
-        <div className="relative min-h-72 overflow-hidden bg-ink">
+    <article className="mt-10 overflow-hidden bg-surface">
+      <div className="relative min-h-[56svh] overflow-hidden bg-ink">
+        <div className="absolute inset-0">
           <Image
             src="/assets/campaigns/el-comercial-cowork/background-mastil-costanera.png"
-            alt="Mástil de la Costanera de Formosa, sede visual de la propuesta de cowork"
+            alt=""
+            aria-hidden="true"
             fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="100vw"
             className="object-cover"
+            style={{ opacity: "clamp(0, calc(1.35 - var(--p, 0.2) * 2.3), 1)" } as CSSProperties}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent" />
-          <p className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-pill bg-ink/75 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-crema backdrop-blur">
+          <Image
+            src="/assets/campaigns/el-comercial-cowork/background-ferroviario.png"
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            style={{ opacity: "clamp(0, calc(var(--p, 0.2) * 3 - 0.45), 1)" } as CSSProperties}
+          />
+          <Image
+            src="/assets/campaigns/el-comercial-cowork/background-plaza-san-martin.png"
+            alt=""
+            aria-hidden="true"
+            fill
+            sizes="100vw"
+            className="object-cover"
+            style={{ opacity: "clamp(0, calc(var(--p, 0.2) * 3 - 1.55), 1)" } as CSSProperties}
+          />
+        </div>
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/20 to-ink/25" />
+        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-6xl px-5 pb-8 text-crema">
+          <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-crema/80">
             <span className="live-dot" aria-hidden="true" />
             Idea en conversación
           </p>
+          <p className="mt-3 max-w-xl text-xl font-semibold leading-tight sm:text-3xl">
+            Un espacio posible para construir y compartir desde Formosa.
+          </p>
         </div>
+      </div>
 
-        <div className="p-6 sm:p-8">
+      <div className="mx-auto max-w-6xl px-5 py-10 md:py-16">
+        <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.14em] text-accent">
             Próximamente
           </p>
@@ -36,24 +64,10 @@ export function ProposedCowork() {
             encontrarnos alrededor de una merienda.
           </p>
 
-          <dl className="mt-6 grid gap-3 text-sm sm:grid-cols-2">
-            <div className="surface-well rounded-card p-4">
-              <dt className="flex items-center gap-2 font-semibold text-text">
-                <CalendarDays aria-hidden="true" className="size-4 text-accent" />
-                Frecuencia propuesta
-              </dt>
-              <dd className="mt-2 font-light text-text-muted">
-                Segundo y último sábado de cada mes.
-              </dd>
-            </div>
-            <div className="surface-well rounded-card p-4">
-              <dt className="flex items-center gap-2 font-semibold text-text">
-                <Clock3 aria-hidden="true" className="size-4 text-accent" />
-                Horario propuesto
-              </dt>
-              <dd className="mt-2 font-light text-text-muted">16 a 20 h.</dd>
-            </div>
-          </dl>
+          <p className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold text-text-muted">
+            <span className="inline-flex items-center gap-2"><CalendarDays aria-hidden="true" className="size-4 text-accent" />Segundo y último sábado.</span>
+            <span className="inline-flex items-center gap-2"><Clock3 aria-hidden="true" className="size-4 text-accent" />16 a 20 h.</span>
+          </p>
 
           <ul className="mt-6 grid gap-2 text-sm font-light leading-relaxed text-text-muted">
             <li className="flex gap-2"><Coffee aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-accent" />Merienda y tiempo de cowork.</li>
