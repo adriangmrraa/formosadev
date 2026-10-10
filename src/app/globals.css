@@ -57,6 +57,25 @@ body {
 }
 
 /* ---------------------------------------------------------------------------
+   Accessibility — cross-cutting guarantees.
+   A single lapacho focus ring on every interactive element (links, buttons and
+   the FAQ <summary>), plus an anchor scroll offset so the sticky header never
+   covers a section heading reached from the in-page navigation.
+--------------------------------------------------------------------------- */
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+main [id] {
+  scroll-margin-top: 4.5rem;
+}
+
+/* ---------------------------------------------------------------------------
    Motion system — progressive enhancement.
    All reveal states are gated behind a `.js` class added before hydration, so
    without JavaScript the content is always visible. `prefers-reduced-motion`
@@ -190,6 +209,11 @@ body {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  /* Keep color feedback on hover, drop the decorative lift (transform). */
+  .hover\:-translate-y-0\.5:hover {
+    transform: none !important;
   }
 
   .js .reveal,
