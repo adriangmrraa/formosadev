@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Manrope } from "next/font/google";
+import { Archivo, Manrope } from "next/font/google";
 import Script from "next/script";
 import { institutional } from "../lib/content";
 import "./globals.css";
@@ -8,6 +8,16 @@ import "./globals.css";
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Display grotesque with true italics (the brand manual allows a high-impact
+// grotesque for display moments). Used only for `font-display` accent words
+// and numbers — never for body copy or the wordmark.
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -60,8 +70,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es-AR" className={`${manrope.variable} antialiased`}>
-      <body className="min-h-screen bg-crema font-sans text-ink">
+    <html lang="es-AR" className={`${manrope.variable} ${archivo.variable} antialiased`}>
+      <body className="fd-backdrop min-h-screen font-sans text-ink">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

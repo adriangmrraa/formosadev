@@ -20,10 +20,10 @@ export function ChannelCard({ href, name, note, icon }: ChannelCardProps) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-full min-h-[92px] w-full items-center gap-3 rounded-card border border-hairline-soft bg-surface p-4 text-left transition duration-200 ease-out hover:bg-canvas-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus active:scale-[0.98]"
+      className="group surface-glow flex h-full min-h-[92px] w-full items-center gap-3 rounded-card border border-hairline-soft p-4 text-left transition duration-200 ease-out hover:border-hairline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus active:scale-[0.98]"
     >
       {icon ? (
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-soft text-text [&>svg]:size-5">
+        <span className="icon-orb flex h-10 w-10 shrink-0 items-center justify-center rounded-xl [&>svg]:size-5">
           {icon}
         </span>
       ) : null}
@@ -35,7 +35,10 @@ export function ChannelCard({ href, name, note, icon }: ChannelCardProps) {
           </span>
         ) : null}
       </span>
-      <ArrowUpRight aria-hidden="true" className="size-4 shrink-0 text-text-muted" />
+      <ArrowUpRight
+        aria-hidden="true"
+        className="size-4 shrink-0 text-text-muted transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent"
+      />
     </a>
   );
 }

@@ -9,13 +9,15 @@ type RevealTextProps = {
   className?: string;
   /** Stagger between words in ms. */
   wordDelay?: number;
+  /** Render the highlighted word in the display grotesque, black italic. */
+  displayAccent?: boolean;
 };
 
 /**
  * Editorial H1/H2 entrance: word-by-word blur-to-focus with an optional
  * organic marker stroke that draws in after the words reveal.
  */
-export function RevealText({ text, highlight, className = "", wordDelay = 55 }: RevealTextProps) {
+export function RevealText({ text, highlight, className = "", wordDelay = 55, displayAccent = false }: RevealTextProps) {
   const ref = useRef<HTMLSpanElement | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -49,7 +51,7 @@ export function RevealText({ text, highlight, className = "", wordDelay = 55 }: 
         return (
           <Fragment key={`${word}-${i}`}>
             <span
-              className={`reveal-word${isHighlight ? " highlight" : ""}`}
+              className={`reveal-word${isHighlight ? " highlight" : ""}${isHighlight && displayAccent ? " font-display font-black italic" : ""}`}
               style={{ transitionDelay: `${i * wordDelay}ms` }}
             >
               {word}

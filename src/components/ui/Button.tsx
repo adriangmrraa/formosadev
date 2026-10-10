@@ -19,11 +19,14 @@ const base =
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-ink text-crema hover:bg-lapacho",
-  accent: "bg-lapacho text-white hover:bg-lapacho-deep",
+  // accent = the conversion CTA: full `.cta-glow` treatment (lapacho gradient,
+  // breathing colored shadow, sheen sweep). `bg-*` must not fight the gradient,
+  // so the variant only adds text color + a slight hover lift in brightness.
+  accent: "cta-glow text-white hover:brightness-[1.07]",
   secondary:
     "border border-hairline-strong text-text hover:border-lapacho hover:text-lapacho",
   onDarkPrimary: "bg-crema text-ink hover:bg-white",
-  onDarkAccent: "bg-lapacho text-white hover:bg-lapacho-deep",
+  onDarkAccent: "cta-glow text-white hover:brightness-[1.07]",
   onDarkSecondary:
     "border border-crema/30 text-crema hover:border-lapacho hover:text-lapacho",
 };

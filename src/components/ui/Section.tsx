@@ -90,14 +90,31 @@ type SectionHeadingProps = {
   size?: "md" | "lg";
   id?: string;
   className?: string;
+  /** Word to render in the display grotesque, black italic (Metropol accent). */
+  accent?: string;
   children: ReactNode;
 };
+
+function withAccent(children: ReactNode, accent?: string) {
+  if (!accent || typeof children !== "string") return children;
+  const parts = children.split(new RegExp(`(${accent})`, "i"));
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <span key={i} className="font-display font-black italic">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+}
 
 /** Section title with the documented display scale. Inherits text color. */
 export function SectionHeading({
   as: Tag = "h2",
   size = "md",
   id,
+  accent,
   className = "",
   children,
 }: SectionHeadingProps) {
@@ -108,7 +125,7 @@ export function SectionHeading({
 
   return (
     <Tag id={id} className={`${sizeClass} ${className}`}>
-      {children}
+      {withAccent(children, accent)}
     </Tag>
   );
 }

@@ -43,6 +43,10 @@
 
 @theme inline {
   --font-sans: var(--font-manrope), "Inter", system-ui, -apple-system, sans-serif;
+  /* Archivo (loaded in layout.tsx) — display grotesque with true italics for
+     the `font-display font-black italic` accents the brand manual reserves a
+     display grotesque for. Falls back to Manrope. */
+  --font-display: var(--font-archivo), var(--font-manrope), "Inter", system-ui, sans-serif;
 }
 
 :root {
@@ -173,6 +177,9 @@ main [id] {
   scrollbar-width: none;
   scroll-snap-type: x proximity;
   cursor: grab;
+  /* Fade the track at both edges so cards dissolve into the section. */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
 }
 
 .colaboradores-viewport::-webkit-scrollbar {
@@ -215,6 +222,251 @@ main [id] {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Glow layer — the rich Metropol "home-*" language ported to Formosa.dev:
+   glossy specular surfaces, ambient colored depth, a breathing gradient CTA
+   with a sheen sweep, orbs, film grain and staggered entrances. All of it is
+   decorative depth; content stays readable and visible without it, and the
+   whole layer is disabled under prefers-reduced-motion.
+--------------------------------------------------------------------------- */
+
+@keyframes fd-pop {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.84);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes fd-live-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-lapacho) 45%, transparent);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.62);
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+
+@keyframes fd-chevron-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes fd-sheen {
+  0% {
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  42%,
+  100% {
+    transform: translateX(130%) skewX(-18deg);
+  }
+}
+
+/* CTA "levitates" without moving the hit target: the colored shadow breathes
+   (grows and recedes) so it reads as floating while the button stays put. */
+@keyframes fd-cta-breathe {
+  0%,
+  100% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+      0 8px 18px -10px color-mix(in srgb, var(--cta) 55%, transparent),
+      0 2px 6px -3px color-mix(in srgb, var(--cta) 42%, transparent);
+  }
+  50% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.38),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+      0 14px 28px -13px color-mix(in srgb, var(--cta) 72%, transparent),
+      0 4px 10px -4px color-mix(in srgb, var(--cta) 52%, transparent);
+  }
+}
+
+@layer components {
+  /* Page backdrop: warm brand washes over the crema canvas + film grain.
+     Grain sits on a fixed ::after above content (z-80) but below the veil,
+     sheets (z-50 header is under it too — the grain reads through the blur)
+     and the community dialog (z-100). */
+  .fd-backdrop {
+    background:
+      radial-gradient(115% 55% at -8% -6%, color-mix(in srgb, var(--color-lapacho) 8%, transparent), transparent 62%),
+      radial-gradient(90% 48% at 108% 14%, color-mix(in srgb, var(--color-durazno) 12%, transparent), transparent 60%),
+      radial-gradient(75% 42% at 50% 110%, color-mix(in srgb, var(--color-lavanda) 9%, transparent), transparent 66%),
+      var(--color-canvas);
+  }
+  .fd-backdrop::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Glossy card surface: top-tinted gradient + inner highlight + a wide
+     ambient lapacho glow instead of a flat gray shadow. */
+  .surface-glow {
+    background: linear-gradient(180deg, color-mix(in srgb, var(--color-surface-soft) 88%, var(--color-lapacho) 7%), var(--color-surface) 72%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.55),
+      inset 0 0 0 1px rgba(15, 23, 42, 0.04),
+      0 1px 2px rgba(15, 23, 42, 0.05),
+      0 24px 48px -28px color-mix(in srgb, var(--color-lapacho) 26%, transparent);
+  }
+
+  /* Recessed well: inset depth for tiles that should read as hollowed. */
+  .surface-well {
+    background: color-mix(in srgb, var(--color-surface-soft) 86%, transparent);
+    box-shadow:
+      inset 0 1px 3px rgba(15, 23, 42, 0.07),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.55);
+  }
+  .surface-well-dark {
+    background: rgba(255, 248, 245, 0.05);
+    box-shadow:
+      inset 0 1px 3px rgba(0, 0, 0, 0.35),
+      inset 0 -1px 0 rgba(255, 248, 245, 0.06);
+  }
+
+  /* Conversion CTA: lapacho gradient with top sheen, inner highlights, an
+     ambient colored shadow that breathes, and a light sweep crossing the
+     face every ~5s. Reserved for `accent` variants — one per section. */
+  .cta-glow {
+    --cta: var(--color-lapacho);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 60% at 50% -20%, rgba(255, 255, 255, 0.16), transparent 50%),
+      linear-gradient(135deg,
+        color-mix(in srgb, var(--cta) 74%, #ffffff) 0%,
+        var(--cta) 45%,
+        color-mix(in srgb, var(--cta) 62%, #000000) 100%);
+    animation: fd-cta-breathe 5.4s ease-in-out 1.1s infinite;
+  }
+  .cta-glow::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 34%, rgba(255, 255, 255, 0.22) 48%, transparent 60%);
+    transform: translateX(-130%);
+    animation: fd-sheen 5.2s cubic-bezier(0.4, 0, 0.2, 1) 1.6s infinite;
+  }
+
+  /* Glossy orb: specular highlight + micro grain + diagonal color gradient,
+     inner shading and a colored floor glow. --oc = orb color (lapacho default;
+     sol/lavanda/durazno allowed sparingly). Light accents need ink text. */
+  .orb {
+    --oc: var(--color-lapacho);
+    position: relative;
+    isolation: isolate;
+    background-image:
+      radial-gradient(56% 44% at 32% 22%, rgba(255, 255, 255, 0.52), transparent 62%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='96' height='96' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E"),
+      linear-gradient(150deg, color-mix(in srgb, var(--oc) 72%, #ffffff), var(--oc) 55%);
+    box-shadow:
+      inset 0 2px 4px rgba(255, 255, 255, 0.42),
+      inset 0 -9px 16px rgba(0, 0, 0, 0.3),
+      0 14px 26px -12px color-mix(in srgb, var(--oc) 60%, transparent);
+  }
+
+  /* Resting orb: matte face with inner shading — reads touchable, not lit. */
+  .orb-idle {
+    background: color-mix(in srgb, var(--color-surface) 70%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -6px 12px rgba(15, 23, 42, 0.1),
+      0 6px 16px -12px rgba(15, 23, 42, 0.45);
+  }
+  .orb-dark {
+    background: rgba(255, 248, 245, 0.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 248, 245, 0.14),
+      inset 0 -6px 12px rgba(0, 0, 0, 0.28),
+      0 6px 16px -12px rgba(0, 0, 0, 0.55);
+  }
+
+  /* Small glossy icon tile: lapacho wash with specular top light. */
+  .icon-orb {
+    color: var(--color-lapacho-deep);
+    background-image:
+      radial-gradient(56% 44% at 32% 18%, rgba(255, 255, 255, 0.75), transparent 62%),
+      linear-gradient(150deg, color-mix(in srgb, var(--color-lapacho) 18%, #ffffff), color-mix(in srgb, var(--color-lapacho) 10%, #ffffff) 60%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -4px 10px color-mix(in srgb, var(--color-lapacho) 14%, transparent),
+      0 6px 14px -8px color-mix(in srgb, var(--color-lapacho) 35%, transparent);
+  }
+
+  /* Pulsing live dot for status badges. */
+  .live-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 9999px;
+    background: var(--color-lapacho);
+    animation: fd-live-dot 1.9s ease-in-out infinite;
+  }
+
+  /* Ambient depth for media (images, embeds) — colored, never flat gray. */
+  .media-glow {
+    box-shadow:
+      0 24px 48px -28px color-mix(in srgb, var(--color-lapacho) 24%, transparent),
+      0 4px 12px -4px rgba(15, 23, 42, 0.12);
+  }
+  .media-glow-dark {
+    box-shadow:
+      0 24px 48px -24px rgba(0, 0, 0, 0.6),
+      0 6px 18px -8px color-mix(in srgb, var(--color-lapacho) 20%, transparent);
+  }
+
+  /* Decorative radial bloom behind the key conversion moment. */
+  .bloom {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 9999px;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--color-lapacho) 22%, transparent), transparent);
+  }
+
+  /* Mount animation for transient surfaces (dialog, mobile sheet). */
+  .fd-pop {
+    animation: fd-pop 560ms cubic-bezier(0.2, 1.2, 0.34, 1) both;
+  }
+
+  /* Staggered item inside a Reveal: hidden until the parent turns
+     .is-visible, then pops with a per-item delay via --i. Only use inside a
+     Reveal — outside one it would stay invisible. */
+  .js .stagger-item {
+    opacity: 0;
+  }
+  .js .is-visible .stagger-item {
+    animation: fd-pop 560ms cubic-bezier(0.2, 1.2, 0.34, 1) calc(var(--i, 0) * 38ms + 120ms) both;
+  }
+
+  .chevron-bounce {
+    animation: fd-chevron-bounce 1.8s ease-in-out infinite;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -244,6 +496,21 @@ main [id] {
 
   .js .event-panel {
     animation: none !important;
+  }
+
+  /* Glow layer off: no entrances, no breathing/sheen, no pulse — content and
+     surfaces stay fully visible and readable. */
+  .fd-pop,
+  .js .is-visible .stagger-item,
+  .live-dot,
+  .chevron-bounce,
+  .cta-glow,
+  .cta-glow::after {
+    animation: none !important;
+  }
+
+  .js .stagger-item {
+    opacity: 1 !important;
   }
 
   .colaboradores-viewport {

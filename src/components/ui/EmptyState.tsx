@@ -14,7 +14,7 @@ type EmptyStateProps = {
 
 function IconTile({ children }: { children: ReactNode }) {
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-text [&>svg]:size-5">
+    <span className="icon-orb flex h-10 w-10 shrink-0 items-center justify-center rounded-xl [&>svg]:size-5">
       {children}
     </span>
   );
@@ -54,7 +54,7 @@ export function EmptyState({
 
   return (
     <div
-      className={`flex items-start gap-4 rounded-card bg-surface-soft p-6 sm:p-8 ${className}`}
+      className={`surface-glow flex items-start gap-4 rounded-card border border-hairline-soft p-6 sm:p-8 ${className}`}
     >
       {icon ? <IconTile>{icon}</IconTile> : null}
       <div>
