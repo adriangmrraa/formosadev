@@ -16,8 +16,10 @@ export default function CodigoDeConductaPage() {
     <>
       <Header />
       <main className="mx-auto max-w-3xl px-5 py-16">
-        <SectionHeading as="h1">Código de conducta</SectionHeading>
-        <p className="mt-5 text-lg leading-relaxed text-text-muted">
+        <SectionHeading as="h1" accent="conducta">
+          Código de conducta
+        </SectionHeading>
+        <p className="mt-5 text-lg font-light leading-relaxed text-text-muted">
           {conduct.purpose}
         </p>
 
@@ -26,7 +28,9 @@ export default function CodigoDeConductaPage() {
           <ul className="mt-4 space-y-2 text-text-muted">
             {conduct.allowed.map((item) => (
               <li key={item} className="flex gap-2">
-                <span aria-hidden="true">·</span>
+                <span aria-hidden="true" className="font-black text-accent">
+                  ·
+                </span>
                 <span>{item}</span>
               </li>
             ))}
@@ -38,7 +42,9 @@ export default function CodigoDeConductaPage() {
           <ul className="mt-4 space-y-2 text-text-muted">
             {conduct.prohibited.map((item) => (
               <li key={item} className="flex gap-2">
-                <span aria-hidden="true">·</span>
+                <span aria-hidden="true" className="font-black text-accent">
+                  ·
+                </span>
                 <span>{item}</span>
               </li>
             ))}
@@ -84,7 +90,7 @@ export default function CodigoDeConductaPage() {
 
         <section className="mt-10">
           <h2 className="text-xl font-bold">Formato sugerido para compartir</h2>
-          <pre className="mt-4 overflow-x-auto rounded-control bg-ink p-5 font-mono text-sm text-crema">
+          <pre className="media-glow-dark mt-4 overflow-x-auto rounded-control bg-ink p-5 font-mono text-sm text-crema">
             {conduct.shareFormat}
           </pre>
           <p className="mt-4 text-sm text-text-muted">
