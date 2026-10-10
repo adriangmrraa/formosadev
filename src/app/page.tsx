@@ -1,4 +1,14 @@
+import {
+  CalendarDays,
+  ChevronDown,
+  ChevronRight,
+  Coffee,
+  MessageCircle,
+  Ticket,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
+import type { CSSProperties, ReactNode } from "react";
 import { CommunityJoinTrigger } from "../components/CommunityConversation";
 import { PastEvents } from "../components/PastEvents";
 import { Footer } from "../components/Footer";
@@ -7,6 +17,15 @@ import { AutoMarquee } from "../components/motion/AutoMarquee";
 import { Reveal } from "../components/motion/Reveal";
 import { RevealText } from "../components/motion/RevealText";
 import { Button, buttonClass } from "../components/ui/Button";
+import {
+  GitHubIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  TelegramIcon,
+  WhatsAppIcon,
+  XIcon,
+  YouTubeIcon,
+} from "../components/ui/brand-icons";
 import { ChannelCard } from "../components/ui/ChannelCard";
 import { EmptyState } from "../components/ui/EmptyState";
 import { Eyebrow, Section, SectionHeading } from "../components/ui/Section";
@@ -33,6 +52,19 @@ const localityStates = [
   "Camino al hackathon",
 ];
 
+/** The state Formosa Capital is currently in, per the Territorio copy. */
+const currentLocalityState = "Comunidad en formación";
+
+const channelIcons: Record<string, ReactNode> = {
+  instagram: <InstagramIcon className="size-5" />,
+  telegram: <TelegramIcon className="size-5" />,
+  x: <XIcon className="size-5" />,
+  linkedin: <LinkedInIcon className="size-5" />,
+  github: <GitHubIcon className="size-5" />,
+  youtube: <YouTubeIcon className="size-5" />,
+  whatsapp: <WhatsAppIcon className="size-5" />,
+};
+
 function CollaboratorCard({
   collaborator,
   hidden = false,
@@ -57,7 +89,7 @@ function CollaboratorCard({
   return (
     <li
       aria-hidden={hidden || undefined}
-      className="mr-4 flex h-36 w-44 shrink-0 items-center justify-center rounded-card border border-hairline bg-surface p-6 transition-colors hover:border-hairline-strong sm:w-52"
+      className="surface-glow mr-4 flex h-36 w-44 shrink-0 items-center justify-center rounded-card border border-hairline-soft p-6 transition-colors duration-200 hover:border-hairline-strong sm:w-52"
     >
       {collaborator.url && !hidden ? (
         <a
@@ -90,17 +122,23 @@ export default function Home() {
                 <Eyebrow>{institutional.descriptor}</Eyebrow>
               </Reveal>
               <h1 className="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
-                <RevealText text={institutional.ideaMadre} highlight="construyendo" />
+                <RevealText
+                  text={institutional.ideaMadre}
+                  highlight="construyendo"
+                  displayAccent
+                />
               </h1>
               <Reveal delay={150}>
-                <p className="mt-6 max-w-md text-lg leading-relaxed text-text-muted">
+                <p className="mt-6 max-w-md text-lg font-light leading-relaxed text-text-muted">
                   {institutional.heroSubcopy}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <CommunityJoinTrigger className={buttonClass({ variant: "primary" })}>
+                  <CommunityJoinTrigger className={buttonClass({ variant: "accent" })}>
+                    <WhatsAppIcon className="size-4" />
                     Sumate a la comunidad
                   </CommunityJoinTrigger>
                   <CommunityJoinTrigger className={buttonClass({ variant: "secondary" })}>
+                    <CalendarDays aria-hidden="true" className="size-4" />
                     Ver próximo encuentro
                   </CommunityJoinTrigger>
                 </div>
@@ -115,9 +153,9 @@ export default function Home() {
                   height={territorialImages.hero.height}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   priority
-                  className="h-auto w-full rounded-card object-cover"
+                  className="media-glow h-auto w-full rounded-card object-cover"
                 />
-                <figcaption className="mt-2 text-xs text-text/50">
+                <figcaption className="mt-3 text-xs font-light text-text-faint">
                   Paisajes y encuentros de Formosa.
                 </figcaption>
               </figure>
@@ -129,7 +167,7 @@ export default function Home() {
         <Section id="evento" tone="soft">
           <Reveal>
             <SectionHeading>Eventos</SectionHeading>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
+            <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
               Los encuentros de la comunidad: lo que ya pasó y lo que viene.
             </p>
             {upcomingEvent ? (
@@ -139,7 +177,7 @@ export default function Home() {
                   <h3 className="mt-3 text-2xl font-bold leading-snug md:text-3xl">
                     {upcomingEvent.title}
                   </h3>
-                  <p className="mt-4 leading-relaxed text-text-muted">
+                  <p className="mt-4 font-light leading-relaxed text-text-muted">
                     {upcomingEvent.description}
                   </p>
                   <p className="mt-5 text-sm">
@@ -152,16 +190,17 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       variant="accent"
+                      icon={<Ticket />}
                     >
                       Reservar lugar
                     </Button>
-                    <p className="mt-3 max-w-md text-sm leading-relaxed text-text-muted">
+                    <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-text-muted">
                       {upcomingEvent.note}
                     </p>
                   </div>
                 </div>
 
-                <div className="w-full overflow-hidden rounded-card border border-hairline bg-surface">
+                <div className="media-glow w-full overflow-hidden rounded-card border border-hairline bg-surface">
                   <iframe
                     src={upcomingEvent.embedUrl}
                     title={`Registro al evento: ${upcomingEvent.title}`}
@@ -180,30 +219,39 @@ export default function Home() {
             ) : null}
 
             {!upcomingEvent ? (
-              <div className="mt-12 max-w-2xl rounded-card border border-hairline bg-canvas p-8">
-                <h3 className="text-xl font-bold">Estamos armando el próximo encuentro</h3>
-                <p className="mt-3 leading-relaxed text-text-muted">
-                  Todavía no hay una fecha confirmada, pero ya estamos organizando
-                  los primeros meetups en Formosa Capital. Podés ayudar de tres
-                  maneras:
-                </p>
-                <ul className="mt-5 space-y-2 text-sm leading-relaxed text-text-muted">
-                  <li>· Proponé un evento o una charla.</li>
-                  <li>· Ofrecé una sede.</li>
-                  <li>· Sumate a la comunidad para enterarte apenas se confirme.</li>
-                </ul>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <CommunityJoinTrigger className={buttonClass({ variant: "primary" })}>
-                    Sumate a la comunidad
-                  </CommunityJoinTrigger>
-                  <Button
-                    href={contactWhatsAppUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="secondary"
-                  >
-                    Proponé un evento u ofrecé una sede
-                  </Button>
+              <div className="surface-glow mt-12 max-w-2xl rounded-panel border border-hairline-soft p-6 sm:p-8">
+                <div className="flex items-start gap-4">
+                  <span className="icon-orb flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl">
+                    <CalendarDays aria-hidden="true" className="size-5" />
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="text-xl font-bold">Estamos armando el próximo encuentro</h3>
+                    <p className="mt-3 font-light leading-relaxed text-text-muted">
+                      Todavía no hay una fecha confirmada, pero ya estamos organizando
+                      los primeros meetups en Formosa Capital. Podés ayudar de tres
+                      maneras:
+                    </p>
+                    <ul className="mt-5 space-y-2 text-sm leading-relaxed text-text-muted">
+                      <li>· Proponé un evento o una charla.</li>
+                      <li>· Ofrecé una sede.</li>
+                      <li>· Sumate a la comunidad para enterarte apenas se confirme.</li>
+                    </ul>
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      <CommunityJoinTrigger className={buttonClass({ variant: "accent" })}>
+                        <WhatsAppIcon className="size-4" />
+                        Sumate a la comunidad
+                      </CommunityJoinTrigger>
+                      <Button
+                        href={contactWhatsAppUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variant="secondary"
+                        icon={<MessageCircle />}
+                      >
+                        Proponé un evento u ofrecé una sede
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             ) : null}
@@ -214,7 +262,7 @@ export default function Home() {
         <Section id="colaboradores" tone="surface">
           <Reveal>
             <SectionHeading>Colaboradores</SectionHeading>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
+            <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
               Empresas, instituciones y organizaciones que colaboran, apoyan e
               impulsan a la comunidad.
             </p>
@@ -248,6 +296,7 @@ export default function Home() {
               target="_blank"
               rel="noopener noreferrer"
               variant="accent"
+              icon={<MessageCircle />}
               className="mt-8"
             >
               Quiero colaborar
@@ -265,20 +314,29 @@ export default function Home() {
                   (channel): channel is typeof channel & { url: string } =>
                     Boolean(channel.url)
                 )
-                .map((channel) => (
-                  <li key={channel.id}>
+                .map((channel, index) => (
+                  <li
+                    key={channel.id}
+                    className="stagger-item"
+                    style={{ "--i": index } as CSSProperties}
+                  >
                     <ChannelCard
                       href={channel.url}
                       name={channel.name}
                       note={channel.note}
+                      icon={channelIcons[channel.id]}
                     />
                   </li>
                 ))}
-              <li>
+              <li
+                className="stagger-item"
+                style={{ "--i": channels.length } as CSSProperties}
+              >
                 <ChannelCard
                   href={communityWhatsAppUrl}
                   name="WhatsApp"
                   note="Comunidad oficial"
+                  icon={channelIcons.whatsapp}
                 />
               </li>
             </ul>
@@ -289,10 +347,10 @@ export default function Home() {
         <Section ariaLabel="Síntesis" tone="strip" spacing="compact">
           <Reveal>
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center">
-              <span className="text-xl font-extrabold md:text-2xl">Aprender.</span>
-              <span className="text-xl font-extrabold md:text-2xl">Conectar.</span>
-              <span className="text-xl font-extrabold md:text-2xl">Construir.</span>
-              <span className="w-full text-sm text-text-muted md:w-auto md:text-base">
+              <span className="font-display text-xl font-black italic md:text-2xl">Aprender.</span>
+              <span className="font-display text-xl font-black italic md:text-2xl">Conectar.</span>
+              <span className="font-display text-xl font-black italic md:text-2xl">Construir.</span>
+              <span className="w-full text-sm font-light text-text-muted md:w-auto md:text-base">
                 {institutional.inclusion}
               </span>
             </div>
@@ -302,24 +360,28 @@ export default function Home() {
         {/* 06 — Qué es Formosa.dev */}
         <Section id="que-es">
           <Reveal>
-            <SectionHeading className="max-w-2xl">
+            <SectionHeading className="max-w-2xl" accent="construir">
               Una comunidad para construir desde acá.
             </SectionHeading>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
+            <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
               La distancia no debería impedir acceder a personas, conocimiento,
               proyectos y oportunidades. Formosa.dev conecta y multiplica lo que ya
               existe en la provincia: talento, ganas de construir y territorio.
             </p>
             <dl className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {pillars.map((pillar, index) => (
-                <div key={pillar.title}>
-                  <dt className="flex items-baseline gap-3">
-                    <span className="font-mono text-sm font-bold text-accent">
+                <div
+                  key={pillar.title}
+                  className="stagger-item"
+                  style={{ "--i": index } as CSSProperties}
+                >
+                  <dt className="flex items-center gap-3">
+                    <span className="orb flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-sm font-black italic tabular-nums text-white">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <span className="font-semibold">{pillar.title}</span>
                   </dt>
-                  <dd className="mt-2 pl-9 text-sm leading-relaxed text-text-muted">
+                  <dd className="mt-2 pl-14 text-sm font-light leading-relaxed text-text-muted">
                     {pillar.description}
                   </dd>
                 </div>
@@ -331,10 +393,10 @@ export default function Home() {
         {/* 07 — Misión territorial / Mapa de Formosa */}
         <Section id="territorio" tone="dark">
           <Reveal>
-            <SectionHeading className="max-w-2xl">
+            <SectionHeading className="max-w-2xl" accent="encienda">
               Queremos que Formosa.dev se encienda en cada localidad
             </SectionHeading>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-crema/80">
+            <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-crema/80">
               La métrica no es cuántas localidades visitamos, sino cuántas quedan
               con capacidad de sostener actividad local propia. Cada punto del
               mapa es una comunidad que arranca, un referente que aparece y un
@@ -351,9 +413,9 @@ export default function Home() {
                   width={territorialImages.banado.width}
                   height={territorialImages.banado.height}
                   sizes="(max-width: 640px) 100vw, 50vw"
-                  className="h-auto w-full rounded-card object-cover"
+                  className="media-glow-dark h-auto w-full rounded-card object-cover"
                 />
-                <figcaption className="mt-2 text-xs text-crema/60">
+                <figcaption className="mt-3 text-xs font-light text-crema/60">
                   Bañado La Estrella, Formosa.
                 </figcaption>
               </figure>
@@ -366,9 +428,9 @@ export default function Home() {
                   width={territorialImages.cruzDelNorte.width}
                   height={territorialImages.cruzDelNorte.height}
                   sizes="(max-width: 640px) 100vw, 50vw"
-                  className="h-auto w-full rounded-card object-cover"
+                  className="media-glow-dark h-auto w-full rounded-card object-cover"
                 />
-                <figcaption className="mt-2 text-xs text-crema/60">
+                <figcaption className="mt-3 text-xs font-light text-crema/60">
                   La Cruz del Norte, desde Formosa.
                 </figcaption>
               </figure>
@@ -376,19 +438,29 @@ export default function Home() {
           </div>
 
           <Reveal>
-            <div className="mt-10 rounded-card border border-crema/15 p-6">
+            <div className="surface-well-dark mt-10 rounded-card border border-crema/15 p-6">
               <Eyebrow tone="onDark">Estados de una localidad</Eyebrow>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {localityStates.map((state) => (
-                  <li
-                    key={state}
-                    className="rounded-pill border border-crema/20 px-4 py-1.5 text-sm text-crema/80"
-                  >
-                    {state}
-                  </li>
-                ))}
+              <ul className="mt-4 flex flex-wrap gap-2.5">
+                {localityStates.map((state) =>
+                  state === currentLocalityState ? (
+                    <li
+                      key={state}
+                      className="orb flex items-center gap-2 rounded-pill px-4 py-2 text-sm font-semibold text-white"
+                    >
+                      <span className="live-dot" aria-hidden="true" />
+                      {state}
+                    </li>
+                  ) : (
+                    <li
+                      key={state}
+                      className="orb-dark rounded-pill px-4 py-2 text-sm text-crema/80"
+                    >
+                      {state}
+                    </li>
+                  )
+                )}
               </ul>
-              <p className="mt-4 text-sm leading-relaxed text-crema/70">
+              <p className="mt-4 text-sm font-light leading-relaxed text-crema/70">
                 Empezamos por Formosa Capital, en comunidad en formación. El resto
                 del mapa se enciende cuando haya alguien dispuesto a construir
                 comunidad en su localidad.
@@ -397,6 +469,7 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <CommunityJoinTrigger className={buttonClass({ variant: "onDarkAccent" })}>
+                <MessageCircle aria-hidden="true" className="size-4" />
                 Quiero activar mi localidad
               </CommunityJoinTrigger>
               <Button
@@ -404,6 +477,7 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 variant="onDarkSecondary"
+                icon={<MessageCircle />}
               >
                 Ofrecer una sede
               </Button>
@@ -414,24 +488,34 @@ export default function Home() {
         {/* 08 — Café Meetup / Sedes */}
         <Section id="cafe">
           <Reveal>
-            <SectionHeading className="max-w-2xl">
+            <SectionHeading className="max-w-2xl" accent="sede">
               Tu espacio puede ser sede de encuentros
             </SectionHeading>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
+            <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
               Cafés, bares, universidades, coworks, empresas e instituciones
               pueden recibir encuentros pequeños y recurrentes. No es un pedido de
               favor: es una colaboración donde el espacio aporta hospitalidad y la
               comunidad aporta convocatoria y contenido.
             </p>
-            <Button
+            <a
               href={contactWhatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              variant="accent"
-              className="mt-8"
+              className="cta-glow group mt-8 flex min-h-[58px] max-w-xl items-center gap-3 rounded-card px-4 py-3 text-white transition duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus active:scale-[0.98]"
             >
-              Quiero recibir un meetup
-            </Button>
+              <span className="cta-tile flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl">
+                <Coffee aria-hidden="true" className="size-5" />
+              </span>
+              <span className="min-w-0 flex-1 text-[17px] font-bold leading-tight">
+                Quiero recibir un meetup
+              </span>
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/15 transition-colors group-hover:bg-white/25">
+                <ChevronRight
+                  aria-hidden="true"
+                  className="chevron-bounce size-5"
+                />
+              </span>
+            </a>
           </Reveal>
         </Section>
 
@@ -441,13 +525,14 @@ export default function Home() {
             <SectionHeading>
               Quiénes son parte de la organización de Formosa.dev
             </SectionHeading>
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-muted">
+            <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
               La comunidad la sostienen voluntarios en community management,
               eventos, contenido y diseño. Una organización abierta, no una marca
               personal.
             </p>
             <EmptyState
               className="mt-8 max-w-2xl"
+              icon={<Users className="size-5" />}
               title="El equipo está tomando forma."
               description="Cuando haya roles confirmados, van a aparecer acá con su función."
             />
@@ -459,27 +544,20 @@ export default function Home() {
           <Reveal>
             <SectionHeading>Preguntas frecuentes</SectionHeading>
             <div className="mt-8 space-y-3">
-              {faq.map((item) => (
+              {faq.map((item, index) => (
                 <details
                   key={item.question}
-                  className="group rounded-control border border-hairline bg-canvas px-5 py-4"
+                  className="stagger-item group rounded-control border border-hairline-soft bg-surface px-5 py-4 transition-colors duration-200 open:border-hairline hover:bg-canvas-soft"
+                  style={{ "--i": index } as CSSProperties}
                 >
                   <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus [&::-webkit-details-marker]:hidden">
                     <span>{item.question}</span>
-                    <svg
+                    <ChevronDown
                       aria-hidden="true"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="h-4 w-4 shrink-0 text-text-muted transition-transform duration-300 group-open:rotate-180 motion-reduce:transition-none"
-                    >
-                      <path d="m6 9 6 6 6-6" />
-                    </svg>
+                      className="size-4 shrink-0 text-text-muted transition-transform duration-300 group-open:rotate-180 group-open:text-accent motion-reduce:transition-none"
+                    />
                   </summary>
-                  <p className="mt-3 leading-relaxed text-text-muted">
+                  <p className="mt-3 font-light leading-relaxed text-text-muted">
                     {item.answer}
                   </p>
                 </details>
@@ -492,17 +570,23 @@ export default function Home() {
         <Section id="sumate" width="cta" className="text-center">
           <Reveal>
             <SectionHeading size="lg">
-              Hay gente de acá construyendo. Falta que te sumes vos.
+              Hay gente de acá construyendo. Falta que te sumes{" "}
+              <span className="highlight font-display font-black italic">vos</span>.
             </SectionHeading>
-            <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-text-muted">
+            <p className="mx-auto mt-5 max-w-xl text-lg font-light leading-relaxed text-text-muted">
               {institutional.inclusion} La comunidad es gratis, abierta y arranca
               desde Formosa.
             </p>
-            <div className="mt-8 flex flex-col items-center gap-4">
+            <div className="relative mt-10 flex flex-col items-center gap-4">
+              <div
+                aria-hidden="true"
+                className="bloom -inset-x-16 -inset-y-12"
+              />
               <CommunityJoinTrigger className={buttonClass({ variant: "accent", size: "lg" })}>
+                <WhatsAppIcon className="size-4" />
                 Entrar a la comunidad
               </CommunityJoinTrigger>
-              <p className="max-w-sm text-sm text-text-muted">{joinNote}</p>
+              <p className="relative max-w-sm text-sm font-light text-text-muted">{joinNote}</p>
             </div>
           </Reveal>
         </Section>

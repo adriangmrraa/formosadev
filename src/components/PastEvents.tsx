@@ -1,7 +1,8 @@
 "use client";
 
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { useState, type KeyboardEvent } from "react";
+import { useState, type CSSProperties, type KeyboardEvent } from "react";
 import type { PastEvent } from "../lib/types";
 import { EventGallery } from "./EventGallery";
 
@@ -45,7 +46,7 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
           onKeyDown={onSwitcherKeyDown}
           className="-mx-5 flex gap-3 overflow-x-auto px-5 pb-2 sm:gap-4"
         >
-          {events.map((event) => {
+          {events.map((event, index) => {
             const cover = coverOf(event);
             const isActive = event.id === active.id;
             return (
@@ -54,7 +55,8 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
                 type="button"
                 onClick={() => setActiveId(event.id)}
                 aria-pressed={isActive}
-                className={`group flex w-60 shrink-0 flex-col overflow-hidden rounded-card border bg-surface text-left transition duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-72 ${
+                style={{ "--i": index } as CSSProperties}
+                className={`stagger-item group flex w-60 shrink-0 flex-col overflow-hidden rounded-card border bg-surface text-left transition duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus active:scale-[0.97] motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-72 ${
                   isActive
                     ? "border-lapacho ring-2 ring-lapacho/40"
                     : "border-hairline hover:border-hairline-strong"
@@ -93,10 +95,10 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
         <h3 className="mt-3 text-2xl font-bold leading-snug md:text-3xl">
           {active.title}
         </h3>
-        <p className="mt-3 text-sm font-medium text-text-muted">
+        <p className="mt-3 text-sm font-light text-text-muted">
           {active.date} · {active.location}
         </p>
-        <p className="mt-4 max-w-2xl leading-relaxed text-text-muted">
+        <p className="mt-4 max-w-2xl font-light leading-relaxed text-text-muted">
           {active.description}
         </p>
         {active.url ? (
@@ -104,9 +106,13 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
             href={active.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-accent underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+            className="group mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-accent underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
           >
-            Ver la publicación del evento ↗
+            Ver la publicación del evento
+            <ArrowUpRight
+              aria-hidden="true"
+              className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
         ) : null}
         <div className="mt-8">

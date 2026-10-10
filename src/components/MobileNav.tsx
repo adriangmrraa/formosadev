@@ -88,7 +88,7 @@ export function MobileNav({ items }: MobileNavProps) {
         <Menu aria-hidden="true" className="size-5" />
       </summary>
 
-      <div className="absolute right-0 top-full z-50 mt-2 mr-[env(safe-area-inset-right)] w-64 max-w-[calc(100vw-2.5rem)] rounded-nav border border-hairline-soft bg-surface p-1.5">
+      <div className="nav-sheet surface-glow absolute right-0 top-full z-50 mt-2 mr-[env(safe-area-inset-right)] w-64 max-w-[calc(100vw-2.5rem)] rounded-nav border border-hairline-soft p-1.5">
         <ul className="flex flex-col">
           {items.map((item) => {
             const Icon = item.icon ? itemIcons[item.icon] : null;

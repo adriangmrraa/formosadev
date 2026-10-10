@@ -179,7 +179,8 @@ export function EventGallery({
                       className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                     />
                     <PlayBadge />
-                    <span className="absolute left-3 top-3 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur">
+                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur">
+                      <span className="live-dot" aria-hidden="true" />
                       Recap
                     </span>
                   </>

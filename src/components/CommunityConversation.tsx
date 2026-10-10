@@ -30,9 +30,9 @@ function ChannelOption({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex min-h-11 items-center gap-4 rounded-card bg-surface-soft p-4 transition duration-200 hover:bg-canvas-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus active:scale-[0.98]"
+        className="surface-well flex min-h-11 items-center gap-4 rounded-card p-4 transition duration-200 hover:bg-canvas-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus active:scale-[0.98]"
       >
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-surface text-lapacho [&>svg]:size-5">
+        <span className="icon-orb flex h-10 w-10 items-center justify-center rounded-xl [&>svg]:size-5">
           {icon}
         </span>
         <span className="text-left">
@@ -98,7 +98,7 @@ export function CommunityJoinTrigger({ children, className }: CommunityJoinTrigg
             role="dialog"
             aria-modal="true"
             aria-labelledby="community-dialog-title"
-            className="relative w-full max-w-md rounded-dialog border border-white/70 bg-canvas/95 p-6 shadow-[0_24px_80px_rgba(13,17,23,0.35)] backdrop-blur-2xl sm:p-8"
+            className="fd-pop relative w-full max-w-md rounded-dialog border border-white/70 bg-canvas/95 p-6 shadow-[0_24px_80px_rgba(13,17,23,0.35)] backdrop-blur-2xl sm:p-8"
             onMouseDown={(event) => event.stopPropagation()}
           >
             <div aria-hidden="true" className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-lapacho/15 blur-3xl" />
