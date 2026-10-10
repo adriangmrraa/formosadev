@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  /* Primitive palette — brand manual v2.4 §6. */
   --color-ink: #0f172a;
   --color-ink-soft: #1e293b;
   --color-crema: #fff8f5;
@@ -10,6 +11,25 @@
   --color-sol: #ffc31a;
   --color-lavanda: #d9a7f5;
   --color-durazno: #ffd6c1;
+
+  /* Semantic tokens — surfaced intent mapped onto the primitives above. */
+  --color-canvas: #fff8f5;
+  --color-canvas-soft: #fffdfb;
+  --color-surface: #ffffff;
+  --color-hairline: rgba(15, 23, 42, 0.1);
+  --color-hairline-strong: rgba(15, 23, 42, 0.2);
+  --color-text: #0f172a;
+  --color-text-muted: #1e293b;
+  --color-accent: #ff2b8a;
+  --color-accent-deep: #d61f74;
+  --color-focus: #ff2b8a;
+
+  /* Radius scale. */
+  --radius-control: 0.75rem;
+  --radius-card: 1rem;
+  --radius-panel: 1.5rem;
+  --radius-dialog: 2rem;
+  --radius-pill: 9999px;
 }
 
 @theme inline {
@@ -17,8 +37,9 @@
 }
 
 :root {
-  --background: #fff8f5;
-  --foreground: #0f172a;
+  --background: var(--color-canvas);
+  --foreground: var(--color-text);
+  --motion-ui: 200ms;
   --motion-fast: 350ms;
   --motion-normal: 550ms;
   --motion-slow: 900ms;
