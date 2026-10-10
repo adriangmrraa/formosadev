@@ -18,11 +18,12 @@ una sola disciplina:
 
 - **Crema es el lienzo, ink es la voz, lapacho es el acento de conversión.** El
   rosa lapacho aparece poco y siempre para lo importante: el CTA que convierte.
-- **Un solo accent por sección.** Como máximo un botón lapacho por sección (el de
-  conversión clave). Todo otro CTA es `primary` (ink) o `secondary` (outline).
-- **Elevación por tinte + hairline 1px.** Sin sombras en el chrome (header,
-  footer, nav, cards, botones). La única excepción es el overlay del diálogo de
-  comunidad.
+- **Un solo accent por sección.** Como máximo un elemento lapacho de conversión
+  por sección (el CTA que convierte). Todo otro CTA es `primary` (ink) o
+  `secondary` (outline).
+- **Profundidad con propósito.** La capa "glow" permite sombras **ambientales de
+  color** (glow lapacho/durazno/lavanda), highlights inset especulares y grain —
+  nunca sombras grises planas. Ver [Glow layer](#glow-layer).
 - **Una idea principal por bloque** (manual §35.1). Se evita la "carditis": los
   contenedores existen solo cuando organizan información de verdad.
 - **Contraste alto, espacio negativo, jerarquía fuerte** (manual §35.2).
@@ -51,7 +52,14 @@ No se usan todos los colores en una misma pieza.
 
 ### Tipografía
 
-- **Primaria:** `Manrope`, cargada con `next/font/google` (`--font-manrope`).
+- **Primaria:** `Manrope` (variable), cargada con `next/font/google`
+  (`--font-manrope`). `font-light` (300) para subcopy de apoyo; `font-extrabold`
+  (800) para titulares.
+- **Display:** `Archivo` (variable, normal + itálica), `next/font/google`
+  (`--font-archivo`, utility `font-display`). Solo para **acentos**: la palabra
+  destacada de un titular (`font-black italic`) y números grandes
+  (`tabular-nums`). El manual de marca reserva una grotesca de alto impacto para
+  display; Manrope no tiene itálica real.
 - **Fallback:** `Inter`, `system-ui`, `-apple-system`.
 - El wordmark `formosa.dev` es un activo gráfico; no se reconstruye con estas
   fuentes. El logo se usa siempre sobre `logo-formosadev.webp` (variante 29).
@@ -112,10 +120,41 @@ transporte AMBA) sin tocar la marca. Equivalencia de slots:
 | `radius-md` (cards, sheets) | `radius-card` | 24px (`rounded-3xl`) |
 | pill del bottom nav (28px) | `radius-nav` | 28px |
 
-Reglas heredadas del chrome de Metropol: elevación por **tinte**, nunca por
-sombra; hairline solo donde separa de verdad; CTAs `bg-ink` con icono + texto;
-`active:scale-[0.98]` como feedback de presión (reemplaza el lift
-`-translate-y`).
+Reglas heredadas del chrome de Metropol: hairline solo donde separa de verdad;
+CTAs con icono + texto; `active:scale-[0.98]` como feedback de presión. La capa
+"home-*" de Metropol (la rica, no la austera del chrome) se porta como la
+[Glow layer](#glow-layer): sombras ambientales de color, superficies glossy con
+highlight especular, orbes, CTA que respira con sheen, grain y entradas
+escalonadas.
+
+### Glow layer
+
+Clases en `globals.css` (`@layer components`). Toda la capa es profundidad
+decorativa: sin ella el contenido sigue legible, y bajo
+`prefers-reduced-motion` se apagan todas sus animaciones.
+
+| Clase | Receta | Uso |
+|---|---|---|
+| `.fd-backdrop` | Washes radiales lapacho/durazno/lavanda sobre `canvas` + grano `feTurbulence` al 4% (fixed, `z-80`) | `body` |
+| `.surface-glow` | Gradiente tintado + highlight inset + sombra ambiental lapacho `0 24px 48px -28px` | Cards principales, tiles de canal, sheet del menú, empty states |
+| `.surface-well` / `.surface-well-dark` | Tinte hundido con sombras inset | Filas/áreas internas; panel de estados en Territorio |
+| `.cta-glow` | Gradiente lapacho 135° + sheen sweep (`fd-sheen` 5.2s) + sombra de color que **respira** (`fd-cta-breathe` 5.4s) | Variante `accent` de `Button` y barras de acción (Café) |
+| `.cta-tile` | `bg-white/15` + highlight inset | Icono y chevron dentro de una barra `.cta-glow` |
+| `.orb` | Especular radial + grano + gradiente en `--oc` (lapacho por defecto) + sombra de color | Números de pillars, estado actual de localidad |
+| `.orb-idle` / `.orb-dark` | Cara mate con shading inset | Chips en reposo / chips sobre superficie oscura |
+| `.icon-orb` | Wash lapacho glossy para el tile del icono | `ChannelCard`, `EmptyState`, opciones del diálogo |
+| `.live-dot` | Punto lapacho con pulso + anillo expansivo 1.9s | Badges de estado ("Recap", "en formación") |
+| `.media-glow` / `.media-glow-dark` | Sombra ambiental de color para media | Imágenes hero/territorio, embeds, bloque `<pre>` |
+| `.bloom` | Bloom radial lapacho detrás del momento de conversión | CTA final |
+| `.fd-pop` | Entrada spring (blur+scale+translate) en mount | Diálogo de comunidad |
+| `.stagger-item` | `fd-pop` escalonado por `--i`, gated a `.is-visible` del `Reveal` padre | Grids (Redes, pillars, FAQ, switcher de eventos) |
+| `.chevron-bounce` | Rebote 3px en loop | Chevron de la barra CTA |
+
+**Regla de sombras (sustituye a "sin sombras en chrome"):** se permiten
+**(a)** sombras ambientales de color (glow con `color-mix` de tokens de marca),
+**(b)** highlights/sombras **inset** especulares, y **(c)** el overlay del
+diálogo. Siguen prohibidas las sombras grises planas (`shadow-*` genéricas de
+Tailwind) en superficies de contenido.
 
 ### Radius
 
@@ -151,18 +190,20 @@ para poder pasarla también como `className` a `CommunityJoinTrigger`.
 | Variante | Estilo | Cuándo |
 |---|---|---|
 | `primary` | `bg-ink text-crema`, hover `bg-lapacho` | Acción principal cuando el accent está reservado a otra acción |
-| `accent` | `bg-lapacho text-white`, hover `bg-lapacho-deep` | **Máximo uno por sección**: la conversión clave |
+| `accent` | `.cta-glow` (gradiente lapacho + breathe + sheen) `text-white` | **Máximo uno por sección**: la conversión clave |
 | `secondary` | outline `hairline-strong` + `text-text`, hover lapacho | Acción alternativa |
 | `onDarkPrimary` | `bg-crema text-ink`, hover `bg-white` | Sobre superficie `dark` |
-| `onDarkAccent` | `bg-lapacho text-white`, hover `bg-lapacho-deep` | Acento sobre superficie `dark` |
+| `onDarkAccent` | `.cta-glow` `text-white` | Acento sobre superficie `dark` |
 | `onDarkSecondary` | outline `crema/30` + `text-crema`, hover lapacho | Alternativa sobre superficie `dark` |
 
 Reglas:
 
-- **Hero:** el CTA principal es `primary` (ink). El secundario es `secondary`.
+- **Hero:** el CTA de conversión es `accent` (`cta-glow`). El secundario es
+  `secondary`. El "Sumate" del header queda `primary` (el chrome es austero).
 - **Un solo `accent` lapacho por sección.** Si la sección tiene un único CTA, ese
   puede ser el accent; si tiene varios, el accent va al de conversión.
 - **`min-h-11` (44px)** en todo botón/link-control. Ver Accessibility.
+- **Icono + texto** en todo CTA (lucide para acciones, `brand-icons` para canales).
 - **Anillo de foco lapacho** en `:focus-visible` para links, botones y `summary`.
 
 ---
@@ -211,12 +252,17 @@ Principio: **el movimiento sirve a la comprensión, nunca decora** (manual §35)
 - **Reveal editorial** (`.reveal`, `.reveal-word`, `.highlight`): entrada por
   bloque y por palabra con blur-to-focus y marcador orgánico. Gated tras `.js`
   para no romper sin JavaScript.
-- **Marquee de colaboradores:** scroll infinito suave, pausa en hover/focus,
-  corre solo en viewport.
+- **Glow layer:** `fd-pop` (diálogo, sheet del menú), `stagger-item` (pop
+  escalonado por `--i` dentro de un `Reveal`), `fd-cta-breathe` + `fd-sheen`
+  en el CTA de conversión, `live-dot`, `chevron-bounce`.
+- **Marquee de colaboradores:** scroll infinito suave con fade en ambos bordes
+  (`mask-image`), pausa en hover/focus, corre solo en viewport.
 - **Micro-interacciones de UI:** ≤ `--motion-ui` (200ms), `ease-out`. Hover:
-  cambio de color y `-translate-y-0.5` en CTAs y cards.
-- **`prefers-reduced-motion`:** desactiva reveals, marquee, el panel de eventos y
-  los `translate` de hover. El contenido queda siempre visible.
+  cambio de color y `-translate-y-0.5` en cards; `active:scale-[0.97–0.98]` en
+  todo lo presionable; chevron `group-hover:translate-x-0.5`.
+- **`prefers-reduced-motion`:** desactiva reveals, marquee, panel de eventos,
+  hovers con translate y **toda la glow layer** (breathe, sheen, pop, live-dot,
+  bounce). El contenido queda siempre visible.
 
 ---
 
@@ -251,8 +297,9 @@ Principio: **el movimiento sirve a la comprensión, nunca decora** (manual §35)
 ### Don't
 
 - **No usar hex hardcoded** en componentes (solo en `globals.css` y SVG).
-- **No usar `shadow-`** en el chrome. La única excepción es el diálogo de
-  comunidad (overlay).
+- **No usar sombras grises planas** (`shadow-sm/md/lg` genéricos). Las sombras
+  permitidas son ambientales de color, inset especulares y el overlay del
+  diálogo — ver Glow layer.
 - **No poner más de un CTA lapacho por sección.**
 - **No agregar dark mode.**
 - **No agregar dependencias** (p. ej. librerías de íconos) sin necesidad estricta.
@@ -267,9 +314,11 @@ Auditorías para verificar que el código cumple este documento:
 
 1. **Sin hex crudo:** `grep -rn "#[0-9a-fA-F]\{6\}" src/components src/app` → solo
    debe devolver `src/app/globals.css` (tokens).
-2. **Sin sombras en chrome:** `grep -rn "shadow-" src/components src/app` → solo
-   debe devolver el overlay del diálogo de comunidad
-   (`src/components/CommunityConversation.tsx`).
+2. **Sin sombras grises planas:** `grep -rn "shadow-" src/components src/app` →
+   solo debe devolver el overlay del diálogo de comunidad
+   (`src/components/CommunityConversation.tsx`). Las sombras de la glow layer
+   viven en `globals.css` (`.surface-glow`, `.orb`, `.cta-glow`, `.media-glow`,
+   `.cta-tile`).
 3. **Un accent por sección:** `grep -rn "bg-accent\b" src/app/page.tsx` → como
    máximo una ocurrencia por sección.
 4. **Touch targets:** todo CTA usa `Button`/`buttonClass` (incluye `min-h-11`).

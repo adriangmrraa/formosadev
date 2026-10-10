@@ -134,8 +134,10 @@ layout/radius, motion, accesibilidad y auditorías de coherencia.
 
 Proporción: 60–70% neutros + 20–30% rosa lapacho + 5–10% acentos.
 
-**Tipografía:** `Manrope` como primaria (vía `next/font/google`), `Inter`/`system-ui`
-como fallback. El wordmark es un activo gráfico y no se reconstruye con estas fuentes.
+**Tipografía:** `Manrope` como primaria (vía `next/font/google`), `Archivo` como
+grotesca de display para acentos `font-black italic` (vía `next/font/google`,
+variable `--font-archivo`), `Inter`/`system-ui` como fallback. El wordmark es un
+activo gráfico y no se reconstruye con estas fuentes.
 
 Los tokens viven en `src/app/globals.css` (primitivas + semánticas). No hay
 `tailwind.config.js` (Tailwind v4 es CSS-first).
@@ -162,7 +164,9 @@ Los tokens viven en `src/app/globals.css` (primitivas + semánticas). No hay
       Redes, Síntesis, Qué es, Territorio, Café, Equipo, FAQ y CTA final
 - [x] Rutas `/codigo-de-conducta` y `/contacto`
 - [x] Design system documentado en [`DESIGN.md`](./DESIGN.md); tokens semánticos en
-      `globals.css` y primitivas UI en `src/components/ui/`
+      `globals.css`, primitivas UI en `src/components/ui/` y "glow layer"
+      (superficies glossy, orbes, CTA que respira, grain, entradas escalonadas)
+      portada del lenguaje Metropol en la rama `metropol-look`
 - [x] Build estático (`output: "export"`) con workflow de GitHub Pages, dominio
       `formosa.dev.ar`
 
