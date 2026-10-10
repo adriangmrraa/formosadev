@@ -63,7 +63,7 @@ export function MobileNav({ items }: MobileNavProps) {
     <details ref={detailsRef} className="relative md:hidden">
       <summary
         aria-label="Menú"
-        className="inline-flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-ink/15 text-ink transition-colors hover:border-lapacho hover:text-lapacho [&::-webkit-details-marker]:hidden"
+        className="inline-flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-pill border border-hairline-strong text-text transition-colors duration-200 hover:border-lapacho hover:text-lapacho focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus [&::-webkit-details-marker]:hidden"
       >
         <svg
           aria-hidden="true"
@@ -78,13 +78,13 @@ export function MobileNav({ items }: MobileNavProps) {
         </svg>
       </summary>
 
-      <div className="absolute right-0 top-full z-50 mt-2 w-64 max-w-[calc(100vw-2.5rem)] rounded-2xl border border-ink/10 bg-crema p-2 shadow-lg">
+      <div className="absolute right-0 top-full z-50 mt-2 mr-[env(safe-area-inset-right)] w-64 max-w-[calc(100vw-2.5rem)] rounded-card border border-hairline-strong bg-canvas p-2">
         <ul className="flex flex-col">
           {items.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="block rounded-xl px-4 py-3 text-sm font-medium text-ink-soft transition-colors hover:bg-crema-soft hover:text-lapacho"
+                className="flex min-h-11 items-center rounded-control px-4 py-3 text-sm font-medium text-text-muted transition-colors duration-200 hover:bg-canvas-soft hover:text-lapacho"
               >
                 {item.label}
               </Link>

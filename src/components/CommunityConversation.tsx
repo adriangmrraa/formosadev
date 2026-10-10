@@ -3,6 +3,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { communityTelegramUrl, communityWhatsAppUrl } from "../lib/content";
+import { EmptyState } from "./ui/EmptyState";
+import { Eyebrow } from "./ui/Section";
 
 type CommunityJoinTriggerProps = {
   children: ReactNode;
@@ -36,24 +38,32 @@ function ChannelOption({
   href: string | null;
   icon: ReactNode;
 }) {
-  const content = (
-    <>
-      <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-crema-soft text-lapacho">{icon}</span>
-      <span className="text-left">
-        <span className="block font-semibold text-ink">{name}</span>
-        <span className="mt-1 block text-sm text-ink-soft">{description}</span>
-      </span>
-    </>
-  );
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex min-h-11 items-center gap-4 rounded-card border border-hairline bg-canvas p-4 transition duration-200 hover:border-lapacho hover:bg-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+      >
+        <span className="flex h-12 w-12 items-center justify-center rounded-control bg-canvas-soft text-lapacho">
+          {icon}
+        </span>
+        <span className="text-left">
+          <span className="block font-semibold text-text">{name}</span>
+          <span className="mt-1 block text-sm text-text-muted">{description}</span>
+        </span>
+      </a>
+    );
+  }
 
-  return href ? (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-crema p-4 transition hover:border-lapacho hover:bg-white">
-      {content}
-    </a>
-  ) : (
-    <div aria-disabled="true" className="flex items-center gap-4 rounded-2xl border border-dashed border-ink/20 bg-crema-soft p-4 opacity-70">
-      {content}
-    </div>
+  return (
+    <EmptyState
+      layout="inline"
+      icon={icon}
+      title={name}
+      description={description}
+    />
   );
 }
 
@@ -102,27 +112,27 @@ export function CommunityJoinTrigger({ children, className }: CommunityJoinTrigg
             role="dialog"
             aria-modal="true"
             aria-labelledby="community-dialog-title"
-            className="relative w-full max-w-md rounded-[2rem] border border-white/70 bg-crema/95 p-6 shadow-[0_24px_80px_rgba(13,17,23,0.35)] backdrop-blur-2xl sm:p-8"
+            className="relative w-full max-w-md rounded-dialog border border-white/70 bg-canvas/95 p-6 shadow-[0_24px_80px_rgba(13,17,23,0.35)] backdrop-blur-2xl sm:p-8"
             onMouseDown={(event) => event.stopPropagation()}
           >
             <div aria-hidden="true" className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-lapacho/15 blur-3xl" />
-            <div aria-hidden="true" className="absolute -bottom-24 -left-20 h-48 w-48 rounded-full bg-celeste/20 blur-3xl" />
+            <div aria-hidden="true" className="absolute -bottom-24 -left-20 h-48 w-48 rounded-full bg-lavanda/20 blur-3xl" />
             <div className="relative">
               <div className="flex items-start justify-between gap-5">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-lapacho">Formosa.dev</p>
+                  <Eyebrow size="xs">Formosa.dev</Eyebrow>
                   <h2 id="community-dialog-title" className="mt-3 text-3xl font-extrabold leading-tight tracking-tight">Sumate a la conversación</h2>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
                   aria-label="Cerrar"
-                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white/70 text-xl leading-none text-ink-soft transition hover:border-lapacho/40 hover:bg-white hover:text-ink"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border border-hairline bg-surface/70 text-xl leading-none text-text-muted transition duration-200 hover:border-lapacho/40 hover:bg-surface hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
                 >
                   ×
                 </button>
               </div>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-soft">Elegí el canal que prefieras para ser parte de la comunidad.</p>
+              <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-muted">Elegí el canal que prefieras para ser parte de la comunidad.</p>
               <div className="mt-7"><ConversationOptions /></div>
             </div>
           </section>

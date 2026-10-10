@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { CommunityJoinTrigger } from "../../components/CommunityConversation";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
+import { buttonClass } from "../../components/ui/Button";
+import { SectionHeading } from "../../components/ui/Section";
 import { channels, institutional } from "../../lib/content";
 
 export const metadata: Metadata = {
@@ -16,13 +18,11 @@ export default function ContactoPage() {
     <>
       <Header />
       <main className="mx-auto max-w-3xl px-5 py-16">
-        <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-          Contacto
-        </h1>
-        <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-soft">
+        <SectionHeading as="h1">Contacto</SectionHeading>
+        <p className="mt-5 max-w-xl text-lg leading-relaxed text-text-muted">
           Para sumarte a la comunidad, unite directamente al grupo de WhatsApp.
         </p>
-        <CommunityJoinTrigger className="mt-6 inline-block rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-crema transition-colors hover:bg-lapacho">
+        <CommunityJoinTrigger className={buttonClass({ variant: "primary", className: "mt-6" })}>
           Unirme a la comunidad
         </CommunityJoinTrigger>
 
@@ -34,20 +34,20 @@ export default function ContactoPage() {
                 href={channel.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 bg-crema px-5 py-4 transition-colors hover:border-lapacho"
+                className="flex min-h-11 items-center justify-between gap-3 rounded-control border border-hairline bg-canvas px-5 py-4 transition-colors duration-200 hover:border-lapacho focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
               >
                 <span className="font-semibold">{channel.name}</span>
-                <span className="text-sm text-ink-soft">{channel.note}</span>
+                <span className="text-sm text-text-muted">{channel.note}</span>
               </a>
             ) : (
               <div
                 key={channel.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-ink/10 bg-crema-soft px-5 py-4"
+                className="flex min-h-11 items-center justify-between gap-3 rounded-control border border-hairline bg-canvas-soft px-5 py-4"
               >
-                <span className="font-semibold text-ink-soft">
+                <span className="font-semibold text-text-muted">
                   {channel.name}
                 </span>
-                <span className="text-sm text-ink/50">{channel.note}</span>
+                <span className="text-sm text-text/50">{channel.note}</span>
               </div>
             )
           )}
@@ -55,13 +55,13 @@ export default function ContactoPage() {
 
         <a
           href={`mailto:${institutional.email}`}
-          className="mt-8 block rounded-xl border border-ink/10 bg-crema px-5 py-4 transition-colors hover:border-lapacho"
+          className="mt-8 block min-h-11 rounded-control border border-hairline bg-canvas px-5 py-4 transition-colors duration-200 hover:border-lapacho focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
         >
-          <span className="block text-sm text-ink-soft">Correo de contacto</span>
+          <span className="block text-sm text-text-muted">Correo de contacto</span>
           <span className="block font-semibold">{institutional.email}</span>
         </a>
 
-        <p className="mt-10 text-sm leading-relaxed text-ink/50">
+        <p className="mt-10 text-sm leading-relaxed text-text/50">
           {institutional.statusFormula}
         </p>
       </main>

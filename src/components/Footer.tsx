@@ -7,12 +7,12 @@ export function Footer() {
 
   return (
     <footer className="bg-ink text-crema">
-      <div className="mx-auto max-w-6xl px-5 py-14">
+      <div className="mx-auto max-w-6xl px-5 pt-14 pb-[calc(3.5rem+env(safe-area-inset-bottom))]">
         <div className="grid gap-10 md:grid-cols-3">
           <div>
             <Link
               href="/"
-              className="flex items-center gap-2 text-lg font-extrabold tracking-tight"
+              className="flex min-h-11 items-center gap-2 text-lg font-extrabold tracking-tight"
               aria-label="Formosa.dev, inicio"
             >
               <Image
@@ -20,7 +20,7 @@ export function Footer() {
                 alt="Logo de Formosa.dev"
                 width={32}
                 height={32}
-                className="h-8 w-8 rounded-full object-cover"
+                className="h-8 w-8 rounded-pill object-cover"
               />
               <span>
                 formosa<span className="text-lapacho">.dev</span>
@@ -37,22 +37,34 @@ export function Footer() {
             </p>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
-                <Link href="/#que-es" className="text-crema/80 transition-colors hover:text-lapacho">
+                <Link
+                  href="/#que-es"
+                  className="inline-flex min-h-11 items-center text-crema/80 transition-colors duration-200 hover:text-lapacho"
+                >
                   Qué es
                 </Link>
               </li>
               <li>
-                <Link href="/#evento" className="text-crema/80 transition-colors hover:text-lapacho">
+                <Link
+                  href="/#evento"
+                  className="inline-flex min-h-11 items-center text-crema/80 transition-colors duration-200 hover:text-lapacho"
+                >
                   Eventos
                 </Link>
               </li>
               <li>
-                <Link href="/#colaboradores" className="text-crema/80 transition-colors hover:text-lapacho">
+                <Link
+                  href="/#colaboradores"
+                  className="inline-flex min-h-11 items-center text-crema/80 transition-colors duration-200 hover:text-lapacho"
+                >
                   Colaboradores
                 </Link>
               </li>
               <li>
-                <Link href="/#redes" className="text-crema/80 transition-colors hover:text-lapacho">
+                <Link
+                  href="/#redes"
+                  className="inline-flex min-h-11 items-center text-crema/80 transition-colors duration-200 hover:text-lapacho"
+                >
                   Redes
                 </Link>
               </li>
@@ -65,12 +77,18 @@ export function Footer() {
             </p>
             <ul className="mt-3 space-y-2 text-sm">
               <li>
-                <Link href="/codigo-de-conducta" className="text-crema/80 transition-colors hover:text-lapacho">
+                <Link
+                  href="/codigo-de-conducta"
+                  className="inline-flex min-h-11 items-center text-crema/80 transition-colors duration-200 hover:text-lapacho"
+                >
                   Código de conducta
                 </Link>
               </li>
               <li>
-                <Link href="/contacto" className="text-crema/80 transition-colors hover:text-lapacho">
+                <Link
+                  href="/contacto"
+                  className="inline-flex min-h-11 items-center text-crema/80 transition-colors duration-200 hover:text-lapacho"
+                >
                   Contacto
                 </Link>
               </li>
@@ -80,7 +98,7 @@ export function Footer() {
                     href={c.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-crema/80 transition-colors hover:text-lapacho"
+                    className="inline-flex min-h-11 items-center text-crema/80 transition-colors duration-200 hover:text-lapacho"
                   >
                     {c.name}
                   </a>

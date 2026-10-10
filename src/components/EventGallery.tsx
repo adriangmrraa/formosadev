@@ -16,7 +16,7 @@ const SWIPE_THRESHOLD = 48;
 function PlayBadge() {
   return (
     <span className="absolute inset-0 flex items-center justify-center">
-      <span className="flex h-16 w-16 items-center justify-center rounded-full bg-crema/90 text-ink shadow-lg transition-transform duration-300 group-hover:scale-110">
+      <span className="flex h-16 w-16 items-center justify-center rounded-pill bg-crema/90 text-ink ring-1 ring-ink/10 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100">
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
@@ -137,7 +137,7 @@ export function EventGallery({
   };
 
   const navButtonClass =
-    "flex h-11 w-11 items-center justify-center rounded-full border border-crema/25 bg-ink/60 text-crema backdrop-blur transition hover:border-crema/60 hover:bg-ink/80 motion-reduce:transition-none";
+    "flex h-11 w-11 items-center justify-center rounded-pill border border-crema/25 bg-ink/60 text-crema backdrop-blur transition duration-200 hover:border-crema/60 hover:bg-ink/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus motion-reduce:transition-none";
 
   return (
     <>
@@ -157,7 +157,7 @@ export function EventGallery({
                     : `Ampliar: ${entry.alt}`
                 }
                 aria-haspopup="dialog"
-                className="group relative block w-full cursor-pointer overflow-hidden rounded-2xl border border-ink/10 bg-ink/5 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lapacho"
+                className="group relative block w-full cursor-pointer overflow-hidden rounded-card border border-hairline bg-ink/5 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
               >
                 {entry.kind === "image" ? (
                   <Image

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CommunityJoinTrigger } from "./CommunityConversation";
 import { MobileNav } from "./MobileNav";
+import { buttonClass } from "./ui/Button";
 
 const navItems = [
   { label: "Eventos", href: "/#evento" },
@@ -12,14 +13,14 @@ const navItems = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/10 bg-crema/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-hairline bg-canvas/90 pt-[env(safe-area-inset-top)] backdrop-blur">
       <nav
         aria-label="Principal"
-        className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-5"
+        className="mx-auto flex max-w-6xl items-center justify-between gap-4 py-4 pl-[max(1rem,env(safe-area-inset-left))] pr-[max(1rem,env(safe-area-inset-right))] md:pl-5 md:pr-5"
       >
         <Link
           href="/"
-          className="flex items-center gap-2 text-base font-extrabold tracking-tight md:text-lg"
+          className="flex min-h-11 items-center gap-2 text-base font-extrabold tracking-tight md:text-lg"
           aria-label="Formosa.dev, inicio"
         >
           <Image
@@ -27,7 +28,7 @@ export function Header() {
             alt="Logo de Formosa.dev"
             width={48}
             height={48}
-            className="h-12 w-12 rounded-full object-cover"
+            className="h-12 w-12 rounded-pill object-cover"
             priority
           />
           <span>
@@ -40,7 +41,7 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-ink-soft transition-colors hover:text-lapacho"
+              className="inline-flex min-h-11 items-center text-sm font-medium text-text-muted transition-colors duration-200 hover:text-lapacho"
             >
               {item.label}
             </Link>
@@ -48,7 +49,7 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2">
-          <CommunityJoinTrigger className="rounded-full bg-ink px-4 py-2 text-sm font-semibold text-crema transition-colors hover:bg-lapacho">
+          <CommunityJoinTrigger className={buttonClass({ variant: "primary", size: "sm" })}>
             Sumate
           </CommunityJoinTrigger>
           <MobileNav items={navItems} />

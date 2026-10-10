@@ -54,10 +54,10 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
                 type="button"
                 onClick={() => setActiveId(event.id)}
                 aria-pressed={isActive}
-                className={`group flex w-60 shrink-0 flex-col overflow-hidden rounded-2xl border bg-white text-left transition hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lapacho motion-reduce:transition-none sm:w-72 ${
+                className={`group flex w-60 shrink-0 flex-col overflow-hidden rounded-card border bg-surface text-left transition duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus motion-reduce:transition-none motion-reduce:hover:translate-y-0 sm:w-72 ${
                   isActive
                     ? "border-lapacho ring-2 ring-lapacho/40"
-                    : "border-ink/10 hover:border-ink/25"
+                    : "border-hairline hover:border-hairline-strong"
                 }`}
               >
                 {cover ? (
@@ -70,13 +70,13 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
                   />
                 ) : null}
                 <span className="flex flex-1 flex-col p-3 sm:p-4">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-lapacho">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-accent">
                     {event.descriptor}
                   </span>
-                  <span className="mt-1 line-clamp-2 text-sm font-bold leading-snug text-ink">
+                  <span className="mt-1 line-clamp-2 text-sm font-bold leading-snug text-text">
                     {event.title}
                   </span>
-                  <span className="mt-auto pt-2 text-xs text-ink-soft">
+                  <span className="mt-auto pt-2 text-xs text-text-muted">
                     {event.date}
                   </span>
                 </span>
@@ -87,16 +87,16 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
       ) : null}
 
       <article key={active.id} className="event-panel mt-8">
-        <p className="text-sm font-semibold uppercase tracking-widest text-lapacho">
+        <p className="text-sm font-semibold uppercase tracking-widest text-accent">
           {active.descriptor}
         </p>
         <h3 className="mt-3 text-2xl font-bold leading-snug md:text-3xl">
           {active.title}
         </h3>
-        <p className="mt-3 text-sm font-medium text-ink-soft">
+        <p className="mt-3 text-sm font-medium text-text-muted">
           {active.date} · {active.location}
         </p>
-        <p className="mt-4 max-w-2xl leading-relaxed text-ink-soft">
+        <p className="mt-4 max-w-2xl leading-relaxed text-text-muted">
           {active.description}
         </p>
         {active.url ? (
@@ -104,7 +104,7 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
             href={active.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-block text-sm font-semibold text-lapacho underline-offset-4 hover:underline"
+            className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-accent underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
           >
             Ver la publicación del evento ↗
           </a>
