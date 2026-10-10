@@ -32,7 +32,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-crema/50">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-crema/50">
               Secciones
             </p>
             <ul className="mt-3 space-y-2 text-sm">
@@ -72,7 +72,7 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-crema/50">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-crema/50">
               Comunidad
             </p>
             <ul className="mt-3 space-y-2 text-sm">

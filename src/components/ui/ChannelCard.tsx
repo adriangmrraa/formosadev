@@ -1,27 +1,41 @@
+import { ArrowUpRight } from "lucide-react";
+import type { ReactNode } from "react";
+
 type ChannelCardProps = {
   href: string;
   name: string;
   note?: string;
+  /** Channel glyph rendered inside the leading soft square. */
+  icon?: ReactNode;
 };
 
-/** Outbound channel link. One shared card so every channel reads as one grid. */
-export function ChannelCard({ href, name, note }: ChannelCardProps) {
+/**
+ * Outbound channel tile — Metropol's ClassicTripActions language: icon inside
+ * a soft square, bold label, muted note, arrow affordance. One shared card so
+ * every channel reads as one grid.
+ */
+export function ChannelCard({ href, name, note, icon }: ChannelCardProps) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex h-full min-h-11 w-full items-center justify-between gap-3 rounded-card border border-hairline bg-surface p-5 text-left transition duration-200 ease-out hover:-translate-y-0.5 hover:border-lapacho focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus motion-reduce:hover:translate-y-0"
+      className="flex h-full min-h-[92px] w-full items-center gap-3 rounded-card border border-hairline-soft bg-surface p-4 text-left transition duration-200 ease-out hover:bg-canvas-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus active:scale-[0.98]"
     >
-      <span>
-        <span className="block font-semibold text-text">{name}</span>
+      {icon ? (
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface-soft text-text [&>svg]:size-5">
+          {icon}
+        </span>
+      ) : null}
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-bold text-text">{name}</span>
         {note ? (
-          <span className="mt-1 block text-sm text-text-muted">{note}</span>
+          <span className="mt-0.5 block truncate text-xs font-medium text-text-muted">
+            {note}
+          </span>
         ) : null}
       </span>
-      <span aria-hidden="true" className="text-text-muted">
-        ↗
-      </span>
+      <ArrowUpRight aria-hidden="true" className="size-4 shrink-0 text-text-muted" />
     </a>
   );
 }

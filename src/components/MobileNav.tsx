@@ -1,11 +1,31 @@
 "use client";
 
+import {
+  Calendar,
+  Handshake,
+  Menu,
+  ScrollText,
+  Share2,
+  type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
+
+// Icon references cannot cross the server/client boundary, so items carry a
+// serializable key resolved here.
+const itemIcons = {
+  calendar: Calendar,
+  share2: Share2,
+  handshake: Handshake,
+  scrollText: ScrollText,
+} satisfies Record<string, LucideIcon>;
+
+export type MobileNavIcon = keyof typeof itemIcons;
 
 type NavItem = {
   label: string;
   href: string;
+  icon?: MobileNavIcon;
 };
 
 type MobileNavProps = {
@@ -63,33 +83,29 @@ export function MobileNav({ items }: MobileNavProps) {
     <details ref={detailsRef} className="relative md:hidden">
       <summary
         aria-label="Menú"
-        className="inline-flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-pill border border-hairline-strong text-text transition-colors duration-200 hover:border-lapacho hover:text-lapacho focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus [&::-webkit-details-marker]:hidden"
+        className="inline-flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-hairline text-text transition-colors duration-200 hover:bg-surface-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus [&::-webkit-details-marker]:hidden"
       >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          className="h-5 w-5"
-        >
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
+        <Menu aria-hidden="true" className="size-5" />
       </summary>
 
-      <div className="absolute right-0 top-full z-50 mt-2 mr-[env(safe-area-inset-right)] w-64 max-w-[calc(100vw-2.5rem)] rounded-card border border-hairline-strong bg-canvas p-2">
+      <div className="absolute right-0 top-full z-50 mt-2 mr-[env(safe-area-inset-right)] w-64 max-w-[calc(100vw-2.5rem)] rounded-nav border border-hairline-soft bg-surface p-1.5">
         <ul className="flex flex-col">
-          {items.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className="flex min-h-11 items-center rounded-control px-4 py-3 text-sm font-medium text-text-muted transition-colors duration-200 hover:bg-canvas-soft hover:text-lapacho"
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {items.map((item) => {
+            const Icon = item.icon ? itemIcons[item.icon] : null;
+            return (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="flex min-h-11 items-center gap-3 rounded-control px-4 py-3 text-sm font-medium text-text-muted transition-colors duration-200 hover:bg-surface-soft hover:text-text"
+                >
+                  {Icon ? (
+                    <Icon aria-hidden="true" className="size-4 shrink-0" />
+                  ) : null}
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </details>

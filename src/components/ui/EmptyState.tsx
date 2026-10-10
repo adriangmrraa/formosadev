@@ -3,20 +3,33 @@ import type { ReactNode } from "react";
 type EmptyStateProps = {
   title: string;
   description?: ReactNode;
+  /** Icon rendered inside a soft square tile that leads the block. */
   icon?: ReactNode;
+  /** Optional inline CTA rendered after the description. */
+  action?: ReactNode;
   /** `inline` is the compact row used for disabled list options. */
   layout?: "block" | "inline";
   className?: string;
 };
 
+function IconTile({ children }: { children: ReactNode }) {
+  return (
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-text [&>svg]:size-5">
+      {children}
+    </span>
+  );
+}
+
 /**
- * Honest empty state. Uses the hairline + tint elevation with a dashed border
- * so a section without real content still reads as intentional.
+ * Honest empty state. Tinted tile with a leading icon square — elevation by
+ * tint, no dashed outlines — so a section without real content still reads as
+ * intentional.
  */
 export function EmptyState({
   title,
   description,
   icon,
+  action,
   layout = "block",
   className = "",
 }: EmptyStateProps) {
@@ -24,17 +37,13 @@ export function EmptyState({
     return (
       <div
         aria-disabled="true"
-        className={`flex min-h-11 items-center gap-4 rounded-card border border-dashed border-hairline-strong bg-canvas-soft p-4 opacity-70 ${className}`}
+        className={`flex min-h-11 items-center gap-4 rounded-control bg-surface-soft p-4 opacity-70 ${className}`}
       >
-        {icon ? (
-          <span className="flex h-12 w-12 items-center justify-center rounded-control bg-canvas text-lapacho">
-            {icon}
-          </span>
-        ) : null}
+        {icon ? <IconTile>{icon}</IconTile> : null}
         <span className="text-left">
-          <span className="block font-semibold text-text">{title}</span>
+          <span className="block text-sm font-bold text-text">{title}</span>
           {description ? (
-            <span className="mt-1 block text-sm text-text-muted">
+            <span className="mt-0.5 block text-xs text-text-muted">
               {description}
             </span>
           ) : null}
@@ -45,12 +54,18 @@ export function EmptyState({
 
   return (
     <div
-      className={`rounded-card border border-dashed border-hairline-strong bg-canvas-soft p-8 text-text-muted ${className}`}
+      className={`flex items-start gap-4 rounded-card bg-surface-soft p-6 sm:p-8 ${className}`}
     >
-      <p className="font-semibold text-text">{title}</p>
-      {description ? (
-        <div className="mt-2 leading-relaxed">{description}</div>
-      ) : null}
+      {icon ? <IconTile>{icon}</IconTile> : null}
+      <div>
+        <p className="font-bold text-text">{title}</p>
+        {description ? (
+          <div className="mt-2 leading-relaxed text-text-muted">
+            {description}
+          </div>
+        ) : null}
+        {action ? <div className="mt-5">{action}</div> : null}
+      </div>
     </div>
   );
 }

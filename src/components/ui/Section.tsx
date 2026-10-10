@@ -4,10 +4,10 @@ export type SectionTone = "plain" | "soft" | "surface" | "dark" | "strip";
 
 const toneClasses: Record<SectionTone, string> = {
   plain: "",
-  soft: "border-t border-hairline bg-canvas-soft",
-  surface: "border-t border-hairline bg-surface",
-  dark: "border-t border-hairline bg-ink text-crema",
-  strip: "border-y border-hairline bg-canvas-soft",
+  soft: "bg-surface-soft",
+  surface: "bg-surface",
+  dark: "bg-ink text-crema",
+  strip: "border-y border-hairline bg-surface-soft",
 };
 
 const widthClasses = {
@@ -71,8 +71,8 @@ export function Eyebrow({
 }: EyebrowProps) {
   const sizeClass =
     size === "xs"
-      ? "text-xs font-bold uppercase tracking-[0.2em]"
-      : "text-sm font-semibold uppercase tracking-widest";
+      ? "text-xs font-bold uppercase tracking-[0.14em]"
+      : "text-sm font-semibold uppercase tracking-[0.14em]";
   const toneClass =
     tone === "onDark"
       ? "text-crema/60"
