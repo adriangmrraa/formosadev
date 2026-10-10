@@ -115,21 +115,30 @@ Mobile first. El copy de cada sección está en `copy-sitio.md`.
 
 ## Sistema de diseño
 
-**Paleta de marca** — `DOCUMENTO-MAESTRO.md` §10.2 (marcada ahí como *provisoria*):
+**Fuente de verdad de marca:** `Formosa.dev — Manual de Marca Maestro Unificado v2.4`
+(§6 identidad visual, §14 aplicación digital, §18 do/don't, §35 sistema visual y UI
+editorial). El design system operativo de este sitio está documentado en
+[`DESIGN.md`](./DESIGN.md): tokens semánticos, reglas de CTA, escala tipográfica,
+layout/radius, motion, accesibilidad y auditorías de coherencia.
 
-| Token | Hex | Uso |
-|---|---|---|
-| Verde Chaqueño | `#2D8A4E` | Primario |
-| Celeste Formosa | `#4CB8C4` | Secundario |
-| Tierra Colorada | `#C55A2D` | Acento / CTA |
-| Deep Tech | `#0D1117` | Fondo oscuro |
-| Off White | `#F5F5F0` | Fondo claro |
-| Text Dark | `#1A1A1A` | Texto |
-| Text Light | `#E6E6E6` | Texto |
+**Paleta de marca (manual v2.4 §6):**
 
-**Tipografía:** `Inter` para títulos y displays; `Inter` o `Source Sans Pro` para cuerpo.
+| Token | Nombre | Hex | Uso |
+|---|---|---|---|
+| `ink` | Norte / Ink | `#0F172A` | Base oscura, texto, superficies `dark`, CTAs `primary` |
+| `crema` | Crema tierra | `#FFF8F5` | Fondo principal del sitio |
+| `lapacho` | Rosa lapacho | `#FF2B8A` | Acento distintivo: CTA de conversión y marcador `.highlight` |
+| `sol` | Amarillo flor / sol | `#FFC31A` | Energía puntual |
+| `lavanda` | Lavanda horizonte | `#D9A7F5` | Atmósfera (secundario) |
+| `durazno` | Durazno atardecer | `#FFD6C1` | Soporte cálido (secundario) |
 
-No hay escala de espaciado, radios ni archivo de tokens definido todavía.
+Proporción: 60–70% neutros + 20–30% rosa lapacho + 5–10% acentos.
+
+**Tipografía:** `Manrope` como primaria (vía `next/font/google`), `Inter`/`system-ui`
+como fallback. El wordmark es un activo gráfico y no se reconstruye con estas fuentes.
+
+Los tokens viven en `src/app/globals.css` (primitivas + semánticas). No hay
+`tailwind.config.js` (Tailwind v4 es CSS-first).
 
 ---
 
@@ -147,10 +156,15 @@ No hay escala de espaciado, radios ni archivo de tokens definido todavía.
 
 - [x] Repositorio inicializado y conectado a `origin`
 - [x] `estructura-sitio.md` y `copy-sitio.md` versionados en la raíz
-- [x] Scaffold de Next.js 16 + TypeScript + Tailwind v4 en `src/app/`
-- [ ] Layout global (navbar + footer) — hoy `layout.tsx` y `page.tsx` son el boilerplate
-- [ ] Secciones
-- [ ] Deploy a GitHub Pages + dominio formosa.dev.ar
+- [x] Next.js 16 + TypeScript + Tailwind v4 en `src/app/`
+- [x] Layout global: `Header` + `MobileNav` + `Footer`
+- [x] Home con las secciones: Hero, Eventos (próximo + anteriores), Colaboradores,
+      Redes, Síntesis, Qué es, Territorio, Café, Equipo, FAQ y CTA final
+- [x] Rutas `/codigo-de-conducta` y `/contacto`
+- [x] Design system documentado en [`DESIGN.md`](./DESIGN.md); tokens semánticos en
+      `globals.css` y primitivas UI en `src/components/ui/`
+- [x] Build estático (`output: "export"`) con workflow de GitHub Pages, dominio
+      `formosa.dev.ar`
 
 ---
 
