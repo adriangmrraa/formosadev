@@ -1,10 +1,38 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MapPin } from "lucide-react";
 import Image from "next/image";
 import { useState, type CSSProperties, type KeyboardEvent } from "react";
-import type { PastEvent } from "../lib/types";
+import type { EventVenue, PastEvent } from "../lib/types";
 import { EventGallery } from "./EventGallery";
+
+/** Compact venue line: address + small logo + external link (never a card). */
+function VenueLine({ venue }: { venue: EventVenue }) {
+  return (
+    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+      <span className="inline-flex items-center gap-2 text-sm font-light text-text-muted">
+        <MapPin aria-hidden="true" className="size-4 shrink-0 text-accent" />
+        {venue.name} — {venue.address}
+      </span>
+      <a
+        href={venue.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Visitar el sitio de ${venue.name}`}
+        className="inline-flex min-h-8 items-center gap-2 rounded-control border border-hairline px-2.5 py-1 transition-colors hover:border-lapacho focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+      >
+        <Image
+          src={venue.logoSrc}
+          alt={venue.logoAlt}
+          width={640}
+          height={360}
+          className="h-6 w-auto object-contain"
+        />
+        <ArrowUpRight aria-hidden="true" className="size-4 text-text-muted" />
+      </a>
+    </div>
+  );
+}
 
 /** Thumbnail used in the event switcher: the first media item (or its poster). */
 function coverOf(event: PastEvent) {
@@ -95,9 +123,12 @@ export function PastEvents({ events }: { events: PastEvent[] }) {
         <h3 className="mt-3 text-2xl font-bold leading-snug md:text-3xl">
           {active.title}
         </h3>
-        <p className="mt-3 text-sm font-light text-text-muted">
-          {active.date} · {active.location}
-        </p>
+        <p className="mt-3 text-sm font-light text-text-muted">{active.date}</p>
+        {active.venue ? (
+          <VenueLine venue={active.venue} />
+        ) : (
+          <p className="mt-3 text-sm font-light text-text-muted">{active.location}</p>
+        )}
         <p className="mt-4 max-w-2xl font-light leading-relaxed text-text-muted">
           {active.description}
         </p>

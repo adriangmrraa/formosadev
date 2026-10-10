@@ -59,6 +59,13 @@ export const pastEvents: PastEvent[] = [
     description:
       "La primera jornada presencial co-organizada por Formosa.dev: equipos trabajando en sus proyectos para el track argentino de Colosseum, la hackathon global de Solana.",
     url: "https://luma.com/usz4536h",
+    venue: {
+      name: "Pepe Club",
+      address: "9 de Julio 629, Formosa Capital",
+      logoSrc: "/assets/colaboradores/pepe-guapo.webp",
+      logoAlt: "Logo de Pepe Club",
+      url: "https://pepe-club.com/",
+    },
     media: [
       {
         kind: "video",
@@ -342,6 +349,13 @@ export const collaborators: Collaborator[] = [
     logoSrc: "/assets/colaboradores/debatech.jpg",
     logoAlt: "Logo de Debatech",
     large: true,
+  },
+  {
+    id: "el-comercial",
+    name: "El Comercial",
+    logoSrc: "/assets/colaboradores/el-comercial.jpg",
+    logoAlt: "Logo de El Comercial",
+    url: "https://www.elcomercial.com.ar/",
   },
   {
     id: "fusalabs",

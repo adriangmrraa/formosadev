@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* The cover-flow gallery ships pre-built Tailwind utility classes inside
+   node_modules, which Tailwind v4 does not scan by default. Include the
+   package source so its layout/3D utilities are generated. */
+@source "../../node_modules/@ashishgogula/coverflow/dist";
+
 @theme {
   /* Primitive palette — brand manual v2.4 §6. */
   --color-ink: #0f172a;
@@ -31,6 +36,10 @@
      spending the one-lapacho-CTA-per-section budget. */
   --color-accent-soft: rgba(255, 43, 138, 0.1);
   --color-focus: #ff2b8a;
+  /* shadcn-style slots the cover-flow package's own utilities reference
+     (`text-foreground`, etc.). Mapped onto the brand primitives above. */
+  --color-foreground: var(--color-text);
+  --color-background: var(--color-canvas);
 
   /* Radius scale (Metropol app language: 16 controls / 24 cards / 28 nav). */
   --radius-control: 1rem;
@@ -162,6 +171,18 @@ main [id] {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Cover-flow caption: the gallery package renders the active item's title at
+   text-2xl; rein it in to a readable editorial caption over the warm canvas.
+   Unlayered so it wins over the package's utility classes. */
+.cf-event h3 {
+  font-size: 1rem;
+  line-height: 1.45;
+  font-weight: 600;
+  max-width: 44rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
 }
 
 /* ---------------------------------------------------------------------------

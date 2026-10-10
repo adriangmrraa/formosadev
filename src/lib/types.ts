@@ -57,6 +57,18 @@ export interface EventVideo {
 
 export type EventMedia = EventImage | EventVideo;
 
+/**
+ * The venue that hosted a past event: name, address, logo and its public
+ * site. Rendered as a compact location line (never a nested card).
+ */
+export interface EventVenue {
+  name: string;
+  address: string;
+  logoSrc: string;
+  logoAlt: string;
+  url: string;
+}
+
 /** A finished event with verified data and its media recap. */
 export interface PastEvent {
   id: string;
@@ -69,6 +81,8 @@ export interface PastEvent {
   description: string;
   /** Canonical public page of the event, when it exists. */
   url?: string;
+  /** Structured venue info; when present it renders as a location line. */
+  venue?: EventVenue;
   media: EventMedia[];
 }
 

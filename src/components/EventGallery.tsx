@@ -1,28 +1,33 @@
 "use client";
 
+import { CoverFlow } from "@ashishgogula/coverflow";
+import type {
+  CoverFlowItem,
+  RenderImageProps,
+} from "@ashishgogula/coverflow";
+import { Maximize2 } from "lucide-react";
 import Image from "next/image";
 import {
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
-  type CSSProperties,
+  type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import type { EventMedia } from "../lib/types";
-import { Parallax } from "./motion/Parallax";
-import { Reveal } from "./motion/Reveal";
 
 const SWIPE_THRESHOLD = 48;
 
 function PlayBadge() {
   return (
     <span className="absolute inset-0 flex items-center justify-center">
-      <span className="flex h-16 w-16 items-center justify-center rounded-pill bg-crema/90 text-ink ring-1 ring-ink/10 transition-transform duration-300 group-hover:scale-110 motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+      <span className="flex h-14 w-14 items-center justify-center rounded-pill bg-crema/90 text-ink ring-1 ring-ink/10">
         <svg
           aria-hidden="true"
           viewBox="0 0 24 24"
-          className="ml-1 h-7 w-7"
+          className="ml-1 h-6 w-6"
           fill="currentColor"
         >
           <path d="M8 5.14v13.72c0 .8.87 1.3 1.56.88l11-6.86a1.03 1.03 0 0 0 0-1.76l-11-6.86A1.03 1.03 0 0 0 8 5.14Z" />
@@ -54,9 +59,11 @@ function ArrowIcon({ direction }: { direction: "prev" | "next" }) {
 }
 
 /**
- * Masonry gallery (CSS columns) + accessible lightbox for a past event.
- * The grid only renders the video poster; the real <video> mounts inside the
- * lightbox, so no mp4 is downloaded until the visitor asks for it.
+ * 3D cover-flow gallery (iOS-style) + accessible lightbox for a past event.
+ * The interactive deck is delegated to `@ashishgogula/coverflow` (spring-driven
+ * 3D transforms, keyboard + drag + wheel, honors prefers-reduced-motion); the
+ * lightbox keeps the full-resolution media, alt captions and swipe/keyboard
+ * navigation it already had.
  */
 export function EventGallery({
   media,
@@ -66,12 +73,58 @@ export function EventGallery({
   eventTitle: string;
 }) {
   const [index, setIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(media.length - 1);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
-  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const amplifyRef = useRef<HTMLButtonElement | null>(null);
   const touchStartX = useRef<number | null>(null);
 
   const item = index === null ? null : media[index];
   const count = media.length;
+
+  const items = useMemo<CoverFlowItem[]>(
+    () =>
+      media.map((entry, i) => ({
+        id: i,
+        image: entry.kind === "video" ? entry.poster : entry.src,
+        title: entry.kind === "video" ? entry.title : entry.alt,
+      })),
+    [media]
+  );
+
+  const videoSrcs = useMemo(() => {
+    const set = new Set<string>();
+    for (const entry of media) {
+      if (entry.kind === "video") set.add(entry.poster);
+    }
+    return set;
+  }, [media]);
+
+  const renderImage = useCallback(
+    (props: RenderImageProps) => {
+      const image = (
+        <Image
+          src={props.src}
+          alt={props.alt}
+          width={props.width}
+          height={props.height}
+          className={props.className}
+          sizes={props.sizes}
+          priority={props.priority}
+          loading={props.priority ? undefined : props.loading}
+          draggable={false}
+        />
+      );
+      return videoSrcs.has(props.src) ? (
+        <>
+          {image}
+          <PlayBadge />
+        </>
+      ) : (
+        image
+      );
+    },
+    [videoSrcs]
+  );
 
   const open = useCallback((i: number) => setIndex(i), []);
 
@@ -106,22 +159,35 @@ export function EventGallery({
     };
   }, [index]);
 
-  // Restore focus to the thumbnail that opened the lightbox.
-  const prevIndex = useRef<number | null>(null);
+  // Return focus to the "Ampliar" control when the lightbox closes.
+  const prevOpen = useRef(false);
   useEffect(() => {
-    if (index === null && prevIndex.current !== null) {
-      itemRefs.current[prevIndex.current]?.focus();
+    if (index === null && prevOpen.current) {
+      amplifyRef.current?.focus();
     }
-    prevIndex.current = index;
+    prevOpen.current = index !== null;
   }, [index]);
 
-  const onKeyDown = (event: React.KeyboardEvent) => {
+  const onKeyDown = (event: ReactKeyboardEvent) => {
     if (event.key === "ArrowRight") {
       event.preventDefault();
       step(1);
     } else if (event.key === "ArrowLeft") {
       event.preventDefault();
       step(-1);
+    }
+  };
+
+  // Keyboard path to open the lightbox from the focused deck (the cover-flow
+  // region only handles the arrow keys itself). Skip the "Ampliar" button,
+  // whose Enter/Space is handled natively.
+  const onDeckKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (
+      (event.key === "Enter" || event.key === " ") &&
+      (event.target as HTMLElement).tagName !== "BUTTON"
+    ) {
+      event.preventDefault();
+      open(activeIndex);
     }
   };
 
@@ -143,61 +209,35 @@ export function EventGallery({
 
   return (
     <>
-      <Parallax>
-        <ul className="columns-2 gap-3 sm:columns-3 sm:gap-4">
-          {media.map((entry, i) => (
-            <li key={i} className="mb-3 break-inside-avoid sm:mb-4">
-              <Reveal scale delay={Math.min(i, 6) * 60}>
-                <button
-                  ref={(el) => {
-                    itemRefs.current[i] = el;
-                  }}
-                  type="button"
-                  onClick={() => open(i)}
-                  aria-label={
-                    entry.kind === "video"
-                      ? `Reproducir: ${entry.title}`
-                      : `Ampliar: ${entry.alt}`
-                  }
-                  aria-haspopup="dialog"
-                  className="group relative block w-full cursor-pointer overflow-hidden rounded-card border border-hairline bg-ink/5 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-                >
-                  {entry.kind === "image" ? (
-                    <span className="depth-zoom block" style={{ "--dz": "0.07" } as CSSProperties}>
-                      <Image
-                        src={entry.src}
-                        alt={entry.alt}
-                        width={entry.width}
-                        height={entry.height}
-                        sizes="(max-width: 640px) 50vw, (max-width: 1152px) 33vw, 370px"
-                        className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                      />
-                    </span>
-                  ) : (
-                    <>
-                      <span className="depth-zoom block" style={{ "--dz": "0.07" } as CSSProperties}>
-                        <Image
-                          src={entry.poster}
-                          alt=""
-                          width={entry.width}
-                          height={entry.height}
-                          sizes="(max-width: 640px) 50vw, (max-width: 1152px) 33vw, 370px"
-                          className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                        />
-                      </span>
-                      <PlayBadge />
-                      <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur">
-                        <span className="live-dot" aria-hidden="true" />
-                        Recap
-                      </span>
-                    </>
-                  )}
-                </button>
-              </Reveal>
-            </li>
-          ))}
-        </ul>
-      </Parallax>
+      <div
+        className="cf-event h-[30rem] w-full sm:h-[33rem]"
+        onKeyDown={onDeckKeyDown}
+      >
+        <CoverFlow
+          items={items}
+          itemWidth={300}
+          itemHeight={400}
+          initialIndex={media.length - 1}
+          onItemClick={(_item, i) => open(i)}
+          onIndexChange={setActiveIndex}
+          renderImage={renderImage}
+        />
+      </div>
+
+      <div className="mt-4 flex items-center gap-4">
+        <button
+          ref={amplifyRef}
+          type="button"
+          onClick={() => open(activeIndex)}
+          className="inline-flex min-h-11 items-center gap-2 rounded-pill border border-hairline-strong px-4 py-2 text-sm font-semibold text-text transition-colors duration-200 hover:border-lapacho hover:text-lapacho focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus active:scale-[0.98] motion-reduce:transition-none"
+        >
+          <Maximize2 aria-hidden="true" className="size-4" />
+          Ampliar foto
+        </button>
+        <span className="text-xs font-light uppercase tracking-widest text-text-faint">
+          {activeIndex + 1} / {count}
+        </span>
+      </div>
 
       <dialog
         ref={dialogRef}

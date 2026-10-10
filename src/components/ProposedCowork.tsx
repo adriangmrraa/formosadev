@@ -1,4 +1,4 @@
-import { CalendarDays, Clock3, Coffee, ExternalLink, Sparkles } from "lucide-react";
+import { CalendarDays, Clock3, Coffee, Sparkles } from "lucide-react";
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { CommunityJoinTrigger } from "./CommunityConversation";
@@ -78,22 +78,6 @@ export function ProposedCowork() {
             <CommunityJoinTrigger className={buttonClass({ variant: "accent" })}>
               Quiero enterarme
             </CommunityJoinTrigger>
-            <a
-              href="https://www.elcomercial.com.ar/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 rounded-control border border-hairline px-3 py-2 transition-colors hover:border-lapacho"
-              aria-label="Visitar El Comercial"
-            >
-              <Image
-                src="/assets/colaboradores/el-comercial.jpg"
-                alt="El Comercial"
-                width={200}
-                height={49}
-                className="h-6 w-auto object-contain"
-              />
-              <ExternalLink aria-hidden="true" className="size-4 text-text-muted" />
-            </a>
           </div>
           <p className="mt-4 text-xs font-light leading-relaxed text-text-faint">
             Propuesta de sede en conversación con El Comercial. La fecha y la agenda
