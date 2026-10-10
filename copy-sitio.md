@@ -229,6 +229,24 @@
 <p>Los encuentros de la comunidad: lo que ya pasó y lo que viene.</p>
 ```
 
+### Propuesta de cowork recurrente (en conversación)
+
+Formosa.dev está preparando una propuesta de actividad continua de cowork para
+Formosa Capital. La idea está en conversación: **no hay fecha confirmada ni
+registro publicado**. La sede propuesta es El Comercial; Formosa.dev organizaría
+la actividad y El Comercial facilitaría el espacio.
+
+- Estado visible: `Próximamente` / `Idea en conversación`.
+- Frecuencia propuesta: segundo y último sábado de cada mes.
+- Horario propuesto: 16 a 20 h.
+- Dinámica: cowork con merienda, charlas breves, trabajo continuo en proyectos,
+  muestras de avances y conversaciones sobre cómo construir y usar agentes.
+- CTA permitido ahora: invitar a sumarse a la comunidad para recibir novedades.
+- No presentar a El Comercial como colaborador confirmado ni inventar enlace de
+  Luma; el logo enlaza únicamente a su home oficial.
+- Pie obligatorio: `Propuesta de sede en conversación con El Comercial. La fecha
+  y la agenda se anunciarán solo cuando estén confirmadas.`
+
 ### Evento pasado (con recap)
 
 El Road to Colosseum X Formosa (3/10/2026, Pepe Club) ya se realizó: quedó como

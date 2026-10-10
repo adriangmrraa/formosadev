@@ -11,6 +11,7 @@ import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { CommunityJoinTrigger } from "../components/CommunityConversation";
 import { PastEvents } from "../components/PastEvents";
+import { ProposedCowork } from "../components/ProposedCowork";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { AmbientVideo } from "../components/motion/AmbientVideo";
@@ -220,6 +221,8 @@ export default function Home() {
               </div>
             ) : null}
 
+            {!upcomingEvent ? <ProposedCowork /> : null}
+
             {pastEvents.length > 0 ? (
               <div className="mt-10 border-t border-hairline pt-10">
                 <PastEvents events={pastEvents} />
@@ -305,36 +308,62 @@ export default function Home() {
           </section>
         ) : null}
 
+        {/* The second and last full-bleed depth band: an unchanged local
+            Formosa environment. All remaining sections stay predominantly
+            flat/textural so the page keeps its rhythm and the motion remains
+            purposeful. */}
+        <section aria-label="Paisaje de Formosa" className="relative">
+          <Parallax className="relative h-[46svh] max-h-[520px] min-h-72 overflow-hidden">
+            <div
+              className="depth-zoom absolute inset-0"
+              style={{ "--dz": "0.08" } as CSSProperties}
+            >
+              <Image
+                src="/assets/campaigns/el-comercial-cowork/background-plaza-san-martin.png"
+                alt="Plaza San Martín de Formosa"
+                fill
+                sizes="100vw"
+                className="object-cover"
+              />
+            </div>
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-ink/30"
+            />
+            <div className="absolute inset-x-0 bottom-0 pb-6">
+              <p className="mx-auto max-w-6xl px-5 text-sm font-semibold text-crema/90">
+                Formosa es el punto de partida.
+              </p>
+            </div>
+          </Parallax>
+        </section>
+
         {/* 03 — Colaboradores */}
         <Section id="colaboradores" tone="surface">
           <Reveal>
-            <Parallax className="depth-shift" style={{ "--dy": "-18px" } as CSSProperties}>
-              <SectionHeading>Colaboradores</SectionHeading>
-              <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
-                Empresas, instituciones y organizaciones que colaboran, apoyan e
-                impulsan a la comunidad.
-              </p>
-            </Parallax>
+            <SectionHeading>Colaboradores</SectionHeading>
+            <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
+              Empresas, instituciones y organizaciones que colaboran, apoyan e
+              impulsan a la comunidad.
+            </p>
             {collaborators.length > 0 ? (
-              <Parallax className="depth-shift" style={{ "--dy": "22px" } as CSSProperties}>
-                <AutoMarquee duration={36}>
-                  <ul className="colaboradores-track mt-10">
-                    {collaborators.map((collaborator) => (
-                      <CollaboratorCard
-                        key={collaborator.id}
-                        collaborator={collaborator}
-                      />
-                    ))}
-                    {collaborators.map((collaborator) => (
-                      <CollaboratorCard
-                        key={`${collaborator.id}-copy`}
-                        collaborator={collaborator}
-                        hidden
-                      />
-                    ))}
-                  </ul>
-                </AutoMarquee>
-              </Parallax>
+              <AutoMarquee duration={36}>
+                <ul className="colaboradores-track mt-10">
+                  {collaborators.map((collaborator) => (
+                    <CollaboratorCard
+                      key={collaborator.id}
+                      collaborator={collaborator}
+                    />
+                  ))}
+                  {collaborators.map((collaborator) => (
+                    <CollaboratorCard
+                      key={`${collaborator.id}-copy`}
+                      collaborator={collaborator}
+                      hidden
+                    />
+                  ))}
+                </ul>
+              </AutoMarquee>
             ) : (
               <EmptyState
                 className="mt-10 max-w-2xl"
@@ -342,29 +371,24 @@ export default function Home() {
                 description="Estamos sumando a las organizaciones que acompañan e impulsan a Formosa.dev."
               />
             )}
-            <Parallax className="depth-shift" style={{ "--dy": "-18px" } as CSSProperties}>
-              <Button
-                href={contactWhatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="accent"
-                icon={<MessageCircle />}
-                className="mt-8"
-              >
-                Quiero colaborar
-              </Button>
-            </Parallax>
+            <Button
+              href={contactWhatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="accent"
+              icon={<MessageCircle />}
+              className="mt-8"
+            >
+              Quiero colaborar
+            </Button>
           </Reveal>
         </Section>
 
         {/* 04 — Redes */}
         <Section id="redes" tone="soft">
           <Reveal>
-            <Parallax className="depth-shift" style={{ "--dy": "-14px" } as CSSProperties}>
-              <SectionHeading>Redes</SectionHeading>
-            </Parallax>
-            <Parallax className="depth-shift" style={{ "--dy": "20px" } as CSSProperties}>
-              <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <SectionHeading>Redes</SectionHeading>
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 {channels
                   .filter(
                     (channel): channel is typeof channel & { url: string } =>
@@ -395,27 +419,21 @@ export default function Home() {
                     icon={channelIcons.whatsapp}
                   />
                 </li>
-              </ul>
-            </Parallax>
+            </ul>
           </Reveal>
         </Section>
 
         {/* 05 — Síntesis */}
         <Section ariaLabel="Síntesis" tone="strip" spacing="compact">
           <Reveal>
-            <Parallax
-              className="depth-zoom"
-              style={{ "--dz": "0.05" } as CSSProperties}
-            >
-              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center">
-                <span className="font-display text-xl font-black italic md:text-2xl">Aprender.</span>
-                <span className="font-display text-xl font-black italic md:text-2xl">Conectar.</span>
-                <span className="font-display text-xl font-black italic md:text-2xl">Construir.</span>
-                <span className="w-full text-sm font-light text-text-muted md:w-auto md:text-base">
-                  {institutional.inclusion}
-                </span>
-              </div>
-            </Parallax>
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center">
+              <span className="font-display text-xl font-black italic md:text-2xl">Aprender.</span>
+              <span className="font-display text-xl font-black italic md:text-2xl">Conectar.</span>
+              <span className="font-display text-xl font-black italic md:text-2xl">Construir.</span>
+              <span className="w-full text-sm font-light text-text-muted md:w-auto md:text-base">
+                {institutional.inclusion}
+              </span>
+            </div>
           </Reveal>
         </Section>
 
