@@ -10,6 +10,7 @@ import {
 import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { CommunityJoinTrigger } from "../components/CommunityConversation";
+import { EventBackdropSection } from "../components/EventBackdropSection";
 import { PastEvents } from "../components/PastEvents";
 import { ProposedCowork } from "../components/ProposedCowork";
 import { Footer } from "../components/Footer";
@@ -233,7 +234,10 @@ export default function Home() {
         </Section>
 
         {/* 03 — Colaboradores */}
-        <Section id="colaboradores" tone="surface">
+        <EventBackdropSection
+          id="colaboradores"
+          imageSrc="/assets/eventos/road-to-colosseum/colosseum-01.webp"
+        >
           <Reveal>
             <SectionHeading>Colaboradores</SectionHeading>
             <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
@@ -276,7 +280,7 @@ export default function Home() {
               Quiero colaborar
             </Button>
           </Reveal>
-        </Section>
+        </EventBackdropSection>
 
         {/* 04 — Redes */}
         <Section id="redes" tone="soft">
@@ -332,7 +336,10 @@ export default function Home() {
         </Section>
 
         {/* 06 — Qué es Formosa.dev */}
-        <Section id="que-es">
+        <EventBackdropSection
+          id="que-es"
+          imageSrc="/assets/eventos/road-to-colosseum/colosseum-07.webp"
+        >
           <Reveal>
             <SectionHeading className="max-w-2xl" accent="construir">
               Una comunidad para construir desde acá.
@@ -362,7 +369,7 @@ export default function Home() {
               ))}
             </dl>
           </Reveal>
-        </Section>
+        </EventBackdropSection>
 
         {/* 07 — Misión territorial / Mapa de Formosa */}
         <Section id="territorio" tone="dark">
@@ -460,7 +467,10 @@ export default function Home() {
         </Section>
 
         {/* 08 — Café Meetup / Sedes */}
-        <Section id="cafe">
+        <EventBackdropSection
+          id="cafe"
+          imageSrc="/assets/eventos/road-to-colosseum/colosseum-03.webp"
+        >
           <Reveal>
             <SectionHeading className="max-w-2xl" accent="sede">
               Tu espacio puede ser sede de encuentros
@@ -491,7 +501,7 @@ export default function Home() {
               </span>
             </a>
           </Reveal>
-        </Section>
+        </EventBackdropSection>
 
         {/* 09 — Equipo / Organización */}
         <Section id="equipo">
@@ -541,7 +551,12 @@ export default function Home() {
         </Section>
 
         {/* 11 — CTA final */}
-        <Section id="sumate" width="cta" className="text-center">
+        <EventBackdropSection
+          id="sumate"
+          imageSrc="/assets/eventos/road-to-colosseum/colosseum-05.webp"
+          width="cta"
+          className="text-center"
+        >
           <Reveal>
             <SectionHeading size="lg">
               Hay gente de acá construyendo. Falta que te sumes{" "}
@@ -563,7 +578,7 @@ export default function Home() {
               <p className="relative max-w-sm text-sm font-light text-text-muted">{joinNote}</p>
             </div>
           </Reveal>
-        </Section>
+        </EventBackdropSection>
       </main>
 
       <Footer />

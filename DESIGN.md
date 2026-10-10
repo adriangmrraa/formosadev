@@ -267,10 +267,12 @@ Principio: **el movimiento sirve a la comprensión, nunca decora** (manual §35)
   sin letterbox; reproduce solo en viewport y solo con motion permitido; el
   poster queda como fallback estático. El hero usa únicamente los primeros 10 s
   del recap antes de reiniciar. La reproducción real vive en el lightbox.
-- **Bandas con profundidad:** máximo dos por landing: el hero de video y la
-  propuesta visual de cowork. El cowork cruza fondos reales de Formosa según
-  `--p` y desemboca en una superficie blanca; el resto alterna fondos lisos,
-  texturas e imágenes estáticas, sin sumar parallax decorativo.
+- **Bandas con profundidad:** el hero de video, la propuesta visual de cowork y
+  las cuatro bandas narrativas (Comunidad, Sede, Colaboradores y CTA) usan
+  profundidad cuando la foto real suma contexto. Cada foto de evento se mueve
+  apenas con `--p` y termina alternada con bandas lisas o de textura; no se
+  usan fondos de imagen como decoración repetida. Bajo `prefers-reduced-motion`
+  quedan completamente estáticos.
 - **Información:** evitar carditis. Los datos que se pueden leer como una sola
   frase (frecuencia y horario, por ejemplo) se muestran en línea; una card solo
   se justifica cuando es una unidad interactiva o agrupa contenido independiente.
