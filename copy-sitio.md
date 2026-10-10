@@ -229,6 +229,18 @@
 <p>Los encuentros de la comunidad: lo que ya pasó y lo que viene.</p>
 ```
 
+### Próximo evento confirmado
+
+- **Meta Meetup | Agentes de IA, APIs y soluciones para empresas x Formosa.dev**
+- Sábado 31 de octubre de 2026, de 16:00 a 20:00 h.
+- Diario El Comercial — Hipólito Yrigoyen 58, Formosa Capital.
+- Participación gratuita con inscripción previa en Luma.
+- Página pública: `https://luma.com/k5a27ahf`
+- Embed: `https://luma.com/embed/event/evt-6OyO6NIs8NAPFz8/simple`
+
+El registro embebido debe conservar una altura de 450 px y un ancho responsivo, con
+un máximo aproximado de 600 px en pantallas grandes para no ocupar más espacio del necesario.
+
 ### Propuesta de cowork recurrente (en conversación)
 
 Formosa.dev está preparando una propuesta de actividad continua de cowork para

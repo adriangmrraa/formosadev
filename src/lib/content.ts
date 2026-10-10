@@ -43,7 +43,17 @@ export const joinNote =
 // registration page (title, venue, note). Leave `upcomingEvent` undefined when
 // there is no confirmed event so the section falls back to an honest empty
 // state instead of showing stale data.
-export const upcomingEvent: UpcomingEvent | undefined = undefined;
+export const upcomingEvent: UpcomingEvent | undefined = {
+  id: "meta-meetup-agentes-ia-apis-2026",
+  descriptor: "Meta Meetup · Formosa.dev",
+  title: "Meta Meetup | Agentes de IA, APIs y soluciones para empresas x Formosa.dev",
+  description:
+    "Un encuentro presencial y práctico para explorar WhatsApp, Instagram y Facebook, sus APIs e integraciones con agentes de IA para resolver necesidades reales de empresas.",
+  location: "Diario El Comercial — Hipólito Yrigoyen 58, Formosa Capital",
+  note: "Participación gratuita con inscripción previa en Luma.",
+  url: "https://luma.com/k5a27ahf",
+  embedUrl: "https://luma.com/embed/event/evt-6OyO6NIs8NAPFz8/simple",
+};
 
 // Past events with their media recap, newest first — the section renders a
 // switcher strip when there is more than one. Photos/videos live in
