@@ -42,7 +42,6 @@ import {
   joinNote,
   pastEvents,
   pillars,
-  territorialImages,
   upcomingEvent,
 } from "../lib/content";
 import type { Collaborator, EventVideo } from "../lib/types";
@@ -156,10 +155,10 @@ export default function Home() {
             <Reveal scale delay={120}>
               <figure>
                 <Image
-                  src={territorialImages.hero.src}
-                  alt={territorialImages.hero.alt}
-                  width={territorialImages.hero.width}
-                  height={territorialImages.hero.height}
+                  src="/assets/campaigns/el-comercial-cowork/background-ferroviario.png"
+                  alt="Estación ferroviaria de Formosa"
+                  width={941}
+                  height={1672}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   priority
                   className="media-glow h-auto w-full rounded-card object-cover"
@@ -488,10 +487,10 @@ export default function Home() {
             <Reveal scale>
               <figure>
                 <Image
-                  src={territorialImages.banado.src}
-                  alt={territorialImages.banado.alt}
-                  width={territorialImages.banado.width}
-                  height={territorialImages.banado.height}
+                  src="/assets/campaigns/el-comercial-cowork/background-banado-la-estrella.png"
+                  alt="Bañado La Estrella, humedal formoseño con aves y vegetación"
+                  width={941}
+                  height={1672}
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="media-glow-dark h-auto w-full rounded-card object-cover"
                 />
@@ -503,10 +502,10 @@ export default function Home() {
             <Reveal scale delay={100}>
               <figure>
                 <Image
-                  src={territorialImages.cruzDelNorte.src}
-                  alt={territorialImages.cruzDelNorte.alt}
-                  width={territorialImages.cruzDelNorte.width}
-                  height={territorialImages.cruzDelNorte.height}
+                  src="/assets/campaigns/el-comercial-cowork/background-cruz-del-norte.png"
+                  alt="Cielo nocturno de Formosa con la constelación de la Cruz del Norte"
+                  width={1122}
+                  height={1402}
                   sizes="(max-width: 640px) 100vw, 50vw"
                   className="media-glow-dark h-auto w-full rounded-card object-cover"
                 />

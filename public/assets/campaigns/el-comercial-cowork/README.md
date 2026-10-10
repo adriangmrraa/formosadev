@@ -8,5 +8,7 @@ Formosa from `assets para contenido redes/Entornos/` and the preformatted
 `fondos-presentacion/` files. They must not be replaced with generated scenes
 or non-local imagery.
 
-- `background-mastil-costanera.png` — real Formosa image used in the cowork proposal.
-- `background-plaza-san-martin.png` — real Formosa image used in the second full-bleed parallax band.
+- `background-ferroviario.png` — hero image.
+- `background-mastil-costanera.png` — cowork proposal image.
+- `background-plaza-san-martin.png` — second full-bleed parallax band.
+- `background-banado-la-estrella.png` and `background-cruz-del-norte.png` — territorial section imagery.
