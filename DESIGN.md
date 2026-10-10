@@ -257,12 +257,22 @@ Principio: **el movimiento sirve a la comprensión, nunca decora** (manual §35)
   en el CTA de conversión, `live-dot`, `chevron-bounce`.
 - **Marquee de colaboradores:** scroll infinito suave con fade en ambos bordes
   (`mask-image`), pausa en hover/focus, corre solo en viewport.
+- **Scroll depth** (`Parallax` + `.depth-shift`/`.depth-zoom`): el wrapper
+  escribe `--p` (0→1 al atravesar el viewport) vía rAF + IntersectionObserver;
+  las clases lo mapean a `translateY` (±`--dy`) o `scale` (1→1+`--dz`).
+  Reglas: solo transform, amplitudes chicas (≤28px, ≤0.12), capas opuestas por
+  sección — nunca layout ni paint. Aplica a la banda de video, las capas de
+  Colaboradores/Redes/Síntesis y los thumbs de la galería.
+- **Video ambiental** (`AmbientVideo`): muted, loop, `playsInline`, `object-cover`
+  sin letterbox; reproduce solo en viewport y solo con motion permitido; el
+  poster queda como fallback estático. La reproducción real vive en el lightbox.
 - **Micro-interacciones de UI:** ≤ `--motion-ui` (200ms), `ease-out`. Hover:
   cambio de color y `-translate-y-0.5` en cards; `active:scale-[0.97–0.98]` en
   todo lo presionable; chevron `group-hover:translate-x-0.5`.
 - **`prefers-reduced-motion`:** desactiva reveals, marquee, panel de eventos,
-  hovers con translate y **toda la glow layer** (breathe, sheen, pop, live-dot,
-  bounce). El contenido queda siempre visible.
+  hovers con translate, **toda la glow layer** (breathe, sheen, pop, live-dot,
+  bounce) **y todo el scroll depth** (parallax, zoom por scroll, autoplay del
+  video ambiental — el poster queda quieto). El contenido queda siempre visible.
 
 ---
 

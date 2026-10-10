@@ -6,9 +6,11 @@ import {
   useEffect,
   useRef,
   useState,
+  type CSSProperties,
   type PointerEvent as ReactPointerEvent,
 } from "react";
 import type { EventMedia } from "../lib/types";
+import { Parallax } from "./motion/Parallax";
 import { Reveal } from "./motion/Reveal";
 
 const SWIPE_THRESHOLD = 48;
@@ -141,55 +143,61 @@ export function EventGallery({
 
   return (
     <>
-      <ul className="columns-2 gap-3 sm:columns-3 sm:gap-4">
-        {media.map((entry, i) => (
-          <li key={i} className="mb-3 break-inside-avoid sm:mb-4">
-            <Reveal scale delay={Math.min(i, 6) * 60}>
-              <button
-                ref={(el) => {
-                  itemRefs.current[i] = el;
-                }}
-                type="button"
-                onClick={() => open(i)}
-                aria-label={
-                  entry.kind === "video"
-                    ? `Reproducir: ${entry.title}`
-                    : `Ampliar: ${entry.alt}`
-                }
-                aria-haspopup="dialog"
-                className="group relative block w-full cursor-pointer overflow-hidden rounded-card border border-hairline bg-ink/5 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
-              >
-                {entry.kind === "image" ? (
-                  <Image
-                    src={entry.src}
-                    alt={entry.alt}
-                    width={entry.width}
-                    height={entry.height}
-                    sizes="(max-width: 640px) 50vw, (max-width: 1152px) 33vw, 370px"
-                    className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                  />
-                ) : (
-                  <>
-                    <Image
-                      src={entry.poster}
-                      alt=""
-                      width={entry.width}
-                      height={entry.height}
-                      sizes="(max-width: 640px) 50vw, (max-width: 1152px) 33vw, 370px"
-                      className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
-                    />
-                    <PlayBadge />
-                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur">
-                      <span className="live-dot" aria-hidden="true" />
-                      Recap
+      <Parallax>
+        <ul className="columns-2 gap-3 sm:columns-3 sm:gap-4">
+          {media.map((entry, i) => (
+            <li key={i} className="mb-3 break-inside-avoid sm:mb-4">
+              <Reveal scale delay={Math.min(i, 6) * 60}>
+                <button
+                  ref={(el) => {
+                    itemRefs.current[i] = el;
+                  }}
+                  type="button"
+                  onClick={() => open(i)}
+                  aria-label={
+                    entry.kind === "video"
+                      ? `Reproducir: ${entry.title}`
+                      : `Ampliar: ${entry.alt}`
+                  }
+                  aria-haspopup="dialog"
+                  className="group relative block w-full cursor-pointer overflow-hidden rounded-card border border-hairline bg-ink/5 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+                >
+                  {entry.kind === "image" ? (
+                    <span className="depth-zoom block" style={{ "--dz": "0.07" } as CSSProperties}>
+                      <Image
+                        src={entry.src}
+                        alt={entry.alt}
+                        width={entry.width}
+                        height={entry.height}
+                        sizes="(max-width: 640px) 50vw, (max-width: 1152px) 33vw, 370px"
+                        className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                      />
                     </span>
-                  </>
-                )}
-              </button>
-            </Reveal>
-          </li>
-        ))}
-      </ul>
+                  ) : (
+                    <>
+                      <span className="depth-zoom block" style={{ "--dz": "0.07" } as CSSProperties}>
+                        <Image
+                          src={entry.poster}
+                          alt=""
+                          width={entry.width}
+                          height={entry.height}
+                          sizes="(max-width: 640px) 50vw, (max-width: 1152px) 33vw, 370px"
+                          className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                        />
+                      </span>
+                      <PlayBadge />
+                      <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur">
+                        <span className="live-dot" aria-hidden="true" />
+                        Recap
+                      </span>
+                    </>
+                  )}
+                </button>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+      </Parallax>
 
       <dialog
         ref={dialogRef}

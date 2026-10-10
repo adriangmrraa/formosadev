@@ -13,7 +13,9 @@ import { CommunityJoinTrigger } from "../components/CommunityConversation";
 import { PastEvents } from "../components/PastEvents";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
+import { AmbientVideo } from "../components/motion/AmbientVideo";
 import { AutoMarquee } from "../components/motion/AutoMarquee";
+import { Parallax } from "../components/motion/Parallax";
 import { Reveal } from "../components/motion/Reveal";
 import { RevealText } from "../components/motion/RevealText";
 import { Button, buttonClass } from "../components/ui/Button";
@@ -42,7 +44,7 @@ import {
   territorialImages,
   upcomingEvent,
 } from "../lib/content";
-import type { Collaborator } from "../lib/types";
+import type { Collaborator, EventVideo } from "../lib/types";
 
 const localityStates = [
   "Buscando referente",
@@ -54,6 +56,12 @@ const localityStates = [
 
 /** The state Formosa Capital is currently in, per the Territorio copy. */
 const currentLocalityState = "Comunidad en formación";
+
+/** The recap video of the newest event powers the full-bleed ambient band. */
+const recapEvent = pastEvents[0];
+const recapVideo = recapEvent?.media.find(
+  (entry): entry is EventVideo => entry.kind === "video"
+);
 
 const channelIcons: Record<string, ReactNode> = {
   instagram: <InstagramIcon className="size-5" />,
@@ -258,32 +266,75 @@ export default function Home() {
           </Reveal>
         </Section>
 
+        {/* Recap video — full-bleed ambient band between sections 02 and 03.
+            The video covers the whole band (object-cover, no letterboxing)
+            and zooms gently while it crosses the viewport; real playback
+            stays in the gallery lightbox above. */}
+        {recapEvent && recapVideo ? (
+          <section
+            aria-label={`Recap en video: ${recapEvent.title}`}
+            className="relative"
+          >
+            <Parallax className="relative h-[52svh] max-h-[560px] min-h-80 overflow-hidden">
+              <div
+                className="depth-zoom absolute inset-0"
+                style={{ "--dz": "0.12" } as CSSProperties}
+              >
+                <AmbientVideo
+                  sources={recapVideo.sources}
+                  poster={recapVideo.poster}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-ink/35"
+              />
+              <div className="absolute inset-x-0 bottom-0 pb-6">
+                <div className="mx-auto flex max-w-6xl items-center gap-4 px-5">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-crema/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-crema backdrop-blur">
+                    <span className="live-dot" aria-hidden="true" />
+                    Recap
+                  </span>
+                  <p className="min-w-0 truncate text-sm font-semibold text-crema/90">
+                    {recapEvent.descriptor}
+                  </p>
+                </div>
+              </div>
+            </Parallax>
+          </section>
+        ) : null}
+
         {/* 03 — Colaboradores */}
         <Section id="colaboradores" tone="surface">
           <Reveal>
-            <SectionHeading>Colaboradores</SectionHeading>
-            <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
-              Empresas, instituciones y organizaciones que colaboran, apoyan e
-              impulsan a la comunidad.
-            </p>
+            <Parallax className="depth-shift" style={{ "--dy": "-18px" } as CSSProperties}>
+              <SectionHeading>Colaboradores</SectionHeading>
+              <p className="mt-5 max-w-2xl text-lg font-light leading-relaxed text-text-muted">
+                Empresas, instituciones y organizaciones que colaboran, apoyan e
+                impulsan a la comunidad.
+              </p>
+            </Parallax>
             {collaborators.length > 0 ? (
-              <AutoMarquee duration={36}>
-                <ul className="colaboradores-track mt-10">
-                  {collaborators.map((collaborator) => (
-                    <CollaboratorCard
-                      key={collaborator.id}
-                      collaborator={collaborator}
-                    />
-                  ))}
-                  {collaborators.map((collaborator) => (
-                    <CollaboratorCard
-                      key={`${collaborator.id}-copy`}
-                      collaborator={collaborator}
-                      hidden
-                    />
-                  ))}
-                </ul>
-              </AutoMarquee>
+              <Parallax className="depth-shift" style={{ "--dy": "22px" } as CSSProperties}>
+                <AutoMarquee duration={36}>
+                  <ul className="colaboradores-track mt-10">
+                    {collaborators.map((collaborator) => (
+                      <CollaboratorCard
+                        key={collaborator.id}
+                        collaborator={collaborator}
+                      />
+                    ))}
+                    {collaborators.map((collaborator) => (
+                      <CollaboratorCard
+                        key={`${collaborator.id}-copy`}
+                        collaborator={collaborator}
+                        hidden
+                      />
+                    ))}
+                  </ul>
+                </AutoMarquee>
+              </Parallax>
             ) : (
               <EmptyState
                 className="mt-10 max-w-2xl"
@@ -291,69 +342,80 @@ export default function Home() {
                 description="Estamos sumando a las organizaciones que acompañan e impulsan a Formosa.dev."
               />
             )}
-            <Button
-              href={contactWhatsAppUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              variant="accent"
-              icon={<MessageCircle />}
-              className="mt-8"
-            >
-              Quiero colaborar
-            </Button>
+            <Parallax className="depth-shift" style={{ "--dy": "-18px" } as CSSProperties}>
+              <Button
+                href={contactWhatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="accent"
+                icon={<MessageCircle />}
+                className="mt-8"
+              >
+                Quiero colaborar
+              </Button>
+            </Parallax>
           </Reveal>
         </Section>
 
         {/* 04 — Redes */}
         <Section id="redes" tone="soft">
           <Reveal>
-            <SectionHeading>Redes</SectionHeading>
-            <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {channels
-                .filter(
-                  (channel): channel is typeof channel & { url: string } =>
-                    Boolean(channel.url)
-                )
-                .map((channel, index) => (
-                  <li
-                    key={channel.id}
-                    className="stagger-item"
-                    style={{ "--i": index } as CSSProperties}
-                  >
-                    <ChannelCard
-                      href={channel.url}
-                      name={channel.name}
-                      note={channel.note}
-                      icon={channelIcons[channel.id]}
-                    />
-                  </li>
-                ))}
-              <li
-                className="stagger-item"
-                style={{ "--i": channels.length } as CSSProperties}
-              >
-                <ChannelCard
-                  href={communityWhatsAppUrl}
-                  name="WhatsApp"
-                  note="Comunidad oficial"
-                  icon={channelIcons.whatsapp}
-                />
-              </li>
-            </ul>
+            <Parallax className="depth-shift" style={{ "--dy": "-14px" } as CSSProperties}>
+              <SectionHeading>Redes</SectionHeading>
+            </Parallax>
+            <Parallax className="depth-shift" style={{ "--dy": "20px" } as CSSProperties}>
+              <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {channels
+                  .filter(
+                    (channel): channel is typeof channel & { url: string } =>
+                      Boolean(channel.url)
+                  )
+                  .map((channel, index) => (
+                    <li
+                      key={channel.id}
+                      className="stagger-item"
+                      style={{ "--i": index } as CSSProperties}
+                    >
+                      <ChannelCard
+                        href={channel.url}
+                        name={channel.name}
+                        note={channel.note}
+                        icon={channelIcons[channel.id]}
+                      />
+                    </li>
+                  ))}
+                <li
+                  className="stagger-item"
+                  style={{ "--i": channels.length } as CSSProperties}
+                >
+                  <ChannelCard
+                    href={communityWhatsAppUrl}
+                    name="WhatsApp"
+                    note="Comunidad oficial"
+                    icon={channelIcons.whatsapp}
+                  />
+                </li>
+              </ul>
+            </Parallax>
           </Reveal>
         </Section>
 
         {/* 05 — Síntesis */}
         <Section ariaLabel="Síntesis" tone="strip" spacing="compact">
           <Reveal>
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center">
-              <span className="font-display text-xl font-black italic md:text-2xl">Aprender.</span>
-              <span className="font-display text-xl font-black italic md:text-2xl">Conectar.</span>
-              <span className="font-display text-xl font-black italic md:text-2xl">Construir.</span>
-              <span className="w-full text-sm font-light text-text-muted md:w-auto md:text-base">
-                {institutional.inclusion}
-              </span>
-            </div>
+            <Parallax
+              className="depth-zoom"
+              style={{ "--dz": "0.05" } as CSSProperties}
+            >
+              <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-center">
+                <span className="font-display text-xl font-black italic md:text-2xl">Aprender.</span>
+                <span className="font-display text-xl font-black italic md:text-2xl">Conectar.</span>
+                <span className="font-display text-xl font-black italic md:text-2xl">Construir.</span>
+                <span className="w-full text-sm font-light text-text-muted md:w-auto md:text-base">
+                  {institutional.inclusion}
+                </span>
+              </div>
+            </Parallax>
           </Reveal>
         </Section>
 

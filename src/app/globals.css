@@ -476,6 +476,22 @@ main [id] {
   .chevron-bounce {
     animation: fd-chevron-bounce 1.8s ease-in-out infinite;
   }
+
+  /* ------------------------------------------------------------------
+     Scroll-depth layer. A Parallax wrapper writes --p (0→1 while the
+     element traverses the viewport); these classes map it to transform-
+     only depth. Neutral defaults keep content static without JS or under
+     reduced motion (where --p is never written). --dy is the total drift,
+     --dz the total zoom delta. */
+  .depth-shift {
+    transform: translateY(calc((var(--p, 0.5) - 0.5) * var(--dy, 28px)));
+    will-change: transform;
+  }
+
+  .depth-zoom {
+    transform: scale(calc(1 + var(--p, 0) * var(--dz, 0.06)));
+    will-change: transform;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -519,6 +535,13 @@ main [id] {
   .cta-glow,
   .cta-glow::after {
     animation: none !important;
+  }
+
+  /* Scroll depth fully off: transform-only layers freeze at neutral. */
+  .depth-shift,
+  .depth-zoom {
+    transform: none !important;
+    will-change: auto;
   }
 
   .js .stagger-item {
