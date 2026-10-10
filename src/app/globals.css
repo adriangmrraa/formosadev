@@ -16,18 +16,27 @@
   --color-canvas: #fff8f5;
   --color-canvas-soft: #fffdfb;
   --color-surface: #ffffff;
-  --color-hairline: rgba(15, 23, 42, 0.1);
+  /* Deeper warm tint (ink ~4% over crema) — the Metropol "canvas-soft" slot:
+     tinted cards/sections that read as elevation without borders or shadows. */
+  --color-surface-soft: #f5efed;
+  --color-hairline-soft: rgba(15, 23, 42, 0.06);
+  --color-hairline: rgba(15, 23, 42, 0.12);
   --color-hairline-strong: rgba(15, 23, 42, 0.2);
   --color-text: #0f172a;
   --color-text-muted: #1e293b;
+  --color-text-faint: rgba(15, 23, 42, 0.5);
   --color-accent: #ff2b8a;
   --color-accent-deep: #d61f74;
+  /* Lapacho wash for icon tiles and number chips — accent presence without
+     spending the one-lapacho-CTA-per-section budget. */
+  --color-accent-soft: rgba(255, 43, 138, 0.1);
   --color-focus: #ff2b8a;
 
-  /* Radius scale. */
-  --radius-control: 0.75rem;
-  --radius-card: 1rem;
-  --radius-panel: 1.5rem;
+  /* Radius scale (Metropol app language: 16 controls / 24 cards / 28 nav). */
+  --radius-control: 1rem;
+  --radius-card: 1.5rem;
+  --radius-panel: 2rem;
+  --radius-nav: 1.75rem;
   --radius-dialog: 2rem;
   --radius-pill: 9999px;
 }

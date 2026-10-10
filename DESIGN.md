@@ -76,14 +76,18 @@ Todo vive en `src/app/globals.css` dentro de `@theme`.
 | Token CSS | Valor | Clase Tailwind | Uso |
 |---|---|---|---|
 | `--color-canvas` | `#FFF8F5` (crema) | `bg-canvas`, `text-canvas` | Fondo de página |
-| `--color-canvas-soft` | `#FFFDFB` (crema-soft) | `bg-canvas-soft` | Sección alterna / tinte de elevación |
-| `--color-surface` | `#FFFFFF` (blanco) | `bg-surface` | Cards sobre crema |
-| `--color-hairline` | ink @ 10% (`rgba(15,23,42,0.10)`) | `border-hairline` | Separadores y bordes suaves |
-| `--color-hairline-strong` | ink @ 20% (`rgba(15,23,42,0.20)`) | `border-hairline-strong` | Bordes de controles y cards |
+| `--color-canvas-soft` | `#FFFDFB` (crema-soft) | `bg-canvas-soft` | Tinte de hover / tinte casi blanco |
+| `--color-surface-soft` | `#F5EFED` (ink ~4% sobre crema) | `bg-surface-soft` | **Tinte de elevación**: cards, tiles y secciones alternas |
+| `--color-surface` | `#FFFFFF` (blanco) | `bg-surface` | Cards sobre tinte, icon tiles sobre cards tintadas |
+| `--color-hairline-soft` | ink @ 6% (`rgba(15,23,42,0.06)`) | `border-hairline-soft` | Borde apenas visible en tiles tintadas |
+| `--color-hairline` | ink @ 12% (`rgba(15,23,42,0.12)`) | `border-hairline` | Separadores que sí separan |
+| `--color-hairline-strong` | ink @ 20% (`rgba(15,23,42,0.20)`) | `border-hairline-strong` | Bordes de controles outline |
 | `--color-text` | `#0F172A` (ink) | `text-text` | Texto principal |
 | `--color-text-muted` | `#1E293B` (ink-soft) | `text-text-muted` | Texto secundario |
+| `--color-text-faint` | ink @ 50% (`rgba(15,23,42,0.5)`) | `text-text-faint` | Texto terciario (epígrafes, fine print) |
 | `--color-accent` | `#FF2B8A` (lapacho) | `bg-accent`, `text-accent` | Acento de conversión |
 | `--color-accent-deep` | `#D61F74` (lapacho-deep) | `bg-accent-deep` | Hover del acento |
+| `--color-accent-soft` | lapacho @ 10% (`rgba(255,43,138,0.10)`) | `bg-accent-soft`, `text-accent-soft` | Wash lapacho en icon tiles y number chips |
 | `--color-focus` | `#FF2B8A` (lapacho) | (ring de foco) | Anillo `focus-visible` |
 
 > Las primitivas `--color-ink`, `--color-ink-soft`, `--color-crema`,
@@ -91,15 +95,41 @@ Todo vive en `src/app/globals.css` dentro de `@theme`.
 > `--color-lavanda` y `--color-durazno` siguen disponibles: los componentes
 > existentes y los SVG no se rompen.
 
+### Mapping Metropol → Formosa
+
+La capa visual toma el lenguaje de diseño de **La Nueva Metropol** (app de
+transporte AMBA) sin tocar la marca. Equivalencia de slots:
+
+| Metropol (`demobondisok`) | Formosa.dev | Valor |
+|---|---|---|
+| `--canvas` (fondo de página) | `canvas` | `#FFF8F5` crema |
+| `--canvas-soft` (tinta de elevación) | `surface-soft` | `#F5EFED` — ink ~4% sobre crema |
+| `--canvas` de la card (blanco) | `surface` | `#FFFFFF` |
+| `--hairline` / `--hairline-soft` | `hairline` / `hairline-soft` | ink @ 12% / ink @ 6% |
+| `--ink` / `--text-muted` / `--text-faint` | `text` / `text-muted` / `text-faint` | `#0F172A` / `#1E293B` / ink @ 50% |
+| `--electric-blue` (focus/highlights) | `focus` | `#FF2B8A` lapacho |
+| `radius-sm` (inputs, rows) | `radius-control` | 16px |
+| `radius-md` (cards, sheets) | `radius-card` | 24px (`rounded-3xl`) |
+| pill del bottom nav (28px) | `radius-nav` | 28px |
+
+Reglas heredadas del chrome de Metropol: elevación por **tinte**, nunca por
+sombra; hairline solo donde separa de verdad; CTAs `bg-ink` con icono + texto;
+`active:scale-[0.98]` como feedback de presión (reemplaza el lift
+`-translate-y`).
+
 ### Radius
 
 | Token CSS | Valor | Clase Tailwind | Uso |
 |---|---|---|---|
-| `--radius-control` | `0.75rem` (12px) | `rounded-control` | Detalles/FAQ, chips |
-| `--radius-card` | `1rem` (16px) | `rounded-card` | Cards estándar |
-| `--radius-panel` | `1.5rem` (24px) | `rounded-panel` | Paneles y bloques grandes |
+| `--radius-control` | `1rem` (16px) | `rounded-control` | Filas, chips, menú móvil |
+| `--radius-card` | `1.5rem` (24px) | `rounded-card` | Cards y tiles (`rounded-3xl`) |
+| `--radius-panel` | `2rem` (32px) | `rounded-panel` | Paneles y bloques grandes |
+| `--radius-nav` | `1.75rem` (28px) | `rounded-nav` | Sheet del menú móvil |
 | `--radius-dialog` | `2rem` (32px) | `rounded-dialog` | Diálogo de comunidad |
 | `--radius-pill` | `9999px` | `rounded-pill` | Botones, badges, pills |
+
+> Los **icon tiles** internos de las cards usan `rounded-xl` nativo (12px),
+> igual que en `ClassicTripActions` de Metropol.
 
 ### Motion
 
