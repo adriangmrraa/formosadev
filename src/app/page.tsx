@@ -8,6 +8,7 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
 import { CommunityJoinTrigger } from "../components/CommunityConversation";
 import { EventBackdropSection } from "../components/EventBackdropSection";
@@ -203,6 +204,16 @@ export default function Home() {
                     <p className="mt-3 max-w-md text-sm font-light leading-relaxed text-text-muted">
                       {upcomingEvent.note}
                     </p>
+                    <Link
+                      href="/metameetup/"
+                      className="group mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-full text-sm font-semibold text-text transition-colors duration-200 hover:text-lapacho focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+                    >
+                      Guía interactiva del workshop
+                      <ChevronRight
+                        aria-hidden="true"
+                        className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                      />
+                    </Link>
                   </div>
                 </div>
 

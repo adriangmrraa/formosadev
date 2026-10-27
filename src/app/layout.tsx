@@ -70,7 +70,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es-AR" className={`${manrope.variable} ${archivo.variable} antialiased`}>
+    <html
+      lang="es-AR"
+      className={`${manrope.variable} ${archivo.variable} antialiased`}
+      // The beforeInteractive script below adds a `js` class to this element
+      // before React hydrates — an intentional out-of-band mutation.
+      suppressHydrationWarning
+    >
       <body className="fd-backdrop min-h-screen font-sans text-ink">
         <script
           type="application/ld+json"

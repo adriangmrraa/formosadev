@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       images: [`${siteUrl}/assets/hero-formosa-collage.webp`],
     },
     {
+      url: `${siteUrl}/metameetup/`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: `${siteUrl}/contacto/`,
       lastModified,
       changeFrequency: "monthly",

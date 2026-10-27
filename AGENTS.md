@@ -162,7 +162,9 @@ Los tokens viven en `src/app/globals.css` (primitivas + semánticas). No hay
 - [x] Layout global: `Header` + `MobileNav` + `Footer`
 - [x] Home con las secciones: Hero, Eventos (próximo + anteriores), Colaboradores,
       Redes, Síntesis, Qué es, Territorio, Café, Equipo, FAQ y CTA final
-- [x] Rutas `/codigo-de-conducta` y `/contacto`
+- [x] Rutas `/codigo-de-conducta`, `/contacto` y `/metameetup` (wizard interactivo
+      del Meta Meetup con estado en `localStorage`, prompts generados desde el
+      estado y tests con vitest — `npm run test`)
 - [x] Design system documentado en [`DESIGN.md`](./DESIGN.md); tokens semánticos en
       `globals.css`, primitivas UI en `src/components/ui/` y "glow layer"
       (superficies glossy, orbes, CTA que respira, grain, entradas escalonadas)

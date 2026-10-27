@@ -637,3 +637,35 @@ y galería.
   <a href="https://www.contributor-covenant.org/">Contributor Covenant</a>, version 2.1.
 </p>
 ```
+
+---
+
+## Pagina /metameetup (guia interactiva del workshop)
+
+Ruta: `/metameetup/` — companion interactivo del Meta Meetup (vie 30/10/2026, 17-21 h, Diario El Comercial).
+
+No es una landing: es un wizard/timeline navegable de 8 pasos con estado persistido
+en `localStorage` (static export, sin backend). Copy fuente: `src/lib/metameetup.ts`
+(adaptado de la guia del participante y el documento maestro del evento — el anexo
+de inscriptos NO se publica, es confidencial).
+
+Pasos:
+1. Inicio — logistica, que se aprende vs. que no se promete, CTAs a Luma y al repo.
+2. Tu caso — formulario del negocio/caso de uso del participante.
+3. Entorno — checklist de preparacion (Git, Node, agente, cuentas) con barra de progreso.
+4. El sistema — simulador del viaje de un mensaje + comparativa agente de programacion vs. agente comercial.
+5. Canal — arbol de decision de proveedor (YCloud/Zernio/Kapso/demo) + webhooks.
+6. El viernes — agenda + 4 checkpoints con semaforo (verde/amarillo/rojo/N-A).
+7. Prompts — prompts copiables generados desde el estado guardado (placeholders si falta data).
+8. Tu estado — tablero resumen, reglas de seguridad, recursos, PDF descargable, reset.
+
+Archivos:
+- `src/app/metameetup/page.tsx` — ruta + metadata.
+- `src/lib/metameetup.ts` — contenido estatico (pasos, agenda, checkpoints, proveedores, glosario).
+- `src/lib/metameetup-store.ts` — estado, persistencia defensiva, derivaciones puras.
+- `src/lib/metameetup-prompts.ts` — builders de prompts puros.
+- `src/components/metameetup/*` — MetameetupApp (shell + stepper) y los 8 pasos.
+- `src/lib/__tests__/metameetup.test.ts` — tests vitest (store, prompts, arbol, rutas).
+- `public/assets/meta-meetup/meta-meetup-2026-guia-participantes.pdf` — guia descargable.
+
+Tests: `npm run test` (vitest).

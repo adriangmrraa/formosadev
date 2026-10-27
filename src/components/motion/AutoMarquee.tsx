@@ -16,9 +16,10 @@ type AutoMarqueeProps = {
  */
 export function AutoMarquee({ children, duration = 36 }: AutoMarqueeProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [inView, setInView] = useState(
-    () => typeof IntersectionObserver === "undefined"
-  );
+  // Always start paused so the SSR HTML and the first client render match;
+  // the observer flips it on mount. Without JS the track stays paused and
+  // the viewport still scrolls manually.
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
